@@ -1,0 +1,18 @@
+version: '3'
+services:
+  web:
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - "${WEB_PORT}:8080"
+    volumes:
+      - ../:/app
+  db:
+    image: "mysql:8"
+    expose:
+      - "3306"
+    ports:
+      - "${DATABASE_PORT}:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "${DATABASE_ROOT_PASSWORD}"
