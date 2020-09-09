@@ -1,0 +1,17 @@
+services:
+  _defaults:
+    autowire: true
+    public: false
+
+  App\Modules\Accounts\:
+    resource: '../../../src/Modules/Accounts/'
+
+  App\Modules\Accounts\Domain\Users\UserRepository:
+    class: App\Modules\Accounts\Infrastructure\Persistence\Users\DbUserRepository
+
+  App\Modules\Accounts\Application\Users\RegisterUser\RegisterUserHandler:
+    tags: [messenger.message_handler]
+
+  App\Modules\Accounts\Infrastructure\UI\Http\Api\:
+    resource: '../../../src/Modules/Accounts/Infrastructure/UI/Http/Api/'
+    tags: ['controller.service_arguments']

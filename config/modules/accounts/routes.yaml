@@ -1,0 +1,3 @@
+jopa:
+  path: /
+  controller: App\Modules\Accounts\Infrastructure\UI\Http\Api\RegisterUserAction
