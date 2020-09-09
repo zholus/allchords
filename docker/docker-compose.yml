@@ -1,6 +1,7 @@
 version: '3'
 services:
   web:
+    container_name: allchords_php
     build:
       context: ../
       dockerfile: ./docker/Dockerfile
@@ -9,6 +10,7 @@ services:
     volumes:
       - ../:/app
   db:
+    container_name: allchords_mysql
     image: "mysql:8"
     expose:
       - "3306"

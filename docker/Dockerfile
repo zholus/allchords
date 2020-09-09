@@ -60,7 +60,7 @@ COPY docker/conf/fpm.conf /usr/local/etc/php-fpm.d/www.conf
 
 # NGINX
 RUN rm /etc/nginx/nginx.conf && chown -R www-data:www-data /var/www/html /run /var/lib/nginx /var/log/nginx
-COPY docker/confg/nginx.conf /etc/nginx/nginx.conf
+COPY docker/conf/nginx.conf /etc/nginx/nginx.conf
 
 USER www-data
 
