@@ -11,5 +11,8 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
+    App\CommonInfrastructure\:
+        resource: '../src/CommonInfrastructure/'
+
 imports:
     - { resource: 'modules/accounts/services.yaml' }

@@ -16,3 +16,6 @@ framework:
         default_bus: command.bus
         buses:
             command.bus:
+                middleware:
+                    - 'App\CommonInfrastructure\EventDispatchMiddleware'
+                    - doctrine_transaction
