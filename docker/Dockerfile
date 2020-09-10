@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-configure gd --with-jpeg \
     && pecl install \
         redis \
+        xdebug \
     && docker-php-ext-install \
         opcache \
         pdo \
