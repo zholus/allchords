@@ -3,6 +3,10 @@ services:
     autowire: true
     public: false
 
+  _instanceof:
+      App\Common\Domain\DomainEventSubscriber:
+        tags: ['domain.event.subscriber']
+  
   App\Modules\Accounts\:
     resource: '../../../src/Modules/Accounts/'
 

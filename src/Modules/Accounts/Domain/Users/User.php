@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Modules\Accounts\Domain\Users;
 
+use App\Common\Domain\EventDispatcher;
+
 class User
 {
     private UserId $id;
@@ -27,7 +29,10 @@ class User
             $password
         );
 
-        // event
+        EventDispatcher::instance()->publish(new UserCreated(
+            $id,
+            $email
+        ));
 
         return $user;
     }

@@ -17,5 +17,5 @@ framework:
         buses:
             command.bus:
                 middleware:
-                    - 'App\CommonInfrastructure\EventDispatchMiddleware'
+                    - 'App\Common\Infrastructure\Events\EventDispatchMiddleware'
                     - doctrine_transaction
