@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Modules\Accounts\Infrastructure\Domain\Users;
 
 use App\Common\Domain\AbstractDomainEventSubscriber;
-use App\Modules\Accounts\Domain\DomainEvent;
+use App\Common\Domain\DomainEvent;
 use App\Modules\Accounts\Domain\Users\UserCreated;
 
 class SendWelcomeMessage extends AbstractDomainEventSubscriber

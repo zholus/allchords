@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Modules\Accounts\Domain\Users;
 
-use App\Modules\Accounts\Domain\DomainEvent;
+use App\Common\Domain\DomainEvent;
 use DateTimeImmutable;
 
 class UserCreated implements DomainEvent

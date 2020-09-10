@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\Accounts\Domain;
+namespace App\Common\Domain;
 
 use DateTimeImmutable;
 
