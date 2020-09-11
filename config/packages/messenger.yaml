@@ -17,5 +17,6 @@ framework:
         buses:
             command.bus:
                 middleware:
-                    - 'App\Common\Infrastructure\Events\EventDispatchMiddleware'
+                    - 'App\Common\Infrastructure\Messenger\EventDispatchMiddleware'
                     - doctrine_transaction
+                    - 'App\Common\Infrastructure\Messenger\ErrorLoggerMiddleware'

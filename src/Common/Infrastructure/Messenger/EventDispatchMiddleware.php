@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Common\Infrastructure\Events;
+namespace App\Common\Infrastructure\Messenger;
 
 use App\Common\Domain\EventDispatcher;
+use App\Common\Infrastructure\Events\EventSubscribersLocator;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Middleware\MiddlewareInterface;
 use Symfony\Component\Messenger\Middleware\StackInterface;

@@ -36,7 +36,7 @@ final class RegisterUserAction
             ], 400);
         } catch (\Throwable $exception) {
             return new JsonResponse([
-                'message' => 'unexpected server error: ' . $exception->getMessage()
+                'message' => 'unexpected server error'
             ], 500);
         }
 
