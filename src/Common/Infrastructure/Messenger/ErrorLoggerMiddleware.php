@@ -25,14 +25,16 @@ final class ErrorLoggerMiddleware implements MiddlewareInterface
             return $stack->next()->handle($envelope, $stack);
         } catch (\Throwable $exception) {
             if ($exception instanceof HandlerFailedException) {
-                if (!$exception->getPrevious() instanceof DomainException) {
-                    $this->logger->error($exception->getMessage(), [
-                        'exception' => $exception->getPrevious()
+                $rootException = $exception->getPrevious();
+
+                if (!$rootException instanceof DomainException) {
+                    $this->logger->error($rootException->getMessage(), [
+                        'exception' => $rootException
                     ]);
                 }
             }
 
-            throw $exception->getPrevious();
+            throw $rootException ?? $exception;
         }
     }
 }
