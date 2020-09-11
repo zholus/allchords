@@ -21,7 +21,6 @@ class RegisterUserHandler
 
     public function __invoke(RegisterUserCommand $command): void
     {
-        [][0];
         if ($this->userRepository->existsWithUsername($command->getUsername())) {
             throw UserAlreadyExistsException::withUsername($command->getUsername());
         }
