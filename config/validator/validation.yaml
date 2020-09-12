@@ -1,0 +1,8 @@
+App\Modules\Accounts\Application\Users\RegisterUser\RegisterUserCommand:
+  properties:
+    username:
+      - NotBlank: ~
+    email:
+      - NotBlank: ~
+    password:
+      - NotBlank: ~
