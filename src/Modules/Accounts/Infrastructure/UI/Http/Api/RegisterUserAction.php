@@ -4,12 +4,13 @@ declare(strict_types=1);
 namespace App\Modules\Accounts\Infrastructure\UI\Http\Api;
 
 use App\Modules\Accounts\Application\Users\RegisterUser\RegisterUserCommand;
-use DomainException;
+use Assert\Assert;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Throwable;
 
-final class RegisterUserAction
+final class RegisterUserAction extends Action
 {
     private MessageBusInterface $bus;
 
@@ -25,19 +26,19 @@ final class RegisterUserAction
         $password = $request->get('password');
 
         try {
+            Assert::lazy()
+                ->that($email, 'email')->email()
+                ->that($username, 'username')->notEmpty()
+                ->that($password, 'password')->notEmpty()
+                ->verifyNow();
+
             $this->bus->dispatch(new RegisterUserCommand(
                 $username,
                 $email,
                 $password
             ));
-        } catch (DomainException $exception) {
-            return new JsonResponse([
-                'message' => $exception->getMessage()
-            ], 400);
-        } catch (\Throwable $exception) {
-            return new JsonResponse([
-                'message' => 'unexpected server error'
-            ], 500);
+        } catch (Throwable $exception) {
+            return $this->responseByException($exception);
         }
 
         return new JsonResponse([
