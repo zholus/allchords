@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Throwable;
+use OpenApi\Annotations as OA;
 
 final class RegisterUserAction extends Action
 {
@@ -19,6 +20,42 @@ final class RegisterUserAction extends Action
         $this->bus = $bus;
     }
 
+    /**
+     * @OA\RequestBody(
+     *     @OA\MediaType(
+     *          mediaType="application/x-www-form-urlencoded",
+     *          @OA\Schema(
+     *              @OA\Property(property="email",
+     *    			    type="string",
+     *    				example="",
+     *    				description=""
+     *    			),
+     *    			@OA\Property(property="username",
+     *    				type="string",
+     *    				example="",
+     *    				description=""
+     *    			),
+     *    			@OA\Property(property="password",
+     *    			    type="string",
+     *    			    example="",
+     *    			    description=""
+     *    	       ),
+     *          ),
+     *     ),
+     * ),
+     * @OA\Response(
+     *     response=200,
+     *     description="Register user",
+     * )
+     * @OA\Response(
+     *     response=400,
+     *     description="Invalid input request data",
+     * )
+     * @OA\Response(
+     *     response=422,
+     *     description="Cannot process request due to invalid logic",
+     * )
+     */
     public function __invoke(Request $request): JsonResponse
     {
         $email = $request->get('email');

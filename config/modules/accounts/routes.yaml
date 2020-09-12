@@ -1,3 +1,4 @@
-jopa:
-  path: /
+register_user:
+  path: /api/accounts/auth/register
+  methods: POST
   controller: App\Modules\Accounts\Infrastructure\UI\Http\Api\RegisterUserAction
