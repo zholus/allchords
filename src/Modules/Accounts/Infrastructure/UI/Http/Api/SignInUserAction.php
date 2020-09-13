@@ -69,17 +69,17 @@ final class SignInUserAction extends Action
                 $email,
                 $password
             ));
+
+            /**
+             * @var TokenDto $tokenDto
+             */
+            $tokenDto = $this->bus
+                ->dispatch(new GetTokenCommand($email))
+                ->last(HandledStamp::class)
+                ->getResult();
         } catch (\Throwable $exception) {
             return $this->responseByException($exception);
         }
-
-        /**
-         * @var TokenDto $tokenDto
-         */
-        $tokenDto = $this->bus
-            ->dispatch(new GetTokenCommand($email))
-            ->last(HandledStamp::class)
-            ->getResult();
 
         return new JsonResponse([
             'access_token' => $tokenDto->getToken(),

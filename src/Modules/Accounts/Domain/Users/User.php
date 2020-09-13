@@ -5,7 +5,6 @@ namespace App\Modules\Accounts\Domain\Users;
 
 use App\Common\Domain\EventDispatcher;
 use DateTimeImmutable;
-use Symfony\Component\Validator\Constraints\Date;
 
 class User
 {
