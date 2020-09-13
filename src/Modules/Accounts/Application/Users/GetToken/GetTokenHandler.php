@@ -15,9 +15,9 @@ class GetTokenHandler
         $this->userRepository = $userRepository;
     }
 
-    public function __invoke(GetTokenCommand $command)
+    public function __invoke(GetTokenQuery $query)
     {
-        $user = $this->userRepository->getByEmail($command->getEmail());
+        $user = $this->userRepository->getByEmail($query->getEmail());
 
         if ($user === null) {
             throw UserNotFoundException::withGivenCredentials();

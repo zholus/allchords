@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Modules\Accounts\Infrastructure\UI\Http\Api;
 
-use App\Modules\Accounts\Application\Users\GetToken\GetTokenCommand;
+use App\Modules\Accounts\Application\Users\GetToken\GetTokenQuery;
 use App\Modules\Accounts\Application\Users\GetToken\TokenDto;
 use App\Modules\Accounts\Application\Users\SignInUser\SignInUserCommand;
 use Assert\Assert;
@@ -74,7 +74,7 @@ final class SignInUserAction extends Action
              * @var TokenDto $tokenDto
              */
             $tokenDto = $this->bus
-                ->dispatch(new GetTokenCommand($email))
+                ->dispatch(new GetTokenQuery($email))
                 ->last(HandledStamp::class)
                 ->getResult();
         } catch (\Throwable $exception) {

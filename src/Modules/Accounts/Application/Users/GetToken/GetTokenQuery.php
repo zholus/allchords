@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Modules\Accounts\Application\Users\GetToken;
 
-class GetTokenCommand
+class GetTokenQuery
 {
     private string $email;
 

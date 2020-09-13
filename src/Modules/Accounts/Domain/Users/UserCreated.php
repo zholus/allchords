@@ -6,7 +6,7 @@ namespace App\Modules\Accounts\Domain\Users;
 use App\Common\Domain\DomainEvent;
 use DateTimeImmutable;
 
-class UserCreated implements DomainEvent
+final class UserCreated implements DomainEvent
 {
     private UserId $userId;
     private string $email;
