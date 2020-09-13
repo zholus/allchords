@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace App\Modules\Accounts\Domain\Users;
 
 use App\Common\Domain\EventDispatcher;
+use DateTimeImmutable;
+use Symfony\Component\Validator\Constraints\Date;
 
 class User
 {
@@ -11,22 +13,38 @@ class User
     private string $username;
     private string $email;
     private string $password;
+    private DateTimeImmutable $createdAt;
+    private ?string $accessToken;
+    private ?DateTimeImmutable $accessTokenExpiryAt;
 
-    public function __construct(UserId $id, string $username, string $email, string $password)
-    {
+    public function __construct(
+        UserId $id,
+        string $username,
+        string $email,
+        string $password,
+        DateTimeImmutable $createdAt,
+        ?string $accessToken,
+        ?DateTimeImmutable $accessTokenExpiryAt
+    ) {
         $this->id = $id;
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
+        $this->createdAt = $createdAt;
+        $this->accessToken = $accessToken;
+        $this->accessTokenExpiryAt = $accessTokenExpiryAt;
     }
 
     public static function register(UserId $id, string $username, string $email, string $password): User
     {
-        $user = new User (
+        $user = new User(
             $id,
             $username,
             $email,
-            $password
+            $password,
+            new DateTimeImmutable(),
+            null,
+            null,
         );
 
         EventDispatcher::instance()->publish(new UserCreated(
@@ -55,5 +73,34 @@ class User
     public function getPassword(): string
     {
         return $this->password;
+    }
+
+    public function signIn(AccessTokenGenerator $accessTokenGenerator): void
+    {
+        $token = $accessTokenGenerator->generate();
+        $expiryAt = (new \DateTimeImmutable())->add(new \DateInterval('PT3H'));
+
+        $this->setAccessToken($token);
+        $this->setAccessTokenExpiryAt($expiryAt);
+    }
+
+    public function getAccessToken(): ?string
+    {
+        return $this->accessToken;
+    }
+
+    public function getAccessTokenExpiryAt(): ?DateTimeImmutable
+    {
+        return $this->accessTokenExpiryAt;
+    }
+
+    private function setAccessToken(?string $accessToken): void
+    {
+        $this->accessToken = $accessToken;
+    }
+
+    private function setAccessTokenExpiryAt(?DateTimeImmutable $accessTokenExpiryAt): void
+    {
+        $this->accessTokenExpiryAt = $accessTokenExpiryAt;
     }
 }

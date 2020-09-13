@@ -11,9 +11,15 @@ services:
     resource: '../../../src/Modules/Accounts/'
 
   App\Modules\Accounts\Domain\Users\UserRepository:
-    class: App\Modules\Accounts\Infrastructure\Persistence\Users\DbUserRepository
+    class: App\Modules\Accounts\Infrastructure\Domain\Users\DoctrineUserRepository
 
   App\Modules\Accounts\Application\Users\RegisterUser\RegisterUserHandler:
+    tags: [messenger.message_handler]
+
+  App\Modules\Accounts\Application\Users\SignInUser\SignInUserHandler:
+    tags: [messenger.message_handler]
+
+  App\Modules\Accounts\Application\Users\GetToken\GetTokenHandler:
     tags: [messenger.message_handler]
 
   App\Modules\Accounts\Infrastructure\UI\Http\Api\:

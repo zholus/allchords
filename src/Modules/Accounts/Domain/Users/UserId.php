@@ -17,6 +17,11 @@ class UserId
         return $this->id;
     }
 
+    public function __toString(): string
+    {
+        return $this->toString();
+    }
+
     public function equals(UserId $id): bool
     {
         return $this->toString() === $id->toString();

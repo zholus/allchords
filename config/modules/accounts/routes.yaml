@@ -2,3 +2,8 @@ register_user:
   path: /api/accounts/auth/register
   methods: POST
   controller: App\Modules\Accounts\Infrastructure\UI\Http\Api\RegisterUserAction
+
+sign_in_user:
+  path: /api/accounts/auth/sign-in
+  methods: POST
+  controller: App\Modules\Accounts\Infrastructure\UI\Http\Api\SignInUserAction
