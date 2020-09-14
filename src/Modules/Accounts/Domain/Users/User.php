@@ -79,8 +79,8 @@ class User
         $token = $accessTokenGenerator->generate();
         $expiryAt = (new \DateTimeImmutable())->add(new \DateInterval('PT3H'));
 
-        $this->setAccessToken($token);
-        $this->setAccessTokenExpiryAt($expiryAt);
+        $this->accessToken = $token;
+        $this->accessTokenExpiryAt = $expiryAt;
     }
 
     public function getAccessToken(): ?string
@@ -91,15 +91,5 @@ class User
     public function getAccessTokenExpiryAt(): ?DateTimeImmutable
     {
         return $this->accessTokenExpiryAt;
-    }
-
-    private function setAccessToken(?string $accessToken): void
-    {
-        $this->accessToken = $accessToken;
-    }
-
-    private function setAccessTokenExpiryAt(?DateTimeImmutable $accessTokenExpiryAt): void
-    {
-        $this->accessTokenExpiryAt = $accessTokenExpiryAt;
     }
 }
