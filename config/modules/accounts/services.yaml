@@ -22,6 +22,9 @@ services:
   App\Modules\Accounts\Application\Users\GetToken\GetTokenHandler:
     tags: [messenger.message_handler]
 
+  App\Modules\Accounts\Application\Users\GetUser\GetUserHandler:
+    tags: [messenger.message_handler]
+
   App\Modules\Accounts\Infrastructure\UI\Http\Api\:
     resource: '../../../src/Modules/Accounts/Infrastructure/UI/Http/Api/'
     tags: ['controller.service_arguments']

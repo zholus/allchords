@@ -10,4 +10,5 @@ interface UserRepository
     public function existsWithUsername(string $username): bool;
     public function existsWithEmail(string $email): bool;
     public function getByEmail(string $email): ?User;
+    public function getById(UserId $id): ?User;
 }
