@@ -26,4 +26,9 @@ class DoctrineSongRepository extends ServiceEntityRepository implements SongRepo
     {
         $this->getEntityManager()->persist($song);
     }
+
+    public function getById(SongId $songId): ?Song
+    {
+        return $this->find($songId);
+    }
 }

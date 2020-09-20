@@ -4,11 +4,14 @@ declare(strict_types=1);
 namespace App\Modules\SongsCatalog\Infrastructure\UI\Http\Api;
 
 use App\Modules\SongsCatalog\Application\Songs\CreateNew\NewSongCommand;
+use App\Modules\SongsCatalog\Application\Songs\GetSong\GetSongQuery;
+use App\Modules\SongsCatalog\Application\Songs\GetSong\SongDto;
 use Assert\Assert;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Messenger\MessageBusInterface;
 use OpenApi\Annotations as OA;
+use Symfony\Component\Messenger\Stamp\HandledStamp;
 
 /**
  * @OA\Tag(name="Songs")
@@ -85,19 +88,27 @@ final class NewSongAction extends Action
                 ->that($chords, 'chords')->string()->notEmpty()
                 ->verifyNow();
 
-            $this->bus->dispatch(new NewSongCommand(
+            $songId = $this->bus->dispatch(new NewSongCommand(
                 $authorId,
                 $creatorId,
                 $genreId,
                 $title,
                 $chords
-            ));
+            ))->last(HandledStamp::class)->getResult();
+
+            /**
+             * @var SongDto $songDto
+             */
+            $songDto = $this->bus
+                ->dispatch(new GetSongQuery($songId))
+                ->last(HandledStamp::class)
+                ->getResult();
         } catch (\Throwable $exception) {
             return $this->responseByException($exception);
         }
 
         return new JsonResponse([
-            'message' => 'success'
+            'data' => $songDto->toArray()
         ]);
     }
 }

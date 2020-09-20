@@ -34,7 +34,7 @@ class NewSongHandler
         $this->songs = $songs;
     }
 
-    public function __invoke(NewSongCommand $command): void
+    public function __invoke(NewSongCommand $command): string
     {
         $authorId = new AuthorId($command->getAuthorId());
         $genreId = new GenreId($command->getGenreId());
@@ -66,5 +66,7 @@ class NewSongHandler
         );
 
         $this->songs->add($song);
+
+        return $song->getId()->toString();
     }
 }

@@ -54,4 +54,39 @@ class Song
             new DateTimeImmutable()
         );
     }
+
+    public function getId(): SongId
+    {
+        return $this->id;
+    }
+
+    public function getAuthor(): Author
+    {
+        return $this->author;
+    }
+
+    public function getCreatorId(): CreatorId
+    {
+        return $this->creatorId;
+    }
+
+    public function getGenre(): Genre
+    {
+        return $this->genre;
+    }
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    public function getChords(): string
+    {
+        return $this->chords;
+    }
+
+    public function getCreatedAt(): DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
 }

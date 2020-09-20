@@ -13,6 +13,9 @@ services:
   App\Modules\SongsCatalog\Application\Songs\CreateNew\NewSongHandler:
     tags: [messenger.message_handler]
 
+  App\Modules\SongsCatalog\Application\Songs\GetSong\GetSongHandler:
+    tags: [messenger.message_handler]
+
   App\Modules\SongsCatalog\Domain\Authors\AuthorRepository:
     class: App\Modules\SongsCatalog\Infrastructure\Domain\Authors\DoctrineAuthorRepository
 

@@ -13,4 +13,14 @@ class Author
         $this->id = $id;
         $this->title = $title;
     }
+
+    public function getId(): AuthorId
+    {
+        return $this->id;
+    }
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
 }

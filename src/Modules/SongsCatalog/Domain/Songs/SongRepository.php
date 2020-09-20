@@ -7,4 +7,5 @@ interface SongRepository
 {
     public function nextIdentity(): SongId;
     public function add(Song $song): void;
+    public function getById(SongId $param): ?Song;
 }
