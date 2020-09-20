@@ -1,0 +1,13 @@
+App\Modules\SongsCatalog\Domain\Genres\Genre:
+  type: entity
+  id:
+    id:
+      column: id
+      type: GenreId
+  table: genres
+  repositoryClass: App\Modules\SongsCatalog\Infrastructure\Domain\Genres\DoctrineGenreRepository
+  fields:
+    title:
+      type: string
+      nullable: false
+      unique: true

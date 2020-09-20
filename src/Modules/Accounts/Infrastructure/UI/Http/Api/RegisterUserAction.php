@@ -11,6 +11,9 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Throwable;
 use OpenApi\Annotations as OA;
 
+/**
+ * @OA\Tag(name="Accounts")
+ */
 final class RegisterUserAction extends Action
 {
     private MessageBusInterface $bus;

@@ -1,0 +1,30 @@
+services:
+  _defaults:
+    autowire: true
+    public: false
+
+  _instanceof:
+    App\Common\Domain\DomainEventSubscriber:
+      tags: ['domain.event.subscriber']
+
+  App\Modules\SongsCatalog\:
+    resource: '../../../src/Modules/SongsCatalog/'
+
+  App\Modules\SongsCatalog\Application\Songs\CreateNew\NewSongHandler:
+    tags: [messenger.message_handler]
+
+  App\Modules\SongsCatalog\Domain\Authors\AuthorRepository:
+    class: App\Modules\SongsCatalog\Infrastructure\Domain\Authors\DoctrineAuthorRepository
+
+  App\Modules\SongsCatalog\Domain\Creators\CreatorRepository:
+    class: App\Modules\SongsCatalog\Infrastructure\Domain\Creators\HttpCreatorRepository
+
+  App\Modules\SongsCatalog\Domain\Genres\GenreRepository:
+    class: App\Modules\SongsCatalog\Infrastructure\Domain\Genres\DoctrineGenreRepository
+
+  App\Modules\SongsCatalog\Domain\Songs\SongRepository:
+    class: App\Modules\SongsCatalog\Infrastructure\Domain\Songs\DoctrineSongRepository
+
+  App\Modules\SongsCatalog\Infrastructure\UI\Http\Api\:
+    resource: '../../../src/Modules/SongsCatalog/Infrastructure/UI/Http/Api/'
+    tags: [ 'controller.service_arguments' ]

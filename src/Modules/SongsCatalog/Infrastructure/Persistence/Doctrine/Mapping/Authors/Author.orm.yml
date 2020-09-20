@@ -1,0 +1,13 @@
+App\Modules\SongsCatalog\Domain\Authors\Author:
+  type: entity
+  id:
+    id:
+      column: id
+      type: AuthorId
+  table: authors
+  repositoryClass: App\Modules\SongsCatalog\Infrastructure\Domain\Authors\DoctrineAuthorRepository
+  fields:
+    title:
+      type: string
+      nullable: false
+      unique: true

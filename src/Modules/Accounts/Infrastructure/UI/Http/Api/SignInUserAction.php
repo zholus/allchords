@@ -14,6 +14,9 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use OpenApi\Annotations as OA;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 
+/**
+ * @OA\Tag(name="Accounts")
+ */
 final class SignInUserAction extends Action
 {
     private MessageBusInterface $bus;

@@ -1,0 +1,43 @@
+App\Modules\SongsCatalog\Domain\Songs\Song:
+  type: entity
+  id:
+    id:
+      column: id
+      type: SongId
+  table: songs
+  repositoryClass: App\Modules\SongsCatalog\Infrastructure\Domain\Songs\DoctrineSongRepository
+  fields:
+    creatorId:
+      column: creator_id
+      type: CreatorId
+      nullable: false
+      unique: false
+
+    title:
+      column: title
+      type: string
+      nullable: false
+      unique: false
+
+    chords:
+      column: chords
+      type: text
+      nullable: false
+      unique: false
+
+    createdAt:
+      type: datetime_immutable
+      column: created_at
+      nullable: false
+
+  ManyToOne:
+    author:
+      targetEntity: App\Modules\SongsCatalog\Domain\Authors\Author
+      joinColumn:
+        name: author_id
+        referencedColumnName: id
+    genre:
+      targetEntity: App\Modules\SongsCatalog\Domain\Genres\Genre
+      joinColumn:
+        name: genre_id
+        referencedColumnName: id
