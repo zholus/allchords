@@ -23,7 +23,6 @@ abstract class Action
                 'message' => $exception->getMessage()
             ], Response::HTTP_BAD_REQUEST);
         } catch (\Throwable $exception) {
-            var_dump($exception->getMessage());
             return new JsonResponse([
                 'message' => 'Unexpected server error.'
             ], Response::HTTP_INTERNAL_SERVER_ERROR);

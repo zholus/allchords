@@ -1,17 +1,34 @@
 version: '3'
 services:
+  traefik:
+    image: "traefik:v2.2"
+    container_name: "traefik"
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
   web:
     container_name: allchords_php
     build:
       context: ../
       dockerfile: ./docker/Dockerfile
-    ports:
-      - "${WEB_PORT}:8080"
     environment:
       PHP_XDEBUG_REMOTE_PORT: "${PHP_XDEBUG_REMOTE_PORT}"
       PHP_XDEBUG_REMOTE_HOST: "${PHP_XDEBUG_REMOTE_HOST}"
     volumes:
       - ../:/app
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`allchords.local`)"
+      - "traefik.http.routers.whoami.entrypoints=web"
+      - "traefik.basic.port=80"
   db:
     container_name: allchords_mysql
     image: "mysql:8"

@@ -52,7 +52,7 @@ class NewSongHandler
             throw GenreNotFoundException::withId($genreId);
         }
 
-        if ($this->creators->getById($creatorId) === null) {
+        if (!$this->creators->isCreatorExists($creatorId)) {
             throw CreatorNotFoundException::withId($creatorId);
         }
 
