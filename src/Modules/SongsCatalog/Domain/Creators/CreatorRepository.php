@@ -5,5 +5,5 @@ namespace App\Modules\SongsCatalog\Domain\Creators;
 
 interface CreatorRepository
 {
-    public function isCreatorExists(CreatorId $id): bool;
+    public function getById(CreatorId $id): ?Creator;
 }

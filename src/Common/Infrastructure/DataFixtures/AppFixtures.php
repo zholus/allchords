@@ -6,6 +6,8 @@ use App\Modules\Accounts\Domain\Users\User;
 use App\Modules\Accounts\Domain\Users\UserId;
 use App\Modules\SongsCatalog\Domain\Authors\Author;
 use App\Modules\SongsCatalog\Domain\Authors\AuthorId;
+use App\Modules\SongsCatalog\Domain\Creators\Creator;
+use App\Modules\SongsCatalog\Domain\Creators\CreatorId;
 use App\Modules\SongsCatalog\Domain\Genres\Genre;
 use App\Modules\SongsCatalog\Domain\Genres\GenreId;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -17,6 +19,7 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $user = $this->persistUser($manager);
+        $creator = $this->persistCreator($manager, $user);
 
         $author = $this->buildAuthor();
         $genre = $this->buildGenre();
@@ -63,6 +66,21 @@ class AppFixtures extends Fixture
         return new Genre(
             new GenreId($this->uuid()),
             'title'
+        );
+    }
+
+    private function persistCreator(ObjectManager $manager, User $user)
+    {
+        $creator = $this->buildCreator($user);
+
+        $manager->persist($creator);
+    }
+
+    private function buildCreator(User $user)
+    {
+        return new Creator(
+            new CreatorId($user->getId()->toString()),
+            $user->getUsername()
         );
     }
 }

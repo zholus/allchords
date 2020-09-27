@@ -52,14 +52,16 @@ class NewSongHandler
             throw GenreNotFoundException::withId($genreId);
         }
 
-        if (!$this->creators->isCreatorExists($creatorId)) {
+        $creator = $this->creators->getById($creatorId);
+
+        if ($creator === null) {
             throw CreatorNotFoundException::withId($creatorId);
         }
 
         $song = Song::new(
             $this->songs->nextIdentity(),
             $author,
-            $creatorId,
+            $creator,
             $genre,
             $command->getTitle(),
             $command->getChords()

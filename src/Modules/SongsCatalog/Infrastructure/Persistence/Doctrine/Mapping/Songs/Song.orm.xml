@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity
+            name="App\Modules\SongsCatalog\Domain\Songs\Song"
+            table="songs_catalog_songs"
+            repository-class="App\Modules\SongsCatalog\Infrastructure\Domain\Songs\DoctrineSongRepository"
+    >
+        <id name="id" column="id" type="SongId" />
+        <field name="title" column="title" />
+        <field name="chords" column="chords" type="text" />
+        <field name="createdAt" column="created_at" type="datetime_immutable" />
+
+        <many-to-one field="author" target-entity="App\Modules\SongsCatalog\Domain\Authors\Author">
+            <join-column name="author_id" />
+        </many-to-one>
+
+        <many-to-one field="genre" target-entity="App\Modules\SongsCatalog\Domain\Genres\Genre">
+            <join-column name="genre_id" />
+        </many-to-one>
+
+        <many-to-one field="creator" target-entity="App\Modules\SongsCatalog\Domain\Creators\Creator">
+            <join-column name="creator_id" />
+        </many-to-one>
+    </entity>
+</doctrine-mapping>

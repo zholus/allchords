@@ -17,22 +17,27 @@ doctrine:
         auto_mapping: true
         mappings:
             Accounts_Users:
-                type: yml
+                type: xml
                 prefix: 'App\Modules\Accounts\Domain\Users'
                 dir: '%kernel.project_dir%/src/Modules/Accounts/Infrastructure/Persistence/Doctrine/Mapping'
                 is_bundle: false
             SongsCatalog_Authors:
-                type: yml
+                type: xml
                 prefix: 'App\Modules\SongsCatalog\Domain\Authors'
                 dir: '%kernel.project_dir%/src/Modules/SongsCatalog/Infrastructure/Persistence/Doctrine/Mapping/Authors'
                 is_bundle: false
             SongsCatalog_Genres:
-                type: yml
+                type: xml
                 prefix: 'App\Modules\SongsCatalog\Domain\Genres'
                 dir: '%kernel.project_dir%/src/Modules/SongsCatalog/Infrastructure/Persistence/Doctrine/Mapping/Genres'
                 is_bundle: false
             SongsCatalog_Songs:
-                type: yml
+                type: xml
                 prefix: 'App\Modules\SongsCatalog\Domain\Songs'
                 dir: '%kernel.project_dir%/src/Modules/SongsCatalog/Infrastructure/Persistence/Doctrine/Mapping/Songs'
+                is_bundle: false
+            SongsCatalog_Creators:
+                type: xml
+                prefix: 'App\Modules\SongsCatalog\Domain\Creators'
+                dir: '%kernel.project_dir%/src/Modules/SongsCatalog/Infrastructure/Persistence/Doctrine/Mapping/Creators'
                 is_bundle: false

@@ -29,7 +29,7 @@ class GetSongHandler
         return new SongDto(
             $song->getId()->toString(),
             $song->getAuthor()->getId()->toString(),
-            $song->getCreatorId()->toString(),
+            $song->getCreator()->getId()->toString(),
             $song->getGenre()->getId()->toString(),
             $song->getTitle(),
             $song->getChords()

@@ -22,7 +22,7 @@ services:
     class: App\Modules\SongsCatalog\Infrastructure\Domain\Authors\DoctrineAuthorRepository
 
   App\Modules\SongsCatalog\Domain\Creators\CreatorRepository:
-    class: App\Modules\SongsCatalog\Infrastructure\Domain\Creators\HttpCreatorRepository
+    class: App\Modules\SongsCatalog\Infrastructure\Domain\Creators\DoctrineCreatorRepository
 
   App\Modules\SongsCatalog\Domain\Genres\GenreRepository:
     class: App\Modules\SongsCatalog\Infrastructure\Domain\Genres\DoctrineGenreRepository
