@@ -87,6 +87,10 @@ final class Version20200919204750 extends AbstractMigration
     public function down(Schema $schema) : void
     {
         // this down() migration is auto-generated, please modify it to your needs
+        $this->addSql('ALTER TABLE songs_catalog_songs DROP FOREIGN KEY IDX_8C6801BC61220EA6');
+        $this->addSql('ALTER TABLE songs_catalog_songs DROP FOREIGN KEY IDX_8C6801BC4296D31F');
+        $this->addSql('ALTER TABLE songs_catalog_songs DROP FOREIGN KEY IDX_8C6801BCF675F31B');
+        $this->addSql('DROP TABLE songs_catalog_creators');
         $this->addSql('DROP TABLE songs_catalog_authors');
         $this->addSql('DROP TABLE songs_catalog_genres');
         $this->addSql('DROP TABLE songs_catalog_songs');
