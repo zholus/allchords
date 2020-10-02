@@ -53,7 +53,7 @@ final class Version20200919204750 extends AbstractMigration
             (
                 id CHAR(36) NOT NULL, 
                 title VARCHAR(255) NOT NULL, 
-                UNIQUE INDEX UNIQ_9FA81D3C2B36786B (title),
+                UNIQUE INDEX UNIQ_7977B7732B36786B (title),
                 PRIMARY KEY(id)
             ) 
             DEFAULT CHARACTER SET utf8mb4
@@ -73,7 +73,7 @@ final class Version20200919204750 extends AbstractMigration
                 chords LONGTEXT NOT NULL, 
                 created_at DATETIME NOT NULL COMMENT '(DC2Type\:datetime_immutable)', 
                 PRIMARY KEY(id),
-                CONSTRAINT IDX_8C6801BCF675F31B FOREIGN KEY (artist_id) REFERENCES songs_catalog_artists (id),
+                CONSTRAINT IDX_8C6801BCB7970CF8 FOREIGN KEY (artist_id) REFERENCES songs_catalog_artists (id),
                 CONSTRAINT IDX_8C6801BC4296D31F FOREIGN KEY (genre_id) REFERENCES songs_catalog_genres (id),
                 CONSTRAINT IDX_8C6801BC61220EA6 FOREIGN KEY (creator_id) REFERENCES songs_catalog_creators (id)
             ) 
@@ -89,7 +89,7 @@ final class Version20200919204750 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE songs_catalog_songs DROP FOREIGN KEY IDX_8C6801BC61220EA6');
         $this->addSql('ALTER TABLE songs_catalog_songs DROP FOREIGN KEY IDX_8C6801BC4296D31F');
-        $this->addSql('ALTER TABLE songs_catalog_songs DROP FOREIGN KEY IDX_8C6801BCF675F31B');
+        $this->addSql('ALTER TABLE songs_catalog_songs DROP FOREIGN KEY IDX_8C6801BCB7970CF8');
         $this->addSql('DROP TABLE songs_catalog_creators');
         $this->addSql('DROP TABLE songs_catalog_artists');
         $this->addSql('DROP TABLE songs_catalog_genres');

@@ -21,3 +21,4 @@ services:
 imports:
     - { resource: 'modules/accounts/services.yaml' }
     - { resource: 'modules/songs_catalog/services.yaml' }
+    - { resource: 'modules/comments/services.yaml' }

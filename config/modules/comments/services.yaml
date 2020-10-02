@@ -1,0 +1,17 @@
+services:
+  _defaults:
+    autowire: true
+    public: false
+
+  _instanceof:
+    App\Modules\Comments\Domain\DomainEventSubscriber:
+      tags: [ 'domain.event.subscriber' ]
+
+  App\Modules\Comments\:
+    resource: '../../../src/Modules/Comments/'
+
+  App\Modules\Comments\Application\Users\CreateUser\CreateUserHandler:
+    tags: [ messenger.message_handler ]
+
+  App\Modules\Comments\Domain\Users\UserRepository:
+    class: App\Modules\Comments\Infrastructure\Domain\Users\DoctrineUserRepository
