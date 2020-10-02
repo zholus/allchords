@@ -2,8 +2,6 @@ services:
   _defaults:
     autowire: true
     public: false
-    bind:
-      $accountServiceUrl: '%env(resolve:ACCOUNTS_SERVICE_URL)%'
 
   _instanceof:
     App\Modules\SongsCatalog\Domain\DomainEventSubscriber:
