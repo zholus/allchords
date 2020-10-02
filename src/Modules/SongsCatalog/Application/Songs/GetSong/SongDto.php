@@ -6,7 +6,7 @@ namespace App\Modules\SongsCatalog\Application\Songs\GetSong;
 class SongDto
 {
     private string $songId;
-    private string $authorId;
+    private string $artistId;
     private string $creatorId;
     private string $genreId;
     private string $title;
@@ -14,14 +14,14 @@ class SongDto
 
     public function __construct(
         string $songId,
-        string $authorId,
+        string $artistId,
         string $creatorId,
         string $genreId,
         string $title,
         string $chords
     ) {
         $this->songId = $songId;
-        $this->authorId = $authorId;
+        $this->artistId = $artistId;
         $this->creatorId = $creatorId;
         $this->genreId = $genreId;
         $this->title = $title;
@@ -32,7 +32,7 @@ class SongDto
     {
         return [
             'songId' => $this->songId,
-            'authorId' => $this->authorId,
+            'artistId' => $this->artistId,
             'creatorId' => $this->creatorId,
             'genreId' => $this->genreId,
             'title' => $this->title,

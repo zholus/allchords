@@ -30,7 +30,7 @@ final class NewSongAction extends Action
      *     @OA\MediaType(
      *          mediaType="application/x-www-form-urlencoded",
      *          @OA\Schema(
-     *              @OA\Property(property="author_id",
+     *              @OA\Property(property="artis_id",
      *    			    type="string",
      *    				example="",
      *    				description=""
@@ -73,7 +73,7 @@ final class NewSongAction extends Action
      */
     public function __invoke(Request $request): JsonResponse
     {
-        $authorId = $request->get('author_id', '');
+        $artistId = $request->get('artist_id', '');
         $creatorId = $request->get('creator_id', '');
         $genreId = $request->get('genre_id', '');
         $title = $request->get('title', '');
@@ -81,7 +81,7 @@ final class NewSongAction extends Action
 
         try {
             Assert::lazy()
-                ->that($authorId, 'author')->string()->notEmpty()
+                ->that($artistId, 'artist')->string()->notEmpty()
                 ->that($creatorId, 'creator')->string()->notEmpty()
                 ->that($genreId, 'genre')->string()->notEmpty()
                 ->that($title, 'title')->string()->notEmpty()
@@ -89,7 +89,7 @@ final class NewSongAction extends Action
                 ->verifyNow();
 
             $songId = $this->bus->dispatch(new NewSongCommand(
-                $authorId,
+                $artistId,
                 $creatorId,
                 $genreId,
                 $title,

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Modules\SongsCatalog\Domain\Songs;
 
-use App\Modules\SongsCatalog\Domain\Authors\Author;
+use App\Modules\SongsCatalog\Domain\Artists\Artist;
 use App\Modules\SongsCatalog\Domain\Creators\Creator;
 use App\Modules\SongsCatalog\Domain\Genres\Genre;
 use DateTimeImmutable;
@@ -11,7 +11,7 @@ use DateTimeImmutable;
 class Song
 {
     private SongId $id;
-    private Author $author;
+    private Artist $artist;
     private Creator $creator;
     private Genre $genre;
     private string $title;
@@ -20,7 +20,7 @@ class Song
 
     public function __construct(
         SongId $id,
-        Author $author,
+        Artist $artist,
         Creator $creator,
         Genre $genre,
         string $title,
@@ -28,7 +28,7 @@ class Song
         DateTimeImmutable $createdAt
     ) {
         $this->id = $id;
-        $this->author = $author;
+        $this->artist = $artist;
         $this->creator = $creator;
         $this->genre = $genre;
         $this->title = $title;
@@ -38,7 +38,7 @@ class Song
 
     public static function new(
         SongId $id,
-        Author $author,
+        Artist $artist,
         Creator $creator,
         Genre $genre,
         string $title,
@@ -46,7 +46,7 @@ class Song
     ): Song {
         return new self(
             $id,
-            $author,
+            $artist,
             $creator,
             $genre,
             $title,
@@ -60,9 +60,9 @@ class Song
         return $this->id;
     }
 
-    public function getAuthor(): Author
+    public function getArtist(): Artist
     {
-        return $this->author;
+        return $this->artist;
     }
 
     public function getCreator(): Creator

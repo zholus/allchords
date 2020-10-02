@@ -5,29 +5,29 @@ namespace App\Modules\SongsCatalog\Application\Songs\CreateNew;
 
 class NewSongCommand
 {
-    private string $authorId;
+    private string $artistId;
     private string $creatorId;
     private string $genreId;
     private string $title;
     private string $chords;
 
     public function __construct(
-        string $authorId,
+        string $artistId,
         string $creatorId,
         string $genreId,
         string $title,
         string $chords
     ) {
-        $this->authorId = $authorId;
+        $this->artistId = $artistId;
         $this->creatorId = $creatorId;
         $this->genreId = $genreId;
         $this->title = $title;
         $this->chords = $chords;
     }
 
-    public function getAuthorId(): string
+    public function getArtistId(): string
     {
-        return $this->authorId;
+        return $this->artistId;
     }
 
     public function getCreatorId(): string

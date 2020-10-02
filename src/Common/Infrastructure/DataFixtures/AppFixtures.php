@@ -4,8 +4,8 @@ namespace App\Common\Infrastructure\DataFixtures;
 
 use App\Modules\Accounts\Domain\Users\User;
 use App\Modules\Accounts\Domain\Users\UserId;
-use App\Modules\SongsCatalog\Domain\Authors\Author;
-use App\Modules\SongsCatalog\Domain\Authors\AuthorId;
+use App\Modules\SongsCatalog\Domain\Artists\Artist;
+use App\Modules\SongsCatalog\Domain\Artists\ArtistId;
 use App\Modules\SongsCatalog\Domain\Creators\Creator;
 use App\Modules\SongsCatalog\Domain\Creators\CreatorId;
 use App\Modules\SongsCatalog\Domain\Genres\Genre;
@@ -21,10 +21,10 @@ class AppFixtures extends Fixture
         $user = $this->persistUser($manager);
         $creator = $this->persistCreator($manager, $user);
 
-        $author = $this->buildAuthor();
+        $artist = $this->buildArtist();
         $genre = $this->buildGenre();
 
-        $manager->persist($author);
+        $manager->persist($artist);
         $manager->persist($genre);
         $manager->flush();
     }
@@ -48,10 +48,10 @@ class AppFixtures extends Fixture
         );
     }
 
-    private function buildAuthor(): Author
+    private function buildArtist(): Artist
     {
-        return new Author(
-            new AuthorId($this->uuid()),
+        return new Artist(
+            new ArtistId($this->uuid()),
             'title'
         );
     }
@@ -76,7 +76,7 @@ class AppFixtures extends Fixture
         $manager->persist($creator);
     }
 
-    private function buildCreator(User $user)
+    private function buildCreator(User $user): Creator
     {
         return new Creator(
             new CreatorId($user->getId()->toString()),

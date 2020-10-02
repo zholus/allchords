@@ -5,10 +5,6 @@ services:
     bind:
       $accountServiceUrl: '%env(resolve:ACCOUNTS_SERVICE_URL)%'
 
-  _instanceof:
-    App\Common\Domain\DomainEventSubscriber:
-      tags: ['domain.event.subscriber']
-
   App\Modules\SongsCatalog\:
     resource: '../../../src/Modules/SongsCatalog/'
 
@@ -18,8 +14,8 @@ services:
   App\Modules\SongsCatalog\Application\Songs\GetSong\GetSongHandler:
     tags: [messenger.message_handler]
 
-  App\Modules\SongsCatalog\Domain\Authors\AuthorRepository:
-    class: App\Modules\SongsCatalog\Infrastructure\Domain\Authors\DoctrineAuthorRepository
+  App\Modules\SongsCatalog\Domain\Artists\ArtistRepository:
+    class: App\Modules\SongsCatalog\Infrastructure\Domain\Artists\DoctrineArtistRepository
 
   App\Modules\SongsCatalog\Domain\Creators\CreatorRepository:
     class: App\Modules\SongsCatalog\Infrastructure\Domain\Creators\DoctrineCreatorRepository

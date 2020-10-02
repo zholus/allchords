@@ -48,6 +48,7 @@ class User
 
         EventDispatcher::instance()->publish(new UserCreated(
             $id,
+            $username,
             $email
         ));
 

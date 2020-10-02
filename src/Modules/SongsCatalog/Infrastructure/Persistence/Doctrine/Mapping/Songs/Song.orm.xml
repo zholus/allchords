@@ -13,8 +13,8 @@
         <field name="chords" column="chords" type="text" />
         <field name="createdAt" column="created_at" type="datetime_immutable" />
 
-        <many-to-one field="author" target-entity="App\Modules\SongsCatalog\Domain\Authors\Author">
-            <join-column name="author_id" />
+        <many-to-one field="artist" target-entity="App\Modules\SongsCatalog\Domain\Artists\Artist">
+            <join-column name="artist_id" />
         </many-to-one>
 
         <many-to-one field="genre" target-entity="App\Modules\SongsCatalog\Domain\Genres\Genre">

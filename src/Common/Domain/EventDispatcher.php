@@ -21,6 +21,11 @@ class EventDispatcher
         return self::$instance;
     }
 
+    public function clear(): void
+    {
+        $this->events = [];
+    }
+
     public function publish(DomainEvent $event): void
     {
         $this->events[] = $event;

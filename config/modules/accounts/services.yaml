@@ -4,7 +4,7 @@ services:
     public: false
 
   _instanceof:
-      App\Common\Domain\DomainEventSubscriber:
+      App\Modules\Accounts\Domain\DomainEventSubscriber:
         tags: ['domain.event.subscriber']
   
   App\Modules\Accounts\:

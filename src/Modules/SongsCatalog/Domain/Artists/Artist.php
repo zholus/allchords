@@ -1,20 +1,20 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\SongsCatalog\Domain\Authors;
+namespace App\Modules\SongsCatalog\Domain\Artists;
 
-class Author
+class Artist
 {
-    private AuthorId $id;
+    private ArtistId $id;
     private string $title;
 
-    public function __construct(AuthorId $id, string $title)
+    public function __construct(ArtistId $id, string $title)
     {
         $this->id = $id;
         $this->title = $title;
     }
 
-    public function getId(): AuthorId
+    public function getId(): ArtistId
     {
         return $this->id;
     }

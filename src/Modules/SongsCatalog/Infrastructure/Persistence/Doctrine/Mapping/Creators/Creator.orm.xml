@@ -8,7 +8,7 @@
             table="songs_catalog_creators"
             repository-class="App\Modules\SongsCatalog\Infrastructure\Domain\Creators\DoctrineCreatorRepository"
     >
-        <id name="id" column="id" type="CreatorId" />
+        <id name="id" column="id" type="SongsCatalog_CreatorId" />
         <field name="username" column="username" unique="true" />
     </entity>
 </doctrine-mapping>

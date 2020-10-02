@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace App\Modules\SongsCatalog\Application\Songs\CreateNew;
 
-use App\Modules\SongsCatalog\Domain\Authors\AuthorId;
-use App\Modules\SongsCatalog\Domain\Authors\AuthorNotFoundException;
-use App\Modules\SongsCatalog\Domain\Authors\AuthorRepository;
+use App\Modules\SongsCatalog\Domain\Artists\ArtistId;
+use App\Modules\SongsCatalog\Domain\Artists\ArtistNotFoundException;
+use App\Modules\SongsCatalog\Domain\Artists\ArtistRepository;
 use App\Modules\SongsCatalog\Domain\Creators\CreatorId;
 use App\Modules\SongsCatalog\Domain\Creators\CreatorNotFoundException;
 use App\Modules\SongsCatalog\Domain\Creators\CreatorRepository;
@@ -17,18 +17,18 @@ use App\Modules\SongsCatalog\Domain\Songs\SongRepository;
 
 class NewSongHandler
 {
-    private AuthorRepository $authors;
+    private ArtistRepository $artists;
     private CreatorRepository $creators;
     private GenreRepository $genres;
     private SongRepository $songs;
 
     public function __construct(
-        AuthorRepository $authors,
+        ArtistRepository $artists,
         CreatorRepository $creators,
         GenreRepository $genres,
         SongRepository $songs
     ) {
-        $this->authors = $authors;
+        $this->artists = $artists;
         $this->creators = $creators;
         $this->genres = $genres;
         $this->songs = $songs;
@@ -36,14 +36,14 @@ class NewSongHandler
 
     public function __invoke(NewSongCommand $command): string
     {
-        $authorId = new AuthorId($command->getAuthorId());
+        $artistId = new ArtistId($command->getArtistId());
         $genreId = new GenreId($command->getGenreId());
         $creatorId = new CreatorId($command->getCreatorId());
 
-        $author = $this->authors->getById($authorId);
+        $artist = $this->artists->getById($artistId);
 
-        if ($author === null) {
-            throw AuthorNotFoundException::withId($authorId);
+        if ($artist === null) {
+            throw ArtistNotFoundException::withId($artistId);
         }
 
         $genre = $this->genres->getById($genreId);
@@ -60,7 +60,7 @@ class NewSongHandler
 
         $song = Song::new(
             $this->songs->nextIdentity(),
-            $author,
+            $artist,
             $creator,
             $genre,
             $command->getTitle(),

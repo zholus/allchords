@@ -22,12 +22,26 @@ final class EventDispatchMiddleware implements MiddlewareInterface
     {
         $envelope = $stack->next()->handle($envelope, $stack);
 
+        $subscriberMap = [];
+
         foreach (EventDispatcher::instance()->getAllEvents() as $event) {
             foreach ($this->eventSubscribersLocator->getAll() as $subscriber) {
                 if ($subscriber->isSubscribedTo($event)) {
-                    $subscriber->handle($event);
+                    $subscriberMap[] = [
+                        $subscriber,
+                        $event
+                    ];
                 }
             }
+        }
+
+        EventDispatcher::instance()->clear();
+
+        foreach ($subscriberMap as $map) {
+            $subscriber = $map[0];
+            $event = $map[1];
+
+            $subscriber->handle($event);
         }
 
         return $envelope;

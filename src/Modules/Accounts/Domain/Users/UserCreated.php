@@ -10,21 +10,28 @@ final class UserCreated implements DomainEvent
 {
     private UserId $userId;
     private string $email;
+    private string $username;
 
-    public function __construct(UserId $userId, string $email)
+    public function __construct(UserId $userId, string $username, string $email)
     {
         $this->userId = $userId;
         $this->email = $email;
+        $this->username = $username;
     }
 
-    public function getUserId(): UserId
+    public function getUserId(): string
     {
-        return $this->userId;
+        return $this->userId->toString();
     }
 
     public function getEmail(): string
     {
         return $this->email;
+    }
+
+    public function getUsername(): string
+    {
+        return $this->username;
     }
 
     public function occurredOn(): DateTimeImmutable
