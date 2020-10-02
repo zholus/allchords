@@ -20,4 +20,14 @@ class DoctrineCreatorRepository extends ServiceEntityRepository implements Creat
     {
         return $this->find($id);
     }
+
+    public function getByUsername(string $username): ?Creator
+    {
+        return $this->findOneBy(['username' => $username]);
+    }
+
+    public function add(Creator $creator): void
+    {
+        $this->getEntityManager()->persist($creator);
+    }
 }
