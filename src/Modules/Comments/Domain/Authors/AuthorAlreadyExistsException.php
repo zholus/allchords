@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\Comments\Domain\Users;
+namespace App\Modules\Comments\Domain\Authors;
 
-class UserAlreadyExistsException extends \DomainException
+class AuthorAlreadyExistsException extends \DomainException
 {
-    public static function withId(UserId $id): self
+    public static function withId(AuthorId $id): self
     {
         return new self(
             sprintf(
-                'User with [%s] id already exists',
+                'Author with [%s] id already exists',
                 $id->toString()
             )
         );
@@ -19,7 +19,7 @@ class UserAlreadyExistsException extends \DomainException
     {
         return new self(
             sprintf(
-                'User with [%s] username already exists',
+                'Author with [%s] username already exists',
                 $username
             )
         );

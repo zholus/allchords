@@ -20,7 +20,7 @@ final class Version20201002211443 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         $commentsSql = "
-            CREATE TABLE comments_users 
+            CREATE TABLE comments_authors 
             (
                 id CHAR(36) NOT NULL, 
                 username VARCHAR(255) NOT NULL, 
@@ -37,6 +37,6 @@ final class Version20201002211443 extends AbstractMigration
     public function down(Schema $schema) : void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP TABLE comments_users');
+        $this->addSql('DROP TABLE comments_authors');
     }
 }

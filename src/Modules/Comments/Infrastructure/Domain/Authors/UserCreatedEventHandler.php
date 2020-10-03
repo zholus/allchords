@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\Comments\Infrastructure\Domain\Users;
+namespace App\Modules\Comments\Infrastructure\Domain\Authors;
 
 use App\Common\Domain\DomainEvent;
 use App\Modules\Accounts\Domain\Users\UserCreated;
 use App\Modules\Comments\Domain\DomainEventSubscriber;
-use App\Modules\Comments\Application\Users\CreateUser\CreateUserCommand;
+use App\Modules\Comments\Application\Authors\CreateAuthor\CreateAuthorCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -27,7 +27,7 @@ class UserCreatedEventHandler implements DomainEventSubscriber
     public function handle(DomainEvent $event): void
     {
         try {
-            $this->bus->dispatch(new CreateUserCommand(
+            $this->bus->dispatch(new CreateAuthorCommand(
                 $event->getUserId(),
                 $event->getUsername()
             ));

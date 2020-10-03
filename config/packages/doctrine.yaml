@@ -11,7 +11,7 @@ doctrine:
             SongId: App\Modules\SongsCatalog\Infrastructure\Persistence\Doctrine\Mapping\Songs\SongIdType
             SongsCatalog_ArtistId: App\Modules\SongsCatalog\Infrastructure\Persistence\Doctrine\Mapping\Artists\ArtistIdType
             SongsCatalog_CreatorId: App\Modules\SongsCatalog\Infrastructure\Persistence\Doctrine\Mapping\Creators\CreatorIdType
-            Comments_UserId: App\Modules\Comments\Infrastructure\Persistence\Doctrine\Mapping\Users\UserIdType
+            Comments_AuthorId: App\Modules\Comments\Infrastructure\Persistence\Doctrine\Mapping\Authors\AuthorIdType
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
@@ -42,8 +42,8 @@ doctrine:
                 prefix: 'App\Modules\SongsCatalog\Domain\Creators'
                 dir: '%kernel.project_dir%/src/Modules/SongsCatalog/Infrastructure/Persistence/Doctrine/Mapping/Creators'
                 is_bundle: false
-            Comments_Users:
+            Comments_Authors:
                 type: xml
-                prefix: 'App\Modules\Comments\Domain\Users'
-                dir: '%kernel.project_dir%/src/Modules/Comments/Infrastructure/Persistence/Doctrine/Mapping/Users'
+                prefix: 'App\Modules\Comments\Domain\Authors'
+                dir: '%kernel.project_dir%/src/Modules/Comments/Infrastructure/Persistence/Doctrine/Mapping/Authors'
                 is_bundle: false

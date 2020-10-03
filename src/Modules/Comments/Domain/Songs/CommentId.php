@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\Comments\Domain\Comments;
+namespace App\Modules\Comments\Domain\Songs;
 
 use App\Common\Domain\Id;
 

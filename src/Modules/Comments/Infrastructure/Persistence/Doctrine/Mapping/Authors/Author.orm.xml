@@ -4,11 +4,11 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <entity
-            name="App\Modules\Comments\Domain\Users\User"
-            table="comments_users"
-            repository-class="App\Modules\Comments\Infrastructure\Domain\Users\DoctrineUserRepository"
+            name="App\Modules\Comments\Domain\Authors\Author"
+            table="comments_authors"
+            repository-class="App\Modules\Comments\Infrastructure\Domain\Authors\DoctrineAuthorRepository"
     >
-        <id name="id" column="id" type="Comments_UserId" />
+        <id name="id" column="id" type="Comments_AuthorId" />
         <field name="username" column="username" unique="true" />
     </entity>
 </doctrine-mapping>

@@ -10,8 +10,8 @@ services:
   App\Modules\Comments\:
     resource: '../../../src/Modules/Comments/'
 
-  App\Modules\Comments\Application\Users\CreateUser\CreateUserHandler:
+  App\Modules\Comments\Application\Authors\CreateAuthor\CreateAuthorHandler:
     tags: [ messenger.message_handler ]
 
-  App\Modules\Comments\Domain\Users\UserRepository:
-    class: App\Modules\Comments\Infrastructure\Domain\Users\DoctrineUserRepository
+  App\Modules\Comments\Domain\Authors\AuthorRepository:
+    class: App\Modules\Comments\Infrastructure\Domain\Authors\DoctrineAuthorRepository

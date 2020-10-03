@@ -1,19 +1,19 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\Comments\Infrastructure\Persistence\Doctrine\Mapping\Users;
+namespace App\Modules\Comments\Infrastructure\Persistence\Doctrine\Mapping\Authors;
 
-use App\Modules\Comments\Domain\Users\UserId;
+use App\Modules\Comments\Domain\Authors\AuthorId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\GuidType;
 
-class UserIdType extends GuidType
+class AuthorIdType extends GuidType
 {
     const Uuid = 'uuid';
 
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
-        return new UserId($value);
+        return new AuthorId($value);
     }
 
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
