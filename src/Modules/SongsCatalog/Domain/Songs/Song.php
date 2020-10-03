@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Modules\SongsCatalog\Domain\Songs;
 
+use App\Common\Domain\EventDispatcher;
 use App\Modules\SongsCatalog\Domain\Artists\Artist;
 use App\Modules\SongsCatalog\Domain\Creators\Creator;
 use App\Modules\SongsCatalog\Domain\Genres\Genre;
@@ -44,7 +45,7 @@ class Song
         string $title,
         string $chords
     ): Song {
-        return new self(
+        $song = new self(
             $id,
             $artist,
             $creator,
@@ -53,6 +54,12 @@ class Song
             $chords,
             new DateTimeImmutable()
         );
+
+        EventDispatcher::instance()->publish(new SongCreated(
+            $id
+        ));
+
+        return $song;
     }
 
     public function getId(): SongId
