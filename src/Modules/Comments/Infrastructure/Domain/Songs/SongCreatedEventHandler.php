@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Modules\Comments\Infrastructure\Domain\Songs;
 
 use App\Common\Domain\DomainEvent;
-use App\Modules\Comments\Application\Songs\CreateNew\CreateNewSongCommand;
+use App\Modules\Comments\Application\Songs\CreateNewSong\CreateNewSongCommand;
 use App\Modules\Comments\Domain\DomainEventSubscriber;
 use App\Modules\SongsCatalog\Domain\Songs\SongCreated;
 use Psr\Log\LoggerInterface;

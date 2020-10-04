@@ -1,0 +1,4 @@
+new_song_comment:
+  path: /api/comments/new/song
+  methods: POST
+  controller: App\Modules\Comments\Infrastructure\UI\Http\Api\NewSongCommentAction

@@ -13,7 +13,10 @@ services:
   App\Modules\Comments\Application\Authors\CreateAuthor\CreateAuthorHandler:
     tags: [ messenger.message_handler ]
 
-  App\Modules\Comments\Application\Songs\CreateNew\CreateNewSongHandler:
+  App\Modules\Comments\Application\Songs\CreateNewSong\CreateNewSongHandler:
+    tags: [ messenger.message_handler ]
+
+  App\Modules\Comments\Application\Songs\CreateNewComment\CreateNewSongCommentHandler:
     tags: [ messenger.message_handler ]
 
   App\Modules\Comments\Domain\Authors\AuthorRepository:
@@ -21,3 +24,7 @@ services:
 
   App\Modules\Comments\Domain\Songs\SongRepository:
     class: App\Modules\Comments\Infrastructure\Domain\Songs\DoctrineSongRepository
+
+  App\Modules\Comments\Infrastructure\UI\Http\Api\:
+    resource: '../../../src/Modules/Comments/Infrastructure/UI/Http/Api/'
+    tags: [ 'controller.service_arguments' ]

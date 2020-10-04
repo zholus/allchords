@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\Comments\Application\Songs\CreateNew;
+namespace App\Modules\Comments\Application\Songs\CreateNewSong;
 
 use App\Modules\Comments\Domain\Songs\Song;
 use App\Modules\Comments\Domain\Songs\SongAlreadyExistsException;

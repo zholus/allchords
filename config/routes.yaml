@@ -7,3 +7,6 @@ accounts:
 
 songs_catalog:
   resource: 'modules/songs_catalog/routes.yaml'
+
+comments:
+  resource: 'modules/comments/routes.yaml'
