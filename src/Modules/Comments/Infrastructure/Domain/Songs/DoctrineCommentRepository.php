@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Modules\Comments\Infrastructure\Domain\Songs;
 
 use App\Modules\Comments\Domain\Songs\Comment;
+use App\Modules\Comments\Domain\Songs\CommentId;
 use App\Modules\Comments\Domain\Songs\CommentRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,5 +20,10 @@ class DoctrineCommentRepository extends ServiceEntityRepository implements Comme
     public function nextIdentity(): string
     {
         return Uuid::uuid4()->toString();
+    }
+
+    public function getById(CommentId $id): ?Comment
+    {
+        return $this->find($id);
     }
 }

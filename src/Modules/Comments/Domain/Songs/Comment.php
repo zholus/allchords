@@ -22,4 +22,29 @@ class Comment
         $this->text = $text;
         $this->createdAt = $createdAt;
     }
+
+    public function getId(): CommentId
+    {
+        return $this->id;
+    }
+
+    public function getSong(): Song
+    {
+        return $this->song;
+    }
+
+    public function getAuthor(): Author
+    {
+        return $this->author;
+    }
+
+    public function getText(): string
+    {
+        return $this->text;
+    }
+
+    public function getCreatedAt(): DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
 }

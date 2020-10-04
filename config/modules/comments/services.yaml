@@ -19,6 +19,12 @@ services:
   App\Modules\Comments\Application\Songs\CreateNewComment\CreateNewSongCommentHandler:
     tags: [ messenger.message_handler ]
 
+  App\Modules\Comments\Application\Songs\GetComments\GetCommentsHandler:
+    tags: [ messenger.message_handler ]
+
+  App\Modules\Comments\Application\Songs\GetComment\GetCommentHandler:
+    tags: [ messenger.message_handler ]
+
   App\Modules\Comments\Domain\Authors\AuthorRepository:
     class: App\Modules\Comments\Infrastructure\Domain\Authors\DoctrineAuthorRepository
 

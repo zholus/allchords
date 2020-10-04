@@ -6,4 +6,5 @@ namespace App\Modules\Comments\Domain\Songs;
 interface CommentRepository
 {
     public function nextIdentity(): string;
+    public function getById(CommentId $id): ?Comment;
 }

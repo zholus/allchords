@@ -6,6 +6,8 @@ use App\Modules\Accounts\Domain\Users\User;
 use App\Modules\Accounts\Domain\Users\UserId;
 use App\Modules\Comments\Domain\Authors\Author;
 use App\Modules\Comments\Domain\Authors\AuthorId;
+use App\Modules\Comments\Domain\Songs\Song as CommentSong;
+use App\Modules\Comments\Domain\Songs\SongId as CommandSongId;
 use App\Modules\SongsCatalog\Domain\Artists\Artist;
 use App\Modules\SongsCatalog\Domain\Artists\ArtistId;
 use App\Modules\SongsCatalog\Domain\Creators\Creator;
@@ -15,6 +17,7 @@ use App\Modules\SongsCatalog\Domain\Genres\GenreId;
 use App\Modules\SongsCatalog\Domain\Songs\Song;
 use App\Modules\SongsCatalog\Domain\Songs\SongId;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ObjectManager;
 use Ramsey\Uuid\Uuid;
 
@@ -24,14 +27,16 @@ class AppFixtures extends Fixture
     {
         $user = $this->persistUser($manager);
         $creator = $this->persistCreator($manager, $user);
-        $this->persistCommentAuthor($manager, $user);
 
         $artist = $this->buildArtist();
         $genre = $this->buildGenre();
 
         $manager->persist($artist);
         $manager->persist($genre);
-        $this->persistSong($manager, $artist, $creator, $genre);
+        $song = $this->persistSong($manager, $artist, $creator, $genre);
+
+        $this->persistCommentAuthor($manager, $user);
+        $this->persistCommentSong($manager, $song);
 
         $manager->flush();
     }
@@ -125,5 +130,14 @@ class AppFixtures extends Fixture
         $manager->persist($author);
 
         return $author;
+    }
+
+    private function persistCommentSong(ObjectManager $manager, Song $song)
+    {
+        $song = new CommentSong(new CommandSongId($song->getId()->toString()), new ArrayCollection());
+
+        $manager->persist($song);
+
+        return $song;
     }
 }

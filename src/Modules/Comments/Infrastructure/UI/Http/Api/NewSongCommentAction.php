@@ -3,12 +3,17 @@ declare(strict_types=1);
 
 namespace App\Modules\Comments\Infrastructure\UI\Http\Api;
 
+use App\Modules\Comments\Application\Songs\GetComments\CommentDto;
 use App\Modules\Comments\Application\Songs\CreateNewComment\CreateNewSongCommentCommand;
+use App\Modules\Comments\Application\Songs\GetComment\GetCommentQuery;
+use App\Modules\SongsCatalog\Application\Songs\GetSong\GetSongQuery;
+use App\Modules\SongsCatalog\Application\Songs\GetSong\SongDto;
 use Assert\Assert;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\HandledStamp;
 
 /**
  * @OA\Tag(name="Comments")
@@ -71,15 +76,25 @@ final class NewSongCommentAction extends Action
                 ->that($text, 'text')->string()->notEmpty()
                 ->verifyNow();
 
-            $this->bus->dispatch(new CreateNewSongCommentCommand(
+            $commentId = $this->bus->dispatch(new CreateNewSongCommentCommand(
                 $authorId,
                 $songId,
                 $text,
-            ));
+            ))->last(HandledStamp::class)->getResult();
+
+            /**
+             * @var CommentDto $commentDto
+             */
+            $commentDto = $this->bus
+                ->dispatch(new GetCommentQuery($commentId))
+                ->last(HandledStamp::class)
+                ->getResult();
         } catch (\Throwable $exception) {
             return $this->responseByException($exception);
         }
 
-        return new JsonResponse(['ok']);
+        return new JsonResponse([
+            'data' => $commentDto->toArray()
+        ]);
     }
 }

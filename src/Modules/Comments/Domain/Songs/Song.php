@@ -29,4 +29,14 @@ class Song
             new \DateTimeImmutable()
         ));
     }
+
+    public function getId(): SongId
+    {
+        return $this->id;
+    }
+
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
 }

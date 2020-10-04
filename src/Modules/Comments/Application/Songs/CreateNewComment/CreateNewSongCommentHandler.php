@@ -25,7 +25,7 @@ class CreateNewSongCommentHandler
         $this->comments = $comments;
     }
 
-    public function __invoke(CreateNewSongCommentCommand $command)
+    public function __invoke(CreateNewSongCommentCommand $command): string
     {
         $authorId = new AuthorId($command->getAuthorId());
         $songId = new SongId($command->getSongId());
@@ -50,5 +50,7 @@ class CreateNewSongCommentHandler
         );
 
         $this->songs->add($song);
+
+        return $song->getComments()->last()->getId()->toString();
     }
 }

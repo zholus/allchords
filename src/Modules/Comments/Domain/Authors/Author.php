@@ -18,4 +18,9 @@ class Author
     {
         return $this->id;
     }
+
+    public function getUsername(): string
+    {
+        return $this->username;
+    }
 }
