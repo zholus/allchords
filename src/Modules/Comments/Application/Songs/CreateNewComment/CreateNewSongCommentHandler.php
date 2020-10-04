@@ -6,6 +6,8 @@ namespace App\Modules\Comments\Application\Songs\CreateNewComment;
 use App\Modules\Comments\Domain\Authors\AuthorId;
 use App\Modules\Comments\Domain\Authors\AuthorNotFoundException;
 use App\Modules\Comments\Domain\Authors\AuthorRepository;
+use App\Modules\Comments\Domain\Songs\CommentId;
+use App\Modules\Comments\Domain\Songs\CommentRepository;
 use App\Modules\Comments\Domain\Songs\SongId;
 use App\Modules\Comments\Domain\Songs\SongRepository;
 use App\Modules\Comments\Domain\Songs\SongNotFoundException;
@@ -14,26 +16,39 @@ class CreateNewSongCommentHandler
 {
     private SongRepository $songs;
     private AuthorRepository $authors;
+    private CommentRepository $comments;
 
-    public function __construct(SongRepository $songs, AuthorRepository $authors)
+    public function __construct(SongRepository $songs, AuthorRepository $authors, CommentRepository $comments)
     {
         $this->songs = $songs;
         $this->authors = $authors;
+        $this->comments = $comments;
     }
 
     public function __invoke(CreateNewSongCommentCommand $command)
     {
         $authorId = new AuthorId($command->getAuthorId());
         $songId = new SongId($command->getSongId());
+        $commentText = $command->getText();
 
-        if ($this->songs->getById($songId) === null) {
+        $song = $this->songs->getById($songId);
+
+        if ($song === null) {
             throw SongNotFoundException::withId($songId);
         }
 
-        if ($this->authors->getById($authorId) === null) {
+        $author = $this->authors->getById($authorId);
+
+        if ($author === null) {
             throw AuthorNotFoundException::withId($authorId);
         }
 
-        // todo: add song comment
+        $song->addComment(
+            new CommentId($this->comments->nextIdentity()),
+            $author,
+            $commentText
+        );
+
+        $this->songs->add($song);
     }
 }

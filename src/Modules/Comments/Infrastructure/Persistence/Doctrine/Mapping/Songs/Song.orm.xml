@@ -9,5 +9,17 @@
             repository-class="App\Modules\Comments\Infrastructure\Domain\Songs\DoctrineSongRepository"
     >
         <id name="id" column="id" type="Comments_SongId" />
+
+        <one-to-many
+                field="comments"
+                target-entity="App\Modules\Comments\Domain\Songs\Comment"
+                mapped-by="song"
+                fetch="EXTRA_LAZY"
+        >
+            <cascade>
+                <cascade-persist />
+                <cascade-remove />
+            </cascade>
+        </one-to-many>
     </entity>
 </doctrine-mapping>

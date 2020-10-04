@@ -25,6 +25,9 @@ services:
   App\Modules\Comments\Domain\Songs\SongRepository:
     class: App\Modules\Comments\Infrastructure\Domain\Songs\DoctrineSongRepository
 
+  App\Modules\Comments\Domain\Songs\CommentRepository:
+    class: App\Modules\Comments\Infrastructure\Domain\Songs\DoctrineCommentRepository
+
   App\Modules\Comments\Infrastructure\UI\Http\Api\:
     resource: '../../../src/Modules/Comments/Infrastructure/UI/Http/Api/'
     tags: [ 'controller.service_arguments' ]

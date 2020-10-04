@@ -13,6 +13,7 @@ doctrine:
             SongsCatalog_CreatorId: App\Modules\SongsCatalog\Infrastructure\Persistence\Doctrine\Mapping\Creators\CreatorIdType
             Comments_AuthorId: App\Modules\Comments\Infrastructure\Persistence\Doctrine\Mapping\Authors\AuthorIdType
             Comments_SongId: App\Modules\Comments\Infrastructure\Persistence\Doctrine\Mapping\Songs\SongIdType
+            Comments_SongCommentId: App\Modules\Comments\Infrastructure\Persistence\Doctrine\Mapping\Songs\CommentIdType
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
