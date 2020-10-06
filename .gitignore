@@ -54,3 +54,4 @@
 .idea
 docker/.env
 .env.local
+src/.preload.php
