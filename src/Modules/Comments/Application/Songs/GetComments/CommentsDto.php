@@ -3,18 +3,23 @@ declare(strict_types=1);
 
 namespace App\Modules\Comments\Application\Songs\GetComments;
 
-use App\Modules\Comments\Application\Songs\GetComments\CommentDto;
-
 class CommentsDto
 {
     private string $songId;
     /** @var CommentDto|array  */
     private array $comments;
+    private PaginationDto $pagination;
 
-    public function __construct(string $songId, array $comments)
+    public function __construct(string $songId, array $comments, PaginationDto $pagination)
     {
         $this->songId = $songId;
         $this->comments = $comments;
+        $this->pagination = $pagination;
+    }
+
+    public function getPagination(): PaginationDto
+    {
+        return $this->pagination;
     }
 
     public function toArray(): array

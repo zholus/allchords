@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Modules\Comments\Infrastructure\UI\Http\Api;
 
-use App\Modules\Comments\Application\Songs\GetComment\CommentDto;
+use App\Modules\Comments\Application\Songs\GetComments\CommentsDto;
 use App\Modules\Comments\Application\Songs\GetComments\GetCommentsQuery;
 use Assert\Assert;
 use OpenApi\Annotations as OA;
@@ -57,7 +57,7 @@ class GetSongCommentsAction extends Action
                 ->that($perPage, 'per_page')->notEmpty()->integer()
                 ->verifyNow();
 
-            /** @var CommentDto $commentsDto */
+            /** @var CommentsDto $commentsDto */
             $commentsDto = $this->bus->dispatch(new GetCommentsQuery($songId, $page, $perPage))
                 ->last(HandledStamp::class)
                 ->getResult();
@@ -67,6 +67,11 @@ class GetSongCommentsAction extends Action
 
         return new JsonResponse([
             'data' => $commentsDto->toArray()
+        ], 200, [
+            'x-pagination-current-page' => $commentsDto->getPagination()->getCurrentPage(),
+            'x-pagination-elements-on-page' => $commentsDto->getPagination()->getElementsOnPage(),
+            'x-pagination-total-elements-count' => $commentsDto->getPagination()->getTotalElementsCount(),
+            'x-pagination-total-pages-count' => $commentsDto->getPagination()->getTotalPagesCount(),
         ]);
     }
 }

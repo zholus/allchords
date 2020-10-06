@@ -29,12 +29,13 @@ class GetCommentsHandler
 
         $page = $command->getPage();
         $limit = $command->getLimit();
-
         $offset = ($page - 1) * $limit;
 
+        $pagesCount = (int)ceil($song->getComments()->count() / $limit);
         $commentsDto = [];
 
-        foreach ($song->getComments()->slice($offset, $command->getLimit()) as $comment) {
+        $comments = $song->getComments()->slice($offset, $command->getLimit());
+        foreach ($comments as $comment) {
             /** @var Comment $comment */
             $commentsDto[] = new CommentDto(
                 $comment->getId()->toString(),
@@ -47,7 +48,13 @@ class GetCommentsHandler
 
         return new CommentsDto(
             $songId->toString(),
-            $commentsDto
+            $commentsDto,
+            new PaginationDto(
+                $song->getComments()->count(),
+                $page,
+                $pagesCount,
+                count($comments)
+            )
         );
     }
 }
