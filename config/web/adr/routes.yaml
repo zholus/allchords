@@ -1,0 +1,4 @@
+home_page:
+  path: /
+  methods: GET
+  controller: App\Web\ADR\Action\HomePageAction

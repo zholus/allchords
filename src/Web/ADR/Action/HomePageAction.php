@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Web\MVC\Action;
+namespace App\Web\ADR\Action;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

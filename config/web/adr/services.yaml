@@ -4,9 +4,9 @@ services:
     autoconfigure: true
     public: false
 
-  App\Web\MVC\:
-    resource: '../../../src/Web/MVC/'
+  App\Web\ADR\:
+    resource: '../../../src/Web/ADR/'
 
-  App\Web\MVC\Action\:
-    resource: '../../../src/Web/MVC/Action/'
+  App\Web\ADR\Action\:
+    resource: '../../../src/Web/ADR/Action/'
     tags: [ 'controller.service_arguments' ]

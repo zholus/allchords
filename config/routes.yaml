@@ -11,5 +11,5 @@ songs_catalog:
 comments:
   resource: 'modules/comments/routes.yaml'
 
-web_mvc:
-  resource: 'web/mvc/routes.yaml'
+web_adr:
+  resource: 'web/adr/routes.yaml'

@@ -22,4 +22,4 @@ imports:
     - { resource: 'modules/accounts/services.yaml' }
     - { resource: 'modules/songs_catalog/services.yaml' }
     - { resource: 'modules/comments/services.yaml' }
-    - { resource: 'web/mvc/services.yaml' }
+    - { resource: 'web/adr/services.yaml' }

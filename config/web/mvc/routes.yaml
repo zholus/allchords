@@ -1,4 +1,0 @@
-home_page:
-  path: /
-  methods: GET
-  controller: App\Web\MVC\Action\HomePageAction
