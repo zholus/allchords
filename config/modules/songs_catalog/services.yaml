@@ -19,6 +19,9 @@ services:
   App\Modules\SongsCatalog\Application\Creators\CreateNew\CreateNewCreatorHandler:
     tags: [messenger.message_handler]
 
+  App\Modules\SongsCatalog\Application\Songs\GetSongsByCreatedDate\GetSongsByCreatedDateHandler:
+    tags: [messenger.message_handler]
+
   App\Modules\SongsCatalog\Domain\Artists\ArtistRepository:
     class: App\Modules\SongsCatalog\Infrastructure\Domain\Artists\DoctrineArtistRepository
 

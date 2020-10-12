@@ -2,13 +2,10 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>Shop Homepage - Start Bootstrap Template</title>
+    <title>All chords</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -17,7 +14,6 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
 </head>
-
 <body>
 
 <!-- Navigation -->
@@ -68,113 +64,11 @@
             </div>
 
         </div>
-        <!-- /.col-lg-3 -->
 
-        <div class="col-lg-9">
-
-            <h2 class="my-4">New today</h2>
-            <div class="row my-4">
-
-
-                <div class="col-12 my-1">
-                    <div class="card">
-                        <div class="card-body h-25">
-                            <h5 class="card-title f-s-">
-                                <a href="#">"КАМЧАДАЛЫ" (СЕРГЕЙ КОСЫГИН - АЛЕКСЕЙ ЛЫСИКОВ).</a> - <a href="#">МОЯ ДЕВОЧКА СПИТ</a>
-                            </h5>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            <small class="text-muted float-right">2020/05/10</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 my-1">
-                    <div class="card">
-                        <div class="card-body h-25">
-                            <h5 class="card-title">
-                                <a href="#">Кино</a> - <a href="#">Мама анархия</a>
-                            </h5>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            <small class="text-muted float-right">2020/05/10</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 my-1">
-                    <div class="card">
-                        <div class="card-body h-25">
-                            <h5 class="card-title">
-                                <a href="#">Валентин стрыкало</a> - <a href="#">Дешевые драммы</a>
-                            </h5>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            <small class="text-muted float-right">2020/05/10</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <h2 class="my-4">Popular today</h2>
-
-            <div class="row my-4">
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card">
-                        <div class="card-body h-25">
-                            <h6 class="card-title">
-                                <a href="#">Song author</a> - <a href="#">song name</a>
-                            </h6>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            <small class="text-muted float-right">2020/05/10</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card">
-                        <div class="card-body h-25">
-                            <h6 class="card-title">
-                                <a href="#">Song author</a> - <a href="#">song name</a>
-                            </h6>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            <small class="text-muted float-right">2020/05/10</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card">
-                        <div class="card-body h-25">
-                            <h6 class="card-title">
-                                <a href="#">Валентин стрыкало</a> - <a href="#">Я БЬЮ ЖЕНЩИН И ДЕТЕЙ</a>
-                            </h6>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            <small class="text-muted float-right">2020/05/10</small>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <!-- /.row -->
-
-        </div>
-        <!-- /.col-lg-9 -->
-
+        {% block content %}{% endblock %}
     </div>
-    <!-- /.row -->
-
 </div>
-<!-- /.container -->
+
 
 <!-- Footer -->
 <footer class="py-5 bg-dark">
