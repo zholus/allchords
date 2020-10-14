@@ -7,6 +7,7 @@ use App\Modules\SongsCatalog\Application\Songs\GetSongsByCreatedDate\GetSongsByC
 use App\Modules\SongsCatalog\Application\Songs\GetSongsByCreatedDate\SongsDto;
 use App\Web\ADR\Domain\SongsCatalog\ViewModel\Song;
 use DateTimeImmutable;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 
@@ -14,11 +15,16 @@ final class DirectCallSongService implements SongsService
 {
     private MessageBusInterface $bus;
     private ViewModelMapper $viewModelMapper;
+    private LoggerInterface $logger;
 
-    public function __construct(MessageBusInterface $bus, ViewModelMapper $viewModelMapper)
-    {
+    public function __construct(
+        MessageBusInterface $bus,
+        ViewModelMapper $viewModelMapper,
+        LoggerInterface $logger
+    ) {
         $this->bus = $bus;
         $this->viewModelMapper = $viewModelMapper;
+        $this->logger = $logger;
     }
 
     /**
@@ -26,14 +32,24 @@ final class DirectCallSongService implements SongsService
      */
     public function getSongsByCreatedDate(int $limit, ?DateTimeImmutable $date): array
     {
-        /** @var SongsDto $songsDto */
-        $songsDto = $this->bus->dispatch(new GetSongsByCreatedDateQuery(3, $date))
-            ->last(HandledStamp::class)
-            ->getResult();
+        try {
+            /** @var SongsDto $songsDto */
+            $songsDto = $this->bus->dispatch(new GetSongsByCreatedDateQuery(3, $date))
+                ->last(HandledStamp::class)
+                ->getResult();
+
+            $songs = $songsDto->getSongs();
+        } catch (\Throwable $exception) {
+            $this->logger->error($exception->getMessage(), [
+                'exception' => $exception
+            ]);
+
+            $songs = [];
+        }
 
         $result = [];
 
-        foreach ($songsDto->getSongs() as $song) {
+        foreach ($songs as $song) {
             $result[] = $this->viewModelMapper->mapSongsByCreatedDate($song);
         }
 
