@@ -51,7 +51,7 @@ ENV PATH=$PATH:/root/composer/vendor/bin COMPOSER_ALLOW_SUPERUSER=1
 # PHP RUNTIME
 WORKDIR /app
 RUN chown -R www-data:www-data /app
-RUN chown -R www-data:www-data /var/
+RUN chown -R www-data:www-data /var
 USER www-data
 COPY --chown=www-data:www-data . .
 

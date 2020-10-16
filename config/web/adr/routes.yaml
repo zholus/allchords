@@ -2,3 +2,18 @@ home_page:
   path: /
   methods: GET
   controller: App\Web\ADR\Action\HomePageAction
+
+sign_in_page:
+  path: /sign-in
+  methods: GET
+  controller: App\Web\ADR\Action\Accounts\SignInPageAction
+
+register_page:
+  path: /register
+  methods: GET
+  controller: App\Web\ADR\Action\Accounts\RegisterPageAction
+
+register:
+  path: /register
+  methods: POST
+  controller: App\Web\ADR\Action\Accounts\RegisterAction

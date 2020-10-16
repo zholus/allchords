@@ -1,0 +1,30 @@
+{% extends 'layouts/app.twig' %}
+
+{% block content %}
+    <div class="col-lg-9">
+        <h2 class="my-4">Register</h2>
+        <div class="row my-4">
+            <div class="col-12 my-1">
+                <div class="card">
+                    <div class="card-body h-25">
+                        <form method="post" url="{{ path('register') }}">
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" name="username" class="form-control" id="username" placeholder="Username">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email address</label>
+                                <input type="email" name="email" class="form-control" id="email" placeholder="Enter email">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
