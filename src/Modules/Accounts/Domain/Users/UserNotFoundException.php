@@ -21,4 +21,14 @@ final class UserNotFoundException extends DomainException
             )
         );
     }
+
+    public static function withToken(string $token): self
+    {
+        return new self(
+            sprintf(
+                'User with token [%s] not found',
+                $token
+            )
+        );
+    }
 }

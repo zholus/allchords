@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Modules\Accounts\Infrastructure\UI\Http\Api;
 
-use App\Modules\Accounts\Application\Users\GetUser\GetUserQuery;
-use App\Modules\Accounts\Application\Users\GetUser\UserDto;
+use App\Modules\Accounts\Application\Users\GetUserByToken\GetUserByTokenQuery;
+use App\Modules\Accounts\Application\Users\GetUserByToken\UserDto;
 use Assert\Assert;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -56,7 +56,7 @@ final class GetUserAction extends Action
             /**
              * @var UserDto $userDto
              */
-            $userDto = $this->bus->dispatch(new GetUserQuery($userId))
+            $userDto = $this->bus->dispatch(new GetUserByTokenQuery($userId))
                 ->last(HandledStamp::class)
                 ->getResult();
         } catch (\Throwable $exception) {

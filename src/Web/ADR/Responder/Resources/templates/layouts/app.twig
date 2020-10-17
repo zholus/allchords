@@ -28,12 +28,19 @@
                 <li class="nav-item {{ app.request.get('_route') == 'home_page' ? 'active' : '' }}">
                     <a class="nav-link" href="{{ path('home_page') }}">Home</a>
                 </li>
-                <li class="nav-item {{ app.request.get('_route') == 'sign_in_page' ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ path('sign_in_page') }}">Sign in</a>
-                </li>
-                <li class="nav-item {{ app.request.get('_route') == 'register_page' ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ path('register_page') }}">Register</a>
-                </li>
+
+                {% if auth.authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('logout') }}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item {{ app.request.get('_route') == 'sign_in_page' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ path('sign_in_page') }}">Sign in</a>
+                    </li>
+                    <li class="nav-item {{ app.request.get('_route') == 'register_page' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ path('register_page') }}">Register</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>

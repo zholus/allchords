@@ -1,13 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\Accounts\Application\Users\GetUser;
+namespace App\Modules\Accounts\Application\Users\GetUserByToken;
 
-use App\Modules\Accounts\Domain\Users\UserId;
 use App\Modules\Accounts\Domain\Users\UserNotFoundException;
 use App\Modules\Accounts\Domain\Users\UserRepository;
 
-class GetUserHandler
+class GetUserByTokenHandler
 {
     private UserRepository $users;
 
@@ -16,14 +15,12 @@ class GetUserHandler
         $this->users = $users;
     }
 
-    public function __invoke(GetUserQuery $query): UserDto
+    public function __invoke(GetUserByTokenQuery $query): UserDto
     {
-        $userId = new UserId($query->getUserId());
-
-        $user = $this->users->getById($userId);
+        $user = $this->users->getByToken($query->getToken());
 
         if ($user === null) {
-            throw UserNotFoundException::withId($userId);
+            throw UserNotFoundException::withToken($query->getToken());
         }
 
         return new UserDto(

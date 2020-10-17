@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\Accounts\Application\Users\GetUser;
+namespace App\Modules\Accounts\Application\Users\GetUserByToken;
 
 class UserDto
 {
@@ -17,6 +17,21 @@ class UserDto
         $this->userId = $userId;
         $this->username = $username;
         $this->email = $email;
+    }
+
+    public function getUserId(): string
+    {
+        return $this->userId;
+    }
+
+    public function getUsername(): string
+    {
+        return $this->username;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
     }
 
     public function toArray(): array

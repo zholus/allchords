@@ -66,4 +66,11 @@ final class DoctrineUserRepository extends ServiceEntityRepository implements Us
     {
         return $this->find($id);
     }
+
+    public function getByToken(string $token): ?User
+    {
+        return $this->findOneBy([
+            'accessToken' => $token
+        ]);
+    }
 }

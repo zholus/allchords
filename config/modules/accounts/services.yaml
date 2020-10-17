@@ -22,7 +22,7 @@ services:
   App\Modules\Accounts\Application\Users\GetToken\GetTokenHandler:
     tags: [messenger.message_handler]
 
-  App\Modules\Accounts\Application\Users\GetUser\GetUserHandler:
+  App\Modules\Accounts\Application\Users\GetUserByToken\GetUserByTokenHandler:
     tags: [messenger.message_handler]
 
   App\Modules\Accounts\Infrastructure\UI\Http\Api\:

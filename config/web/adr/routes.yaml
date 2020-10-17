@@ -8,6 +8,11 @@ sign_in_page:
   methods: GET
   controller: App\Web\ADR\Action\Accounts\SignInPageAction
 
+sign_in:
+  path: /sign-in
+  methods: POST
+  controller: App\Web\ADR\Action\Accounts\SignInAction
+
 register_page:
   path: /register
   methods: GET
@@ -17,3 +22,8 @@ register:
   path: /register
   methods: POST
   controller: App\Web\ADR\Action\Accounts\RegisterAction
+
+logout:
+  path: /logout
+  methods: GET
+  controller: App\Web\ADR\Action\Accounts\LogoutAction
