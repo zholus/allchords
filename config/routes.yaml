@@ -2,9 +2,6 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-accounts:
-  resource: 'modules/accounts/routes.yaml'
-
 songs_catalog:
   resource: 'modules/songs_catalog/routes.yaml'
 
