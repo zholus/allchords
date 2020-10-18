@@ -26,7 +26,7 @@ class AuthService
         return $this->session->get('user') !== null;
     }
 
-    public function getUserFromSession(): User
+    public function getUser(): User
     {
         $user = $this->session->get('user');
 
