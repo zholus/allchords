@@ -15,7 +15,7 @@ class AuthService
         $this->session = $session;
     }
 
-    public function addToSession(string $userId, string $username, string $email, string $token): void
+    public function authenticate(string $userId, string $username, string $email, string $token): void
     {
         $this->session->set('user', new User($userId, $username, $email, $token));
     }

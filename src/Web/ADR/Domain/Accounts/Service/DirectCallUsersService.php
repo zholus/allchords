@@ -42,7 +42,7 @@ final class DirectCallUsersService implements UsersService
             ->last(HandledStamp::class)
             ->getResult();
 
-        $this->authService->addToSession(
+        $this->authService->authenticate(
             $user->getUserId(),
             $user->getUsername(),
             $user->getEmail(),
