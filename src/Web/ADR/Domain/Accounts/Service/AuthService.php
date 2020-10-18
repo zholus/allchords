@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Web\ADR\Domain\Accounts\Service;
 
 use App\Web\ADR\Domain\Accounts\User;
+use App\Web\ADR\Domain\Accounts\UserUnauthorizedException;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class AuthService
@@ -30,7 +31,7 @@ class AuthService
         $user = $this->session->get('user');
 
         if ($user === null) {
-            // todo: exception
+            throw new UserUnauthorizedException('Unauthorized');
         }
 
         return $user;
