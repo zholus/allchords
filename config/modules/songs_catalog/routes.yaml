@@ -1,4 +1,0 @@
-new_song:
-  path: /api/songs/new
-  methods: POST
-  controller: App\Modules\SongsCatalog\Infrastructure\UI\Http\Api\NewSongAction

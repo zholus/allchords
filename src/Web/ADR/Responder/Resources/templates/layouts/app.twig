@@ -31,6 +31,9 @@
 
                 {% if auth.authenticated %}
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ path('new_song') }}">New song</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ path('logout') }}">Logout</a>
                     </li>
                 {% else %}

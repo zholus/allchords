@@ -33,7 +33,3 @@ services:
 
   App\Modules\SongsCatalog\Domain\Songs\SongRepository:
     class: App\Modules\SongsCatalog\Infrastructure\Domain\Songs\DoctrineSongRepository
-
-  App\Modules\SongsCatalog\Infrastructure\UI\Http\Api\:
-    resource: '../../../src/Modules/SongsCatalog/Infrastructure/UI/Http/Api/'
-    tags: [ 'controller.service_arguments' ]

@@ -27,3 +27,8 @@ logout:
   path: /logout
   methods: GET
   controller: App\Web\ADR\Action\Accounts\LogoutAction
+
+new_song:
+  path: /songs/new
+  methods: GET
+  controller: App\Web\ADR\Action\SongsCatalog\NewSongPageAction
