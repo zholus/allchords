@@ -5,6 +5,8 @@ namespace App\Modules\Accounts\Domain\Users;
 
 use App\Common\Domain\EventDispatcher;
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 class User
 {
@@ -15,6 +17,7 @@ class User
     private DateTimeImmutable $createdAt;
     private ?string $accessToken;
     private ?DateTimeImmutable $accessTokenExpiryAt;
+    private Collection $roles;
 
     public function __construct(
         UserId $id,
@@ -23,7 +26,8 @@ class User
         string $password,
         DateTimeImmutable $createdAt,
         ?string $accessToken,
-        ?DateTimeImmutable $accessTokenExpiryAt
+        ?DateTimeImmutable $accessTokenExpiryAt,
+        Collection $roles
     ) {
         $this->id = $id;
         $this->username = $username;
@@ -32,6 +36,7 @@ class User
         $this->createdAt = $createdAt;
         $this->accessToken = $accessToken;
         $this->accessTokenExpiryAt = $accessTokenExpiryAt;
+        $this->roles = $roles;
     }
 
     public static function register(UserId $id, string $username, string $email, string $password): User
@@ -44,6 +49,7 @@ class User
             new DateTimeImmutable(),
             null,
             null,
+            new ArrayCollection()
         );
 
         EventDispatcher::instance()->publish(new UserCreated(

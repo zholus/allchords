@@ -6,7 +6,8 @@ doctrine:
         # either here or in the DATABASE_URL env var (see .env file)
         #server_version: '5.7'
         types:
-            UserId: App\Modules\Accounts\Infrastructure\Persistence\Doctrine\Mapping\UserIdType
+            Accounts_UserId: App\Modules\Accounts\Infrastructure\Persistence\Doctrine\Mapping\Users\UserIdType
+            Accounts_RoleId: App\Modules\Accounts\Infrastructure\Persistence\Doctrine\Mapping\Users\RoleIdType
             GenreId: App\Modules\SongsCatalog\Infrastructure\Persistence\Doctrine\Mapping\Genres\GenreIdType
             SongId: App\Modules\SongsCatalog\Infrastructure\Persistence\Doctrine\Mapping\Songs\SongIdType
             SongsCatalog_ArtistId: App\Modules\SongsCatalog\Infrastructure\Persistence\Doctrine\Mapping\Artists\ArtistIdType
@@ -22,7 +23,7 @@ doctrine:
             Accounts_Users:
                 type: xml
                 prefix: 'App\Modules\Accounts\Domain\Users'
-                dir: '%kernel.project_dir%/src/Modules/Accounts/Infrastructure/Persistence/Doctrine/Mapping'
+                dir: '%kernel.project_dir%/src/Modules/Accounts/Infrastructure/Persistence/Doctrine/Mapping/Users'
                 is_bundle: false
             SongsCatalog_Artists:
                 type: xml

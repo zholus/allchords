@@ -56,7 +56,7 @@ class AppFixtures extends Fixture
             new UserId($this->uuid()),
             'test1',
             'test@gmail.com',
-            '123123'
+            password_hash('123123', PASSWORD_BCRYPT)
         );
     }
 

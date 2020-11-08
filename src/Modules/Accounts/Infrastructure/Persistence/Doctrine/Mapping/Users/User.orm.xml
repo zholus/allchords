@@ -8,12 +8,23 @@
             table="accounts_users"
             repository-class="App\Modules\Accounts\Infrastructure\Domain\Users\DoctrineUserRepository"
     >
-        <id name="id" column="id" type="UserId" />
+        <id name="id" column="id" type="Accounts_UserId" />
         <field name="email" column="email" unique="true" />
         <field name="password" column="password" />
         <field name="username" column="username" unique="true" />
         <field name="accessToken" column="access_token" nullable="true" unique="true" />
         <field name="accessTokenExpiryAt" column="access_token_expiry_at" type="datetime_immutable" nullable="true" />
         <field name="createdAt" column="created_at" type="datetime_immutable" />
+
+        <many-to-many field="roles" target-entity="App\Modules\Accounts\Domain\Users\Role">
+            <join-table name="accounts_users_roles">
+                <join-columns>
+                    <join-column name="user_id" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="role_id" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
     </entity>
 </doctrine-mapping>
