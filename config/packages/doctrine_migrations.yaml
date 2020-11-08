@@ -2,6 +2,3 @@ doctrine_migrations:
     migrations_paths:
         # namespace is arbitrary but should be different from App\Migrations
         # as migrations classes should NOT be autoloaded
-        'App\Modules\Accounts\Infrastructure\Persistence\Migrations': '%kernel.project_dir%/src/Modules/Accounts/Infrastructure/Persistence/Migrations'
-        'App\Modules\SongsCatalog\Infrastructure\Persistence\Migrations': '%kernel.project_dir%/src/Modules/SongsCatalog/Infrastructure/Persistence/Migrations'
-        'App\Modules\Comments\Infrastructure\Persistence\Migrations': '%kernel.project_dir%/src/Modules/Comments/Infrastructure/Persistence/Migrations'
