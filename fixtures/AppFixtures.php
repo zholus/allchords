@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Common\Infrastructure\DataFixtures;
+namespace App\DataFixtures;
 
 use App\Modules\Accounts\Domain\Users\User;
 use App\Modules\Accounts\Domain\Users\UserId;

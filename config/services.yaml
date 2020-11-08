@@ -14,8 +14,8 @@ services:
     App\Common\:
         resource: '../src/Common/'
 
-    App\Common\Infrastructure\DataFixtures\:
-        resource: '../src/Common/Infrastructure/DataFixtures'
+    App\DataFixtures\:
+        resource: '../fixtures'
         tags: ['doctrine.fixture.orm']
 
 imports:
