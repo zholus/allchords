@@ -12,12 +12,24 @@
                         </div>
                         <form method="post" action="{{ path('sign_in') }}">
                             <div class="form-group">
-                                <label for="email">Email address</label>
-                                <input type="email" name="email" class="form-control" id="email" placeholder="Enter email">
+                                <label for="title">Title</label>
+                                <input type="text" name="title" class="form-control" id="title" placeholder="Enter title">
                             </div>
                             <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                                <label for="artist">Artist</label>
+                                <select name="artist" id="artist" class="form-control">
+                                    <option disabled selected>-- Select artist --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="genre">Genre</label>
+                                <select name="genre" id="genre" class="form-control">
+                                    <option disabled selected>-- Select genre --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="chords">Chords</label>
+                                <textarea name="chords" class="form-control" id="chords" cols="30" rows="10"></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
