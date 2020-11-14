@@ -1,0 +1,104 @@
+{% extends 'layouts/app.twig' %}
+
+{% block content %}
+    <div class="col-lg-9">
+        <h2 class="my-4">Add new song</h2>
+        <div class="row my-4">
+            <div class="col-12 my-1">
+                <div class="card">
+                    <div class="card-body h-25">
+                        <div class="alert alert-info">
+                            You will submit your song for review
+                        </div>
+                        <form method="post" action="{{ path('new_review') }}">
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input type="text" name="title" class="form-control" id="title" placeholder="Enter title">
+                            </div>
+                            <div class="form-group">
+                                <label for="artist">Artists</label>
+                                <select name="artist_id[]" id="artist" class="form-control" multiple>
+                                    <option value="1">-- Select artists --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="genre">Genres</label>
+                                <select name="genre_id[]" id="genre" class="form-control" multiple>
+                                    <option value="1">-- Select genres1 --</option>
+                                    <option value="2">-- Select genres2 --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="chords">Chords</label>
+                                <textarea name="chords" class="form-control" id="chords" cols="30" rows="10"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block footer_scripts %}
+    <script>
+        $(document).ready(function () {
+            $("select#artist").select2({
+                placeholder: 'Select artists',
+                ajax: {
+                    url: '{{ path('songs_reviews_artists_ajax') }}',
+                    data: function (params) {
+                        return {
+                            title: params.term,
+                            page: params.page || 1
+                        }
+                    },
+                    processResults: function (response) {
+                        let items = [];
+
+                        response.data.forEach(element => items.push({
+                            id: element.id,
+                            text: element.title,
+                        }))
+
+                        return {
+                            results: items,
+                            pagination: {
+                                more: response.pagination['current-page'] < response.pagination['total-pages-count']
+                            }
+                        };
+                    }
+                }
+            });
+            $("select#genre").select2({
+                placeholder: 'Select genres',
+                ajax: {
+                    url: '{{ path('songs_reviews_genres_ajax') }}',
+                    data: function (params) {
+                        return {
+                            title: params.term,
+                            page: params.page || 1
+                        }
+                    },
+                    processResults: function (response) {
+                        let items = [];
+
+                        response.data.forEach(element => items.push({
+                            id: element.id,
+                            text: element.title,
+                        }))
+
+                        return {
+                            results: items,
+                            pagination: {
+                                more: response.pagination['current-page'] < response.pagination['total-pages-count']
+                            }
+                        };
+                    }
+                }
+            });
+        })
+    </script>
+{% endblock %}

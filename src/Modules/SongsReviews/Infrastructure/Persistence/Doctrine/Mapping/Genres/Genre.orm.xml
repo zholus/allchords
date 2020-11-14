@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity
+            name="App\Modules\SongsReviews\Domain\Genres\Genre"
+            table="songs_reviews_genres"
+            repository-class="App\Modules\SongsReviews\Infrastructure\Domain\Genres\DoctrineGenreRepository"
+    >
+        <id name="id" column="id" type="SongsReviews_GenreId" />
+        <field name="title" column="title" unique="true" />
+    </entity>
+</doctrine-mapping>

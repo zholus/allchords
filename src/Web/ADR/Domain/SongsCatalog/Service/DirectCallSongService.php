@@ -49,4 +49,10 @@ final class DirectCallSongService implements SongsService
 
         return $result;
     }
+
+    public function sendToReview(string $title, array $artistsIds, array $genresIds, string $chords): void
+    {
+        $songsDto = $this->songContract->getSongsByCreatedDate($limit, $date);
+
+    }
 }

@@ -10,9 +10,10 @@
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-
 </head>
 <body>
 
@@ -31,7 +32,7 @@
 
                 {% if auth.authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link {{ app.request.get('_route') == 'new_song    ' ? 'active' : '' }}" href="{{ path('new_song') }}">New song</a>
+                        <a class="nav-link {{ app.request.get('_route') == 'new_review_page' ? 'active' : '' }}" href="{{ path('new_review') }}">New song</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('logout') }}">Logout</a>
@@ -100,7 +101,9 @@
 <!-- Bootstrap core JavaScript -->
 <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
+{% block footer_scripts %}{% endblock %}
 </body>
 
 </html>

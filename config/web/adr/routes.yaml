@@ -28,7 +28,22 @@ logout:
   methods: GET
   controller: App\Web\ADR\Action\Accounts\LogoutAction
 
-new_song:
-  path: /songs/new
+new_review_page:
+  path: /songs/reviews/new
   methods: GET
-  controller: App\Web\ADR\Action\SongsCatalog\NewSongPageAction
+  controller: App\Web\ADR\Action\SongsReviews\NewReviewPageAction
+
+new_review:
+  path: /songs/reviews/new
+  methods: POST
+  controller: App\Web\ADR\Action\SongsReviews\NewReviewAction
+
+songs_reviews_artists_ajax:
+  path: songs/reviews/ajax/artists
+  methods: GET
+  controller: App\Web\ADR\Action\SongsReviews\Ajax\GetArtistsAction
+
+songs_reviews_genres_ajax:
+  path: songs/reviews/ajax/genres
+  methods: GET
+  controller: App\Web\ADR\Action\SongsReviews\Ajax\GetGenresAction

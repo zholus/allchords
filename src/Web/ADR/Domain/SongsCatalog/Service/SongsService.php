@@ -12,4 +12,5 @@ interface SongsService
      * @return Song[]
      */
     public function getSongsByCreatedDate(int $limit, ?DateTimeImmutable $date): array;
+    public function sendToReview(string $title, array $artistsIds, array $genresIds, string $chords): void;
 }

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity
+            name="App\Modules\SongsReviews\Domain\Reviews\Review"
+            table="songs_reviews_reviews"
+            repository-class="App\Modules\SongsReviews\Infrastructure\Domain\Reviews\DoctrineReviewRepository"
+    >
+        <id name="id" column="id" type="SongsReviews_ReviewId" />
+        <field name="title" column="title" />
+        <field name="chords" column="chords" type="text" />
+        <field name="createdAt" column="created_at" type="datetime_immutable" />
+
+        <many-to-many field="artists" target-entity="App\Modules\SongsReviews\Domain\Artists\Artist">
+            <join-table name="songs_reviews_reviews_artists">
+                <join-columns>
+                    <join-column name="review_id" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="artist_id" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+
+        <many-to-many field="genres" target-entity="App\Modules\SongsReviews\Domain\Genres\Genre">
+            <join-table name="songs_reviews_reviews_genres">
+                <join-columns>
+                    <join-column name="review_id" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="genre_id" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+
+        <many-to-one field="creator" target-entity="App\Modules\SongsReviews\Domain\Creators\Creator">
+            <join-column name="creator_id" />
+        </many-to-one>
+    </entity>
+</doctrine-mapping>

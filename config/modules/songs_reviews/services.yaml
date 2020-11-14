@@ -1,0 +1,23 @@
+services:
+  _defaults:
+    autowire: true
+    public: false
+
+  _instanceof:
+    App\Modules\SongsReviews\Domain\DomainEventSubscriber:
+      tags: ['domain.event.subscriber']
+
+  App\Modules\SongsReviews\:
+    resource: '../../../src/Modules/SongsReviews/'
+
+  App\Modules\SongsReviews\Application\Creators\NewCreator\NewCreatorHandler:
+    tags: [ messenger.message_handler ]
+
+  App\Modules\SongsReviews\Application\Reviews\NewReview\NewReviewHandler:
+    tags: [ messenger.message_handler ]
+
+  App\Modules\SongsReviews\Application\Artists\GetArtistsPaginated\GetArtistsPaginatedHandler:
+    tags: [ messenger.message_handler ]
+
+  App\Modules\SongsReviews\Application\Genres\GetGenresPaginated\GetGenresPaginatedHandler:
+    tags: [ messenger.message_handler ]

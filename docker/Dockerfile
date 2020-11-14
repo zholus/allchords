@@ -48,6 +48,15 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
     && ln -s $(composer config --global home) /root/composer
 ENV PATH=$PATH:/root/composer/vendor/bin COMPOSER_ALLOW_SUPERUSER=1
 
+#
+# Install Node (with NPM), and Yarn (via package manager for Debian)
+#
+# https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN apt-get update \
+ && apt-get install -y \
+ nodejs
+
 # PHP RUNTIME
 WORKDIR /app
 RUN chown -R www-data:www-data /app

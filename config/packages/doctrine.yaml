@@ -2,19 +2,24 @@ doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
 
-        # IMPORTANT: You MUST configure your server version,
-        # either here or in the DATABASE_URL env var (see .env file)
-        #server_version: '5.7'
         types:
             Accounts_UserId: App\Modules\Accounts\Infrastructure\Persistence\Doctrine\Mapping\Users\UserIdType
             Accounts_RoleId: App\Modules\Accounts\Infrastructure\Persistence\Doctrine\Mapping\Users\RoleIdType
+
             GenreId: App\Modules\SongsCatalog\Infrastructure\Persistence\Doctrine\Mapping\Genres\GenreIdType
             SongId: App\Modules\SongsCatalog\Infrastructure\Persistence\Doctrine\Mapping\Songs\SongIdType
             SongsCatalog_ArtistId: App\Modules\SongsCatalog\Infrastructure\Persistence\Doctrine\Mapping\Artists\ArtistIdType
             SongsCatalog_CreatorId: App\Modules\SongsCatalog\Infrastructure\Persistence\Doctrine\Mapping\Creators\CreatorIdType
+
             Comments_AuthorId: App\Modules\Comments\Infrastructure\Persistence\Doctrine\Mapping\Authors\AuthorIdType
             Comments_SongId: App\Modules\Comments\Infrastructure\Persistence\Doctrine\Mapping\Songs\SongIdType
             Comments_SongCommentId: App\Modules\Comments\Infrastructure\Persistence\Doctrine\Mapping\Songs\CommentIdType
+
+            SongsReviews_GenreId: App\Modules\SongsReviews\Infrastructure\Persistence\Doctrine\Mapping\Genres\GenreIdType
+            SongsReviews_ReviewId: App\Modules\SongsReviews\Infrastructure\Persistence\Doctrine\Mapping\Reviews\ReviewIdType
+            SongsReviews_ArtistId: App\Modules\SongsReviews\Infrastructure\Persistence\Doctrine\Mapping\Artists\ArtistIdType
+            SongsReviews_CreatorId: App\Modules\SongsReviews\Infrastructure\Persistence\Doctrine\Mapping\Creators\CreatorIdType
+
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
@@ -44,6 +49,26 @@ doctrine:
                 type: xml
                 prefix: 'App\Modules\SongsCatalog\Domain\Creators'
                 dir: '%kernel.project_dir%/src/Modules/SongsCatalog/Infrastructure/Persistence/Doctrine/Mapping/Creators'
+                is_bundle: false
+            SongsReviews_Artists:
+                type: xml
+                prefix: 'App\Modules\SongsReviews\Domain\Artists'
+                dir: '%kernel.project_dir%/src/Modules/SongsReviews/Infrastructure/Persistence/Doctrine/Mapping/Artists'
+                is_bundle: false
+            SongsReviews_Genres:
+                type: xml
+                prefix: 'App\Modules\SongsReviews\Domain\Genres'
+                dir: '%kernel.project_dir%/src/Modules/SongsReviews/Infrastructure/Persistence/Doctrine/Mapping/Genres'
+                is_bundle: false
+            SongsReviews_Reviews:
+                type: xml
+                prefix: 'App\Modules\SongsReviews\Domain\Reviews'
+                dir: '%kernel.project_dir%/src/Modules/SongsReviews/Infrastructure/Persistence/Doctrine/Mapping/Reviews'
+                is_bundle: false
+            SongsReviews_Creators:
+                type: xml
+                prefix: 'App\Modules\SongsReviews\Domain\Creators'
+                dir: '%kernel.project_dir%/src/Modules/SongsReviews/Infrastructure/Persistence/Doctrine/Mapping/Creators'
                 is_bundle: false
             Comments_Authors:
                 type: xml
