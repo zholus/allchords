@@ -8,8 +8,6 @@ use App\Modules\SongsReviews\Application\Genres\GetGenresPaginated\GenresPaginat
 
 interface ReviewsContract
 {
-    public function getArtistsPaginated(?string $artistTitle, int $limit, int $page): ArtistsPaginatedCollection;
-    public function getGenresPaginated(?string $genreTitle, int $limit, int $page): GenresPaginatedCollection;
     public function newReview(
         string $creatorId,
         array $artistsIds,
