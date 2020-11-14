@@ -26,8 +26,8 @@ class GetGenresPaginatedHandler
 
         $paginated = $this->genres->getPaginated($query->getGenreTitle(), $limit, $offset);
         $genres = [];
-        foreach ($paginated as $artist) {
-            $genres[] = new GenreDto($artist->getId()->toString(), $artist->getTitle());
+        foreach ($paginated as $genre) {
+            $genres[] = new GenreDto($genre->getId()->toString(), $genre->getTitle());
         }
 
         return new GenresPaginatedCollection(
