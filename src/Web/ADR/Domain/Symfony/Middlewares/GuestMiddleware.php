@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace App\Web\ADR\Domain\Symfony\Middlewares;
 
 use App\Web\ADR\Domain\Accounts\Service\AuthService;
-use App\Web\ADR\Domain\Accounts\UserUnauthorizedException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,14 +23,12 @@ final class GuestMiddleware implements MiddlewareInterface
 
     public function handle(Request $request): ?Response
     {
-        try {
-            $this->authService->getUser();
-
+        if ($this->authService->isAuthenticated()) {
             return new RedirectResponse(
                 $this->router->generate('home_page')
             );
-        } catch (UserUnauthorizedException $exception) {
-            return null;
         }
+
+        return null;
     }
 }

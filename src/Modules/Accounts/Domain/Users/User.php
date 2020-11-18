@@ -90,6 +90,11 @@ class User
         $this->accessTokenExpiryAt = $expiryAt;
     }
 
+    public function getRoles(): Collection
+    {
+        return $this->roles;
+    }
+
     public function getAccessToken(): ?string
     {
         return $this->accessToken;
