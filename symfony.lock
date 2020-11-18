@@ -381,6 +381,9 @@
     "webmozart/assert": {
         "version": "1.9.1"
     },
+    "zholus/symfony-middleware": {
+        "version": "v2.0.2"
+    },
     "zircote/swagger-php": {
         "version": "2.0.16"
     }

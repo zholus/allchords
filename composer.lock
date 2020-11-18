@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "617fd2e1b8fc5aa9ca98920c159fa9fd",
+    "content-hash": "63d9b9b398b2cfbdca6c7c8936f38293",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1511,6 +1511,7 @@
                 "reflection",
                 "static"
             ],
+            "abandoned": "roave/better-reflection",
             "time": "2020-03-27T11:06:43+00:00"
         },
         {
@@ -6191,6 +6192,45 @@
                 "validate"
             ],
             "time": "2020-07-08T17:02:28+00:00"
+        },
+        {
+            "name": "zholus/symfony-middleware",
+            "version": "v2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zholus/symfony-middleware-bundle.git",
+                "reference": "6d2b0980842552878385f6e3b926ea9b558a6ceb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zholus/symfony-middleware-bundle/zipball/6d2b0980842552878385f6e3b926ea9b558a6ceb",
+                "reference": "6d2b0980842552878385f6e3b926ea9b558a6ceb",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2.5",
+                "symfony/event-dispatcher": "^5.0",
+                "symfony/framework-bundle": "^5.0"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^8.5.0",
+                "symfony/var-dumper": "^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Zholus\\SymfonyMiddleware\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "time": "2019-12-27T21:32:18+00:00"
         },
         {
             "name": "zircote/swagger-php",

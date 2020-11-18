@@ -7,43 +7,61 @@ sign_in_page:
   path: /sign-in
   methods: GET
   controller: App\Web\ADR\Action\Accounts\SignInPageAction
+  options:
+    middleware: [ 'App\Web\ADR\Domain\Symfony\Middlewares\GuestMiddleware' ]
 
 sign_in:
   path: /sign-in
   methods: POST
   controller: App\Web\ADR\Action\Accounts\SignInAction
+  options:
+    middleware: [ 'App\Web\ADR\Domain\Symfony\Middlewares\GuestMiddleware' ]
 
 register_page:
   path: /register
   methods: GET
   controller: App\Web\ADR\Action\Accounts\RegisterPageAction
+  options:
+    middleware: [ 'App\Web\ADR\Domain\Symfony\Middlewares\GuestMiddleware' ]
 
 register:
   path: /register
   methods: POST
   controller: App\Web\ADR\Action\Accounts\RegisterAction
+  options:
+    middleware: [ 'App\Web\ADR\Domain\Symfony\Middlewares\GuestMiddleware' ]
 
 logout:
   path: /logout
   methods: GET
   controller: App\Web\ADR\Action\Accounts\LogoutAction
+  options:
+    middleware: [ 'App\Web\ADR\Domain\Symfony\Middlewares\AuthMiddleware' ]
 
 new_review_page:
   path: /songs/reviews/new
   methods: GET
   controller: App\Web\ADR\Action\SongsReviews\NewReviewPageAction
+  options:
+    middleware: [ 'App\Web\ADR\Domain\Symfony\Middlewares\AuthMiddleware' ]
 
 new_review:
   path: /songs/reviews/new
   methods: POST
   controller: App\Web\ADR\Action\SongsReviews\NewReviewAction
+  options:
+    middleware: [ 'App\Web\ADR\Domain\Symfony\Middlewares\AuthMiddleware' ]
 
 songs_reviews_artists_ajax:
   path: songs/reviews/ajax/artists
   methods: GET
   controller: App\Web\ADR\Action\SongsReviews\Ajax\GetArtistsAction
+  options:
+    middleware: [ 'App\Web\ADR\Domain\Symfony\Middlewares\AuthMiddleware' ]
 
 songs_reviews_genres_ajax:
   path: songs/reviews/ajax/genres
   methods: GET
   controller: App\Web\ADR\Action\SongsReviews\Ajax\GetGenresAction
+  options:
+    middleware: [ 'App\Web\ADR\Domain\Symfony\Middlewares\AuthMiddleware' ]
