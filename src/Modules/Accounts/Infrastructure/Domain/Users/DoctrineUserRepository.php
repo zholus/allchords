@@ -73,4 +73,11 @@ final class DoctrineUserRepository extends ServiceEntityRepository implements Us
             'accessToken' => $token
         ]);
     }
+
+    public function getByRefreshToken(string $refreshToken): ?User
+    {
+        return $this->findOneBy([
+            'refreshToken' => $refreshToken
+        ]);
+    }
 }

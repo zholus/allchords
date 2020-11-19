@@ -16,9 +16,18 @@ class AuthService
         $this->session = $session;
     }
 
-    public function authenticate(string $userId, string $username, string $email, string $token): void
-    {
-        $this->session->set('user', new User($userId, $username, $email, $token));
+    public function authenticate(
+        string $userId,
+        string $username,
+        string $email,
+        string $token,
+        string $refreshToken,
+        \DateTimeImmutable $expiryAt
+    ): void {
+        $this->session->set(
+            'user',
+            new User($userId, $username, $email, $token, $refreshToken, $expiryAt)
+        );
     }
 
     public function isAuthenticated(): bool

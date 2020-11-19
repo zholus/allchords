@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Modules\Accounts\Infrastructure\Application\Contracts;
 
 use App\Modules\Accounts\Application\Contracts\UsersContract;
+use App\Modules\Accounts\Application\Users\GenerateNewToken\GenerateNewTokenCommand;
 use App\Modules\Accounts\Application\Users\GetToken\GetTokenQuery;
 use App\Modules\Accounts\Application\Users\GetToken\TokenDto;
 use App\Modules\Accounts\Application\Users\GetUserByToken\GetUserByTokenQuery;
@@ -32,7 +33,7 @@ final class UsersService implements UsersContract
         $this->bus->dispatch(new SignInUserCommand($email, $password));
     }
 
-    public function getToken(string $email): TokenDto
+    public function getToken(string $email): string
     {
         return $this->bus->dispatch(new GetTokenQuery($email))
             ->last(HandledStamp::class)
@@ -44,5 +45,10 @@ final class UsersService implements UsersContract
         return $this->bus->dispatch(new GetUserByTokenQuery($token))
             ->last(HandledStamp::class)
             ->getResult();
+    }
+
+    public function generateNewToken(string $refreshToken): void
+    {
+        $this->bus->dispatch(new GenerateNewTokenCommand($refreshToken));
     }
 }

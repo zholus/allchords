@@ -16,6 +16,7 @@ class User
     private string $password;
     private DateTimeImmutable $createdAt;
     private ?string $accessToken;
+    private ?string $refreshToken;
     private ?DateTimeImmutable $accessTokenExpiryAt;
     private Collection $roles;
 
@@ -26,6 +27,7 @@ class User
         string $password,
         DateTimeImmutable $createdAt,
         ?string $accessToken,
+        ?string $refreshToken,
         ?DateTimeImmutable $accessTokenExpiryAt,
         Collection $roles
     ) {
@@ -36,6 +38,7 @@ class User
         $this->createdAt = $createdAt;
         $this->accessToken = $accessToken;
         $this->accessTokenExpiryAt = $accessTokenExpiryAt;
+        $this->refreshToken = $refreshToken;
         $this->roles = $roles;
     }
 
@@ -47,6 +50,7 @@ class User
             $email,
             $password,
             new DateTimeImmutable(),
+            null,
             null,
             null,
             new ArrayCollection()
@@ -83,16 +87,26 @@ class User
 
     public function signIn(AccessTokenGenerator $accessTokenGenerator): void
     {
-        $token = $accessTokenGenerator->generate();
+        $this->regenerateToken($accessTokenGenerator);
+    }
+
+    public function regenerateToken(AccessTokenGenerator $accessTokenGenerator): void
+    {
         $expiryAt = (new \DateTimeImmutable())->add(new \DateInterval('PT3H'));
 
-        $this->accessToken = $token;
+        $this->accessToken = $accessTokenGenerator->generate();
+        $this->refreshToken = $accessTokenGenerator->generate();
         $this->accessTokenExpiryAt = $expiryAt;
     }
 
     public function getRoles(): Collection
     {
         return $this->roles;
+    }
+
+    public function getRefreshToken(): ?string
+    {
+        return $this->refreshToken;
     }
 
     public function getAccessToken(): ?string

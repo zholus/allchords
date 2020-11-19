@@ -7,16 +7,23 @@ class TokenDto
 {
     private string $token;
     private \DateTimeImmutable $expiryAt;
+    private string $refreshToken;
 
-    public function __construct(string $token, \DateTimeImmutable $expiryAt)
+    public function __construct(string $token, string $refreshToken, \DateTimeImmutable $expiryAt)
     {
         $this->token = $token;
         $this->expiryAt = $expiryAt;
+        $this->refreshToken = $refreshToken;
     }
 
     public function getToken(): string
     {
         return $this->token;
+    }
+
+    public function getRefreshToken(): string
+    {
+        return $this->refreshToken;
     }
 
     public function getExpiryAt(): \DateTimeImmutable

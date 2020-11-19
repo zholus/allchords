@@ -9,7 +9,7 @@ sign_in_page:
   controller: App\Web\ADR\Action\Accounts\SignInPageAction
   options:
     middleware:
-      - 'App\Web\ADR\Domain\Symfony\Middlewares\GuestMiddleware'
+      - 'App\Web\ADR\Domain\Symfony\Middlewares\CheckGuestMiddleware'
       - 'App\Web\ADR\Domain\Symfony\Middlewares\PermissionMiddleware'
 
 sign_in:
@@ -18,7 +18,7 @@ sign_in:
   controller: App\Web\ADR\Action\Accounts\SignInAction
   options:
     middleware:
-      - 'App\Web\ADR\Domain\Symfony\Middlewares\GuestMiddleware'
+      - 'App\Web\ADR\Domain\Symfony\Middlewares\CheckGuestMiddleware'
       - 'App\Web\ADR\Domain\Symfony\Middlewares\PermissionMiddleware'
 
 register_page:
@@ -27,7 +27,7 @@ register_page:
   controller: App\Web\ADR\Action\Accounts\RegisterPageAction
   options:
     middleware:
-      - 'App\Web\ADR\Domain\Symfony\Middlewares\GuestMiddleware'
+      - 'App\Web\ADR\Domain\Symfony\Middlewares\CheckGuestMiddleware'
       - 'App\Web\ADR\Domain\Symfony\Middlewares\PermissionMiddleware'
 
 register:
@@ -36,7 +36,7 @@ register:
   controller: App\Web\ADR\Action\Accounts\RegisterAction
   options:
     middleware:
-      - 'App\Web\ADR\Domain\Symfony\Middlewares\GuestMiddleware'
+      - 'App\Web\ADR\Domain\Symfony\Middlewares\CheckGuestMiddleware'
       - 'App\Web\ADR\Domain\Symfony\Middlewares\PermissionMiddleware'
 
 logout:
@@ -45,7 +45,7 @@ logout:
   controller: App\Web\ADR\Action\Accounts\LogoutAction
   options:
     middleware:
-      - 'App\Web\ADR\Domain\Symfony\Middlewares\AuthMiddleware'
+      - 'App\Web\ADR\Domain\Symfony\Middlewares\CheckAuthMiddleware'
       - 'App\Web\ADR\Domain\Symfony\Middlewares\PermissionMiddleware'
 
 new_review_page:
@@ -54,7 +54,7 @@ new_review_page:
   controller: App\Web\ADR\Action\SongsReviews\NewReviewPageAction
   options:
     middleware:
-      - 'App\Web\ADR\Domain\Symfony\Middlewares\AuthMiddleware'
+      - 'App\Web\ADR\Domain\Symfony\Middlewares\CheckAuthMiddleware'
       - 'App\Web\ADR\Domain\Symfony\Middlewares\PermissionMiddleware'
 
 new_review:
@@ -63,7 +63,7 @@ new_review:
   controller: App\Web\ADR\Action\SongsReviews\NewReviewAction
   options:
     middleware:
-      - 'App\Web\ADR\Domain\Symfony\Middlewares\AuthMiddleware'
+      - 'App\Web\ADR\Domain\Symfony\Middlewares\CheckAuthMiddleware'
       - 'App\Web\ADR\Domain\Symfony\Middlewares\PermissionMiddleware'
 
 songs_reviews_artists_ajax:
@@ -72,7 +72,7 @@ songs_reviews_artists_ajax:
   controller: App\Web\ADR\Action\SongsReviews\Ajax\GetArtistsAction
   options:
     middleware:
-      - 'App\Web\ADR\Domain\Symfony\Middlewares\AuthMiddleware'
+      - 'App\Web\ADR\Domain\Symfony\Middlewares\CheckAuthMiddleware'
       - 'App\Web\ADR\Domain\Symfony\Middlewares\PermissionMiddleware'
 
 songs_reviews_genres_ajax:
@@ -81,7 +81,7 @@ songs_reviews_genres_ajax:
   controller: App\Web\ADR\Action\SongsReviews\Ajax\GetGenresAction
   options:
     middleware:
-      - 'App\Web\ADR\Domain\Symfony\Middlewares\AuthMiddleware'
+      - 'App\Web\ADR\Domain\Symfony\Middlewares\CheckAuthMiddleware'
       - 'App\Web\ADR\Domain\Symfony\Middlewares\PermissionMiddleware'
 
 review_songs:
@@ -90,5 +90,5 @@ review_songs:
   controller: App\Web\ADR\Action\SongsReviews\GetSongsForReview
   options:
     middleware:
-      - 'App\Web\ADR\Domain\Symfony\Middlewares\AuthMiddleware'
+      - 'App\Web\ADR\Domain\Symfony\Middlewares\CheckAuthMiddleware'
       - 'App\Web\ADR\Domain\Symfony\Middlewares\PermissionMiddleware'

@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Zholus\SymfonyMiddleware\MiddlewareInterface;
 
-final class AuthMiddleware implements MiddlewareInterface
+final class CheckGuestMiddleware implements MiddlewareInterface
 {
     private AuthService $authService;
     private RouterInterface $router;
@@ -24,11 +24,11 @@ final class AuthMiddleware implements MiddlewareInterface
     public function handle(Request $request): ?Response
     {
         if ($this->authService->isAuthenticated()) {
-            return null;
+            return new RedirectResponse(
+                $this->router->generate('home_page')
+            );
         }
 
-        return new RedirectResponse(
-            $this->router->generate('sign_in_page')
-        );
+        return null;
     }
 }

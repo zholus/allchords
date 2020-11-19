@@ -31,4 +31,14 @@ final class UserNotFoundException extends DomainException
             )
         );
     }
+
+    public static function withRefreshToken(string $refreshToken): self
+    {
+        return new self(
+            sprintf(
+                'User with refresh token [%s] not found',
+                $refreshToken
+            )
+        );
+    }
 }

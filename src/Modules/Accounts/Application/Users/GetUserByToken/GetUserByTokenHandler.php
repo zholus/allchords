@@ -26,7 +26,10 @@ class GetUserByTokenHandler
         return new UserDto(
             $user->getId()->toString(),
             $user->getUsername(),
-            $user->getEmail()
+            $user->getEmail(),
+            $user->getAccessToken(),
+            $user->getRefreshToken(),
+            $user->getAccessTokenExpiryAt()
         );
     }
 }

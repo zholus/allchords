@@ -40,6 +40,7 @@ class UsersFixtures extends AbstractFixture
             new \DateTimeImmutable(),
             null,
             null,
+            null,
             new ArrayCollection()
         );
 
