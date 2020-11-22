@@ -13,4 +13,5 @@ interface UserRepository
     public function getById(UserId $id): ?User;
     public function getByToken(string $token): ?User;
     public function getByRefreshToken(string $refreshToken): ?User;
+    public function getPermissions(UserId $id): array;
 }

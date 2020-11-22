@@ -5,6 +5,7 @@ namespace App\Web\ADR\Domain\Accounts\Service;
 
 use App\Modules\Accounts\Application\Contracts\UsersContract;
 use App\Modules\Accounts\Application\Users\GetUserByToken\UserDto;
+use App\Modules\Accounts\Application\Users\GetUserPermissions\UserPermissionDto;
 
 final class DirectCallUsersService implements UsersService
 {
@@ -31,8 +32,9 @@ final class DirectCallUsersService implements UsersService
         $token = $this->usersContract->getToken($email);
 
         $user = $this->usersContract->getUserByToken($token);
+        $userPermission = $this->usersContract->getPermissions($user->getUserId());
 
-        $this->authenticate($user);
+        $this->authenticate($user, $userPermission);
     }
 
     public function generateNewToken(string $refreshToken): void
@@ -48,11 +50,12 @@ final class DirectCallUsersService implements UsersService
     public function signInUserByToken(string $token): void
     {
         $user = $this->usersContract->getUserByToken($token);
+        $userPermission = $this->usersContract->getPermissions($user->getUserId());
 
-        $this->authenticate($user);
+        $this->authenticate($user, $userPermission);
     }
 
-    private function authenticate(UserDto $user): void
+    private function authenticate(UserDto $user, array $userPermissions): void
     {
         $this->authService->authenticate(
             $user->getUserId(),
@@ -60,7 +63,11 @@ final class DirectCallUsersService implements UsersService
             $user->getEmail(),
             $user->getAccessToken(),
             $user->getRefreshToken(),
-            $user->getAccessTokenExpiryAt()
+            $user->getAccessTokenExpiryAt(),
+            array_map(
+                fn (UserPermissionDto $userPermissionDto) => $userPermissionDto->getName(),
+                $userPermissions
+            )
         );
     }
 }

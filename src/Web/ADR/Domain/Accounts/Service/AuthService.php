@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Web\ADR\Domain\Accounts\Service;
 
+use App\Web\ADR\Domain\Accounts\Permission;
 use App\Web\ADR\Domain\Accounts\User;
 use App\Web\ADR\Domain\Accounts\UserUnauthorizedException;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -22,11 +23,23 @@ class AuthService
         string $email,
         string $token,
         string $refreshToken,
-        \DateTimeImmutable $expiryAt
+        \DateTimeImmutable $expiryAt,
+        array $permissions
     ): void {
         $this->session->set(
             'user',
-            new User($userId, $username, $email, $token, $refreshToken, $expiryAt)
+            new User(
+                $userId,
+                $username,
+                $email,
+                $token,
+                $refreshToken,
+                $expiryAt,
+                array_map(
+                    fn(string $name) => new Permission($name),
+                    $permissions
+                )
+            )
         );
     }
 

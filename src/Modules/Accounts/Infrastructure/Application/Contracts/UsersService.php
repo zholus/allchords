@@ -9,6 +9,7 @@ use App\Modules\Accounts\Application\Users\GetToken\GetTokenQuery;
 use App\Modules\Accounts\Application\Users\GetToken\TokenDto;
 use App\Modules\Accounts\Application\Users\GetUserByToken\GetUserByTokenQuery;
 use App\Modules\Accounts\Application\Users\GetUserByToken\UserDto;
+use App\Modules\Accounts\Application\Users\GetUserPermissions\GetUserPermissionsQuery;
 use App\Modules\Accounts\Application\Users\RegisterUser\RegisterUserCommand;
 use App\Modules\Accounts\Application\Users\SignInUser\SignInUserCommand;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -50,5 +51,12 @@ final class UsersService implements UsersContract
     public function generateNewToken(string $refreshToken): void
     {
         $this->bus->dispatch(new GenerateNewTokenCommand($refreshToken));
+    }
+
+    public function getPermissions(string $userId): array
+    {
+        return $this->bus->dispatch(new GetUserPermissionsQuery($userId))
+            ->last(HandledStamp::class)
+            ->getResult();
     }
 }

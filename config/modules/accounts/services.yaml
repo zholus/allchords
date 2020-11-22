@@ -27,3 +27,6 @@ services:
 
   App\Modules\Accounts\Application\Users\GenerateNewToken\GenerateNewTokenHandler:
     tags: [messenger.message_handler]
+
+  App\Modules\Accounts\Application\Users\GetUserPermissions\GetUserPermissionsHandler:
+    tags: [messenger.message_handler]

@@ -80,4 +80,32 @@ final class DoctrineUserRepository extends ServiceEntityRepository implements Us
             'refreshToken' => $refreshToken
         ]);
     }
+
+    // todo: move to read model
+    public function getPermissions(UserId $id): array
+    {
+        $connection = $this->getEntityManager()->getConnection();
+
+        $sql = "
+            SELECT
+                ap.id,
+                ap.name
+            FROM 
+                accounts_permissions ap
+            JOIN 
+                accounts_roles_permissions arp on ap.id = arp.permission_id
+            JOIN 
+                accounts_users_roles aur on arp.role_id = aur.role_id
+            WHERE 
+                aur.user_id = :USER_ID
+        ";
+
+        $statement = $connection->prepare($sql);
+
+        $statement->bindValue(':USER_ID', $id->toString());
+
+        $statement->execute();
+
+        return $statement->fetchAllAssociative();
+    }
 }

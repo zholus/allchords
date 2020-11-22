@@ -13,4 +13,5 @@ interface UsersContract
     public function getToken(string $email): string;
     public function getUserByToken(string $token): UserDto;
     public function generateNewToken(string $refreshToken): void;
+    public function getPermissions(string $userId): array;
 }

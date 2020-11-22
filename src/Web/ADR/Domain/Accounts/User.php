@@ -14,13 +14,19 @@ class User
     private string $refreshToken;
     private DateTimeImmutable $expiryAt;
 
+    /**
+     * @var Permission[]
+     */
+    private array $permissions;
+
     public function __construct(
         string $userId,
         string $username,
         string $email,
         string $token,
         string $refreshToken,
-        DateTimeImmutable $expiryAt
+        DateTimeImmutable $expiryAt,
+        array $permissions
     ) {
         $this->userId = $userId;
         $this->username = $username;
@@ -28,6 +34,7 @@ class User
         $this->token = $token;
         $this->refreshToken = $refreshToken;
         $this->expiryAt = $expiryAt;
+        $this->permissions = $permissions;
     }
 
     public function getUserId(): string
