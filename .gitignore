@@ -1,6 +1,5 @@
 .idea
 .env.local
-docker/.env
 src/.preload.php
 var
 vendor
