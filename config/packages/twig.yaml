@@ -1,3 +1,0 @@
-twig:
-    paths:
-        '%kernel.project_dir%/src/Web/ADR/Responder/Resources/templates': ~
