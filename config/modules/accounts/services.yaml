@@ -4,29 +4,19 @@ services:
     public: false
 
   _instanceof:
-      App\Modules\Accounts\Domain\DomainEventSubscriber:
-        tags: ['domain.event.subscriber']
+    App\Modules\Accounts\Domain\DomainEventSubscriber:
+      tags: ['domain.event.subscriber']
+
+    App\Common\Application\Command\CommandHandler:
+      tags:
+        - { name: messenger.message_handler, bus: command.bus }
+    App\Common\Application\Query\QueryHandler:
+      tags:
+        - { name: messenger.message_handler, bus: query.bus }
   
   App\Modules\Accounts\:
     resource: '../../../src/Modules/Accounts/'
 
-  App\Modules\Accounts\Domain\Users\UserRepository:
-    class: App\Modules\Accounts\Infrastructure\Domain\Users\DoctrineUserRepository
-
-  App\Modules\Accounts\Application\Users\RegisterUser\RegisterUserHandler:
-    tags: [messenger.message_handler]
-
-  App\Modules\Accounts\Application\Users\SignInUser\SignInUserHandler:
-    tags: [messenger.message_handler]
-
-  App\Modules\Accounts\Application\Users\GetToken\GetTokenHandler:
-    tags: [messenger.message_handler]
-
-  App\Modules\Accounts\Application\Users\GetUserByToken\GetUserByTokenHandler:
-    tags: [messenger.message_handler]
-
-  App\Modules\Accounts\Application\Users\GenerateNewToken\GenerateNewTokenHandler:
-    tags: [messenger.message_handler]
-
-  App\Modules\Accounts\Application\Users\GetUserPermissions\GetUserPermissionsHandler:
-    tags: [messenger.message_handler]
+  App\Modules\Accounts\UI\Http\Api\:
+    resource: '../../../src/Modules/Accounts/UI/Http/Api/'
+    tags: [ 'controller.service_arguments' ]

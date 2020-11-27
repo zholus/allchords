@@ -3,10 +3,11 @@ declare(strict_types=1);
 
 namespace App\Modules\Accounts\Application\Users\GetUserByToken;
 
+use App\Common\Application\Query\QueryHandler;
 use App\Modules\Accounts\Domain\Users\UserNotFoundException;
 use App\Modules\Accounts\Domain\Users\UserRepository;
 
-class GetUserByTokenHandler
+final class GetUserByTokenHandler implements QueryHandler
 {
     private UserRepository $users;
 

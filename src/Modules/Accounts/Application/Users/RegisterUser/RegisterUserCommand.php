@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace App\Modules\Accounts\Application\Users\RegisterUser;
 
-class RegisterUserCommand
+use App\Common\Application\Command\Command;
+
+final class RegisterUserCommand implements Command
 {
     private string $username;
     private string $email;

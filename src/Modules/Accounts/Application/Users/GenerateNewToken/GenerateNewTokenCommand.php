@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace App\Modules\Accounts\Application\Users\GenerateNewToken;
 
-class GenerateNewTokenCommand
+use App\Common\Application\Command\Command;
+
+final class GenerateNewTokenCommand implements Command
 {
     private string $refreshToken;
 

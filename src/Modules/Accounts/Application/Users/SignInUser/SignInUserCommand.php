@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace App\Modules\Accounts\Application\Users\SignInUser;
 
-class SignInUserCommand
+use App\Common\Application\Command\Command;
+
+final class SignInUserCommand implements Command
 {
     private string $email;
     private string $password;

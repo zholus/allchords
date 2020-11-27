@@ -3,12 +3,13 @@ declare(strict_types=1);
 
 namespace App\Modules\Accounts\Application\Users\SignInUser;
 
+use App\Common\Application\Command\CommandHandler;
 use App\Modules\Accounts\Application\Users\PasswordManager;
 use App\Modules\Accounts\Domain\Users\AccessTokenGenerator;
 use App\Modules\Accounts\Domain\Users\UserNotFoundException;
 use App\Modules\Accounts\Domain\Users\UserRepository;
 
-class SignInUserHandler
+final class SignInUserHandler implements CommandHandler
 {
     private UserRepository $userRepository;
     private PasswordManager $passwordManager;

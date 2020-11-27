@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace App\Modules\Accounts\Application\Users\GetUserByToken;
 
-class GetUserByTokenQuery
+use App\Common\Application\Query\Query;
+
+final class GetUserByTokenQuery implements Query
 {
     private string $token;
 

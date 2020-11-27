@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace App\Modules\Accounts\Application\Users\GetToken;
 
-class GetTokenQuery
+use App\Common\Application\Query\Query;
+
+final class GetTokenQuery implements Query
 {
     private string $email;
 

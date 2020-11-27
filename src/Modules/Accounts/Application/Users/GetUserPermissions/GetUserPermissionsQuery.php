@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace App\Modules\Accounts\Application\Users\GetUserPermissions;
 
-class GetUserPermissionsQuery
+use App\Common\Application\Query\Query;
+
+final class GetUserPermissionsQuery implements Query
 {
     private string $userId;
 

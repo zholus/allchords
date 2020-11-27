@@ -3,10 +3,11 @@ declare(strict_types=1);
 
 namespace App\Modules\Accounts\Application\Users\GetUserPermissions;
 
+use App\Common\Application\Query\QueryHandler;
 use App\Modules\Accounts\Domain\Users\UserId;
 use App\Modules\Accounts\Domain\Users\UserRepository;
 
-class GetUserPermissionsHandler
+final class GetUserPermissionsHandler implements QueryHandler
 {
     private UserRepository $userRepository;
 

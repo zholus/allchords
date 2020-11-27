@@ -3,12 +3,13 @@ declare(strict_types=1);
 
 namespace App\Modules\Accounts\Application\Users\RegisterUser;
 
+use App\Common\Application\Command\CommandHandler;
 use App\Modules\Accounts\Application\Users\PasswordManager;
 use App\Modules\Accounts\Domain\Users\User;
 use App\Modules\Accounts\Domain\Users\UserAlreadyExistsException;
 use App\Modules\Accounts\Domain\Users\UserRepository;
 
-class RegisterUserHandler
+final class RegisterUserHandler implements CommandHandler
 {
     private UserRepository $userRepository;
     private PasswordManager $passwordManager;
