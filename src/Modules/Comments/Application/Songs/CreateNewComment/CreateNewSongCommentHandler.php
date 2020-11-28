@@ -3,16 +3,17 @@ declare(strict_types=1);
 
 namespace App\Modules\Comments\Application\Songs\CreateNewComment;
 
+use App\Common\Application\Command\CommandHandler;
 use App\Modules\Comments\Domain\Authors\AuthorId;
 use App\Modules\Comments\Domain\Authors\AuthorNotFoundException;
 use App\Modules\Comments\Domain\Authors\AuthorRepository;
 use App\Modules\Comments\Domain\Songs\CommentId;
 use App\Modules\Comments\Domain\Songs\CommentRepository;
 use App\Modules\Comments\Domain\Songs\SongId;
-use App\Modules\Comments\Domain\Songs\SongRepository;
 use App\Modules\Comments\Domain\Songs\SongNotFoundException;
+use App\Modules\Comments\Domain\Songs\SongRepository;
 
-class CreateNewSongCommentHandler
+final class CreateNewSongCommentHandler implements CommandHandler
 {
     private SongRepository $songs;
     private AuthorRepository $authors;
@@ -25,7 +26,7 @@ class CreateNewSongCommentHandler
         $this->comments = $comments;
     }
 
-    public function __invoke(CreateNewSongCommentCommand $command): string
+    public function __invoke(CreateNewSongCommentCommand $command): void
     {
         $authorId = new AuthorId($command->getAuthorId());
         $songId = new SongId($command->getSongId());
@@ -50,7 +51,5 @@ class CreateNewSongCommentHandler
         );
 
         $this->songs->add($song);
-
-        return $song->getComments()->last()->getId()->toString();
     }
 }

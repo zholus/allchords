@@ -3,12 +3,13 @@ declare(strict_types=1);
 
 namespace App\Modules\Comments\Application\Authors\CreateAuthor;
 
+use App\Common\Application\Command\CommandHandler;
 use App\Modules\Comments\Domain\Authors\Author;
 use App\Modules\Comments\Domain\Authors\AuthorAlreadyExistsException;
 use App\Modules\Comments\Domain\Authors\AuthorId;
 use App\Modules\Comments\Domain\Authors\AuthorRepository;
 
-class CreateAuthorHandler
+final class CreateAuthorHandler implements CommandHandler
 {
     private AuthorRepository $authors;
 

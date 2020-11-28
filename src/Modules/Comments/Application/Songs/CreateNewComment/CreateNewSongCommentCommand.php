@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace App\Modules\Comments\Application\Songs\CreateNewComment;
 
-class CreateNewSongCommentCommand
+use App\Common\Application\Command\Command;
+
+final class CreateNewSongCommentCommand implements Command
 {
     private string $authorId;
     private string $songId;

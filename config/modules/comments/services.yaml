@@ -7,33 +7,19 @@ services:
     App\Modules\Comments\Domain\DomainEventSubscriber:
       tags: [ 'domain.event.subscriber' ]
 
+    App\Common\Application\Command\CommandHandler:
+      tags:
+        - { name: messenger.message_handler, bus: command.bus }
+
+    App\Common\Application\Query\QueryHandler:
+      tags:
+        - { name: messenger.message_handler, bus: query.bus }
+
   App\Modules\Comments\:
     resource: '../../../src/Modules/Comments/'
 
-  App\Modules\Comments\Application\Authors\CreateAuthor\CreateAuthorHandler:
-    tags: [ messenger.message_handler ]
 
-  App\Modules\Comments\Application\Songs\CreateNewSong\CreateNewSongHandler:
-    tags: [ messenger.message_handler ]
 
-  App\Modules\Comments\Application\Songs\CreateNewComment\CreateNewSongCommentHandler:
-    tags: [ messenger.message_handler ]
-
-  App\Modules\Comments\Application\Songs\GetComments\GetCommentsHandler:
-    tags: [ messenger.message_handler ]
-
-  App\Modules\Comments\Application\Songs\GetComment\GetCommentHandler:
-    tags: [ messenger.message_handler ]
-
-  App\Modules\Comments\Domain\Authors\AuthorRepository:
-    class: App\Modules\Comments\Infrastructure\Domain\Authors\DoctrineAuthorRepository
-
-  App\Modules\Comments\Domain\Songs\SongRepository:
-    class: App\Modules\Comments\Infrastructure\Domain\Songs\DoctrineSongRepository
-
-  App\Modules\Comments\Domain\Songs\CommentRepository:
-    class: App\Modules\Comments\Infrastructure\Domain\Songs\DoctrineCommentRepository
-
-  App\Modules\Comments\Infrastructure\UI\Http\Api\:
-    resource: '../../../src/Modules/Comments/Infrastructure/UI/Http/Api/'
+  App\Modules\Comments\UI\Http\Api\:
+    resource: '../../../src/Modules/Comments/UI/Http/Api/'
     tags: [ 'controller.service_arguments' ]

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\Comments\Infrastructure\UI\Http\Api;
+namespace App\Modules\Comments\UI\Http\Api;
 
 use Assert\InvalidArgumentException;
 use DomainException;
@@ -23,7 +23,6 @@ abstract class Action
                 'message' => $exception->getMessage()
             ], Response::HTTP_BAD_REQUEST);
         } catch (\Throwable $exception) {
-            dd($exception);
             return new JsonResponse([
                 'message' => 'Unexpected server error.'
             ], Response::HTTP_INTERNAL_SERVER_ERROR);

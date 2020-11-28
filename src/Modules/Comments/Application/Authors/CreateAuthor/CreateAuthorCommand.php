@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace App\Modules\Comments\Application\Authors\CreateAuthor;
 
-class CreateAuthorCommand
+use App\Common\Application\Command\Command;
+
+final class CreateAuthorCommand implements Command
 {
     private string $authorId;
     private string $username;

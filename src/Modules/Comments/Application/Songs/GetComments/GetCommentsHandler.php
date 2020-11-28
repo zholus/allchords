@@ -3,12 +3,13 @@ declare(strict_types=1);
 
 namespace App\Modules\Comments\Application\Songs\GetComments;
 
+use App\Common\Application\Query\QueryHandler;
 use App\Modules\Comments\Domain\Songs\Comment;
 use App\Modules\Comments\Domain\Songs\SongId;
 use App\Modules\Comments\Domain\Songs\SongNotFoundException;
 use App\Modules\Comments\Domain\Songs\SongRepository;
 
-class GetCommentsHandler
+final class GetCommentsHandler implements QueryHandler
 {
     private SongRepository $songs;
 

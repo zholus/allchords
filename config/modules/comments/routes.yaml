@@ -1,9 +1,9 @@
 new_song_comment:
   path: /api/comments/song/new
   methods: POST
-  controller: App\Modules\Comments\Infrastructure\UI\Http\Api\NewSongCommentAction
+  controller: App\Modules\Comments\UI\Http\Api\NewSongCommentAction
 
 get_song_comments:
   path: /api/comments/song/{song_id}
   methods: GET
-  controller: App\Modules\Comments\Infrastructure\UI\Http\Api\GetSongCommentsAction
+  controller: App\Modules\Comments\UI\Http\Api\GetSongCommentsAction

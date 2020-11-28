@@ -1,27 +1,26 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\Comments\Infrastructure\UI\Http\Api;
+namespace App\Modules\Comments\UI\Http\Api;
 
+use App\Common\Application\Query\QueryBus;
 use App\Modules\Comments\Application\Songs\GetComments\CommentsDto;
 use App\Modules\Comments\Application\Songs\GetComments\GetCommentsQuery;
 use Assert\Assert;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Messenger\Stamp\HandledStamp;
 
 /**
  * @OA\Tag(name="Comments")
  */
 class GetSongCommentsAction extends Action
 {
-    private MessageBusInterface $bus;
+    private QueryBus $queryBus;
 
-    public function __construct(MessageBusInterface $bus)
+    public function __construct(QueryBus $queryBus)
     {
-        $this->bus = $bus;
+        $this->queryBus = $queryBus;
     }
 
     /**
@@ -58,9 +57,7 @@ class GetSongCommentsAction extends Action
                 ->verifyNow();
 
             /** @var CommentsDto $commentsDto */
-            $commentsDto = $this->bus->dispatch(new GetCommentsQuery($songId, $page, $perPage))
-                ->last(HandledStamp::class)
-                ->getResult();
+            $commentsDto = $this->queryBus->handle(new GetCommentsQuery($songId, $page, $perPage));
         } catch (\Throwable $exception) {
             return $this->responseByException($exception);
         }

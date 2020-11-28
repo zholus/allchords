@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Modules\Comments\Infrastructure\Domain\Songs;
 
+use App\Modules\Comments\Domain\Authors\Author;
+use App\Modules\Comments\Domain\Authors\AuthorId;
 use App\Modules\Comments\Domain\Songs\Comment;
 use App\Modules\Comments\Domain\Songs\CommentId;
 use App\Modules\Comments\Domain\Songs\CommentRepository;
@@ -25,5 +27,12 @@ class DoctrineCommentRepository extends ServiceEntityRepository implements Comme
     public function getById(CommentId $id): ?Comment
     {
         return $this->find($id);
+    }
+
+    public function getLastCommentByAuthor(Author $author): ?Comment
+    {
+        return $this->findOneBy([
+            'author' => $author
+        ]);
     }
 }

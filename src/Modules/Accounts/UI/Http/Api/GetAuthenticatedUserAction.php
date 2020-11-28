@@ -56,7 +56,7 @@ final class GetAuthenticatedUserAction extends Action
             /**
              * @var UserDto $userDto
              */
-            $userDto = $this->queryBus->handle(new GetAuthenticatedUserQuery());
+            //$userDto = $this->queryBus->handle(new GetAuthenticatedUserQuery());
         } catch (\Throwable $exception) {
             return $this->responseByException($exception);
         }

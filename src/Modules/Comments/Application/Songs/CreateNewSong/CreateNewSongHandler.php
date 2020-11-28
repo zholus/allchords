@@ -3,12 +3,13 @@ declare(strict_types=1);
 
 namespace App\Modules\Comments\Application\Songs\CreateNewSong;
 
+use App\Common\Application\Command\CommandHandler;
 use App\Modules\Comments\Domain\Songs\Song;
 use App\Modules\Comments\Domain\Songs\SongAlreadyExistsException;
 use App\Modules\Comments\Domain\Songs\SongId;
 use App\Modules\Comments\Domain\Songs\SongRepository;
 
-class CreateNewSongHandler
+final class CreateNewSongHandler implements CommandHandler
 {
     private SongRepository $songs;
 

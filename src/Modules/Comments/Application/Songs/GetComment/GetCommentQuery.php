@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace App\Modules\Comments\Application\Songs\GetComment;
 
-class GetCommentQuery
+use App\Common\Application\Query\Query;
+
+final class GetCommentQuery implements Query
 {
     private string $commentId;
 
