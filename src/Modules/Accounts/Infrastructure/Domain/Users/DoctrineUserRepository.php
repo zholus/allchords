@@ -6,6 +6,7 @@ namespace App\Modules\Accounts\Infrastructure\Domain\Users;
 use App\Modules\Accounts\Domain\Users\User;
 use App\Modules\Accounts\Domain\Users\UserId;
 use App\Modules\Accounts\Domain\Users\UserRepository;
+use DateTimeImmutable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Ramsey\Uuid\Uuid;
@@ -67,11 +68,25 @@ final class DoctrineUserRepository extends ServiceEntityRepository implements Us
         return $this->find($id);
     }
 
-    public function getByToken(string $token): ?User
+    public function getUserIdByToken(string $token): ?UserId
     {
-        return $this->findOneBy([
-            'accessToken' => $token
-        ]);
+        $builder = $this->createQueryBuilder('u');
+
+        $query = $builder
+            ->select('u.id')
+            ->where('u.accessToken = :ACCESS_TOKEN')
+            ->andWhere('u.accessTokenExpiryAt > :EXPIRY_AT')
+            ->setParameter(':ACCESS_TOKEN', $token)
+            ->setParameter(':EXPIRY_AT', new DateTimeImmutable())
+            ->getQuery();
+
+        $result = $query->getScalarResult();
+
+        if (!empty($result[0]['id'])) {
+            return new UserId($result[0]['id']);
+        }
+
+        return null;
     }
 
     public function getByRefreshToken(string $refreshToken): ?User

@@ -12,3 +12,6 @@ get_authenticated_user:
   path: /api/accounts/users/authenticated
   methods: GET
   controller: App\Modules\Accounts\UI\Http\Api\GetAuthenticatedUserAction
+  options:
+    middleware:
+      - 'App\Common\Infrastructure\Middleware\NeedAuth'

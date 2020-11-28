@@ -3,11 +3,10 @@ declare(strict_types=1);
 
 namespace App\Modules\Accounts\UI\Http\Api;
 
+use App\Common\Application\AuthenticatedUserContext;
 use App\Common\Application\Query\QueryBus;
-use App\Modules\Accounts\Application\Users\GetAuthenticatedUser\GetAuthenticatedUserQuery;
-use App\Modules\Accounts\Application\Users\GetUserByToken\GetUserByTokenQuery;
-use App\Modules\Accounts\Application\Users\GetUserByToken\UserDto;
-use Assert\Assert;
+use App\Modules\Accounts\Application\Users\GetUser\GetUserQuery;
+use App\Modules\Accounts\Application\Users\GetUser\UserDto;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,19 +17,15 @@ use Symfony\Component\HttpFoundation\Request;
 final class GetAuthenticatedUserAction extends Action
 {
     private QueryBus $queryBus;
+    private AuthenticatedUserContext $authenticatedUserContext;
 
-    public function __construct(QueryBus $queryBus)
+    public function __construct(AuthenticatedUserContext $authenticatedUserContext, QueryBus $queryBus)
     {
         $this->queryBus = $queryBus;
+        $this->authenticatedUserContext = $authenticatedUserContext;
     }
 
     /**
-     * @OA\Parameter(
-     *     name="user_id",
-     *     in="path",
-     *     description="Uuid user id",
-     *     @OA\Schema(type="string")
-     * )
      * @OA\Response(
      *     response=200,
      *     description="User data",
@@ -46,17 +41,13 @@ final class GetAuthenticatedUserAction extends Action
      */
     public function __invoke(Request $request): JsonResponse
     {
-        $userId = $request->get('user_id');
+        $userId = $this->authenticatedUserContext->getUserId();
 
         try {
-            Assert::lazy()
-                ->that($userId, 'user_id')->uuid()
-                ->verifyNow();
-
             /**
              * @var UserDto $userDto
              */
-            //$userDto = $this->queryBus->handle(new GetAuthenticatedUserQuery());
+            $userDto = $this->queryBus->handle(new GetUserQuery($userId));
         } catch (\Throwable $exception) {
             return $this->responseByException($exception);
         }

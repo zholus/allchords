@@ -11,7 +11,7 @@ interface UserRepository
     public function existsWithEmail(string $email): bool;
     public function getByEmail(string $email): ?User;
     public function getById(UserId $id): ?User;
-    public function getByToken(string $token): ?User;
+    public function getUserIdByToken(string $token): ?UserId;
     public function getByRefreshToken(string $refreshToken): ?User;
     public function getPermissions(UserId $id): array;
 }

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Modules\Comments\UI\Http\Api;
 
+use App\Common\Application\AuthenticatedUserContext;
 use App\Common\Application\Command\CommandBus;
 use App\Common\Application\Query\QueryBus;
 use App\Modules\Comments\Application\Songs\CreateNewComment\CreateNewSongCommentCommand;
@@ -20,11 +21,16 @@ final class NewSongCommentAction extends Action
 {
     private CommandBus $commandBus;
     private QueryBus $queryBus;
+    private AuthenticatedUserContext $authenticatedUserContext;
 
-    public function __construct(CommandBus $commandBus, QueryBus $queryBus)
-    {
+    public function __construct(
+        AuthenticatedUserContext $authenticatedUserContext,
+        CommandBus $commandBus,
+        QueryBus $queryBus
+    ) {
         $this->commandBus = $commandBus;
         $this->queryBus = $queryBus;
+        $this->authenticatedUserContext = $authenticatedUserContext;
     }
 
     /**
@@ -32,11 +38,6 @@ final class NewSongCommentAction extends Action
      *     @OA\MediaType(
      *          mediaType="application/x-www-form-urlencoded",
      *          @OA\Schema(
-     *              @OA\Property(property="author_id",
-     *    			    type="string",
-     *    				example="",
-     *    				description=""
-     *    			),
      *    			@OA\Property(property="song_id",
      *    				type="string",
      *    				example="",
@@ -65,13 +66,12 @@ final class NewSongCommentAction extends Action
      */
     public function __invoke(Request $request): JsonResponse
     {
-        $authorId = $request->get('author_id', '');
+        $authorId = $this->authenticatedUserContext->getUserId();
         $songId = $request->get('song_id', '');
         $text = $request->get('text', '');
 
         try {
             Assert::lazy()
-                ->that($authorId, 'author_id')->uuid()
                 ->that($songId, 'song_id')->uuid()
                 ->that($text, 'text')->string()->notEmpty()
                 ->verifyNow();

@@ -1,8 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Common\Application\Query;
+namespace App\Common\Infrastructure\Messenger;
 
+use App\Common\Application\Query\Query;
+use App\Common\Application\Query\QueryBus;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 
