@@ -7,6 +7,7 @@ use App\Common\Application\Query\QueryBus;
 use App\Modules\SongsCatalog\Application\Songs\GetSongs\GetSongsQuery;
 use App\Modules\SongsCatalog\Application\Songs\GetSongs\SongsCollection;
 use Assert\Assert;
+use DateTime;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -100,6 +101,7 @@ final class GetSongsAction extends Action
                 'title' => $song->getTitle(),
                 'artist_id' => $song->getArtistId(),
                 'artist_name' => $song->getArtistName(),
+                'created_at' => $song->getCreatedAt()->format(DateTime::ISO8601),
             ];
         }
 

@@ -43,7 +43,8 @@ final class GetSongsHandler implements QueryHandler
                 $song->getId()->toString(),
                 $song->getArtist()->getId()->toString(),
                 $song->getArtist()->getTitle(),
-                $song->getTitle()
+                $song->getTitle(),
+                $song->getCreatedAt()
             );
         }
 
