@@ -36,16 +36,38 @@ class DoctrineSongRepository extends ServiceEntityRepository implements SongRepo
     /**
      * @return Song[]
      */
-    public function getSongsCreatedAtSpecificDate(int $limit, DateTimeImmutable $createdAtDate): array
+    public function getSongsFiltered(int $limit, int $offset, ?DateTimeImmutable $creationDate): array
     {
         $builder = $this->createQueryBuilder('s');
-        $builder->where('s.createdAt >= :date_from',  's.createdAt <= :date_to');
         $builder->setMaxResults($limit);
-        $builder->setParameter(':date_from', $createdAtDate->setTime(0, 0));
-        $builder->setParameter(':date_to', $createdAtDate->setTime(23, 59, 59, 9999));
+        $builder->setFirstResult($offset);
+
+        if ($creationDate !== null) {
+            $builder->where('s.createdAt >= :date_from', 's.createdAt <= :date_to');
+            $builder->setParameter(':date_from', $creationDate->setTime(0, 0));
+            $builder->setParameter(':date_to', $creationDate->setTime(23, 59, 59, 9999));
+        }
 
         $query = $builder->getQuery();
 
         return $query->getResult();
+    }
+
+    public function getSongsFilteredCount(int $limit, int $offset, ?DateTimeImmutable $creationDate): int
+    {
+        $builder = $this->createQueryBuilder('s');
+        $builder->select('count(s.id)');
+        $builder->setMaxResults($limit);
+        $builder->setFirstResult($offset);
+
+        if ($creationDate !== null) {
+            $builder->where('s.createdAt >= :date_from', 's.createdAt <= :date_to');
+            $builder->setParameter(':date_from', $creationDate->setTime(0, 0));
+            $builder->setParameter(':date_to', $creationDate->setTime(23, 59, 59, 9999));
+        }
+
+        $query = $builder->getQuery();
+
+        return (int)$query->getSingleScalarResult();
     }
 }

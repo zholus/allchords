@@ -1,20 +1,28 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\SongsCatalog\Application\Songs\GetNewSongsToday;
+namespace App\Modules\SongsCatalog\Application\Songs\GetSongs;
 
 use App\Common\Application\Query\Query;
 use DateTimeImmutable;
 
-final class GetNewSongsTodayQuery implements Query
+final class GetSongsQuery implements Query
 {
-    private ?DateTimeImmutable $createdAtDate;
+    private ?DateTimeImmutable $creationDate;
     private int $limit;
+    private int $page;
+    private int $perPage;
 
-    public function __construct(int $limit, ?DateTimeImmutable $createdAtDate)
-    {
+    public function __construct(
+        int $limit,
+        int $page,
+        int $perPage,
+        ?DateTimeImmutable $creationDate
+    ) {
         $this->limit = $limit;
-        $this->createdAtDate = $createdAtDate;
+        $this->creationDate = $creationDate;
+        $this->page = $page;
+        $this->perPage = $perPage;
     }
 
     public function getLimit(): int
@@ -22,8 +30,18 @@ final class GetNewSongsTodayQuery implements Query
         return $this->limit;
     }
 
-    public function getCreatedAtDate(): ?DateTimeImmutable
+    public function getPage(): int
     {
-        return $this->createdAtDate;
+        return $this->page;
+    }
+
+    public function getPerPage(): int
+    {
+        return $this->perPage;
+    }
+
+    public function getCreationDate(): ?DateTimeImmutable
+    {
+        return $this->creationDate;
     }
 }

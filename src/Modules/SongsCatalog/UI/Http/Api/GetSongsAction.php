@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace App\Modules\SongsCatalog\UI\Http\Api;
 
 use App\Common\Application\Query\QueryBus;
-use App\Modules\SongsCatalog\Application\Songs\GetNewSongsToday\GetNewSongsTodayQuery;
-use App\Modules\SongsCatalog\Application\Songs\GetNewSongsToday\SongsDto;
+use App\Modules\SongsCatalog\Application\Songs\GetSongs\GetSongsQuery;
+use App\Modules\SongsCatalog\Application\Songs\GetSongs\SongsCollection;
 use Assert\Assert;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @OA\Tag(name="SongsCatalog")
  */
-final class GetSongsByCreatedAtAction extends Action
+final class GetSongsAction extends Action
 {
     private QueryBus $queryBus;
 
@@ -30,6 +30,24 @@ final class GetSongsByCreatedAtAction extends Action
      *     in="query",
      *     description="Limit of songs. Default 3",
      *     @OA\Schema(type="integer")
+     * )
+     * @OA\Parameter(
+     *     name="page",
+     *     in="query",
+     *     description="Number of page",
+     *     @OA\Schema(type="integer")
+     * )
+     * @OA\Parameter(
+     *     name="per_page",
+     *     in="query",
+     *     description="Songs per page",
+     *     @OA\Schema(type="integer")
+     * )
+     * @OA\Parameter(
+     *     name="creation_date",
+     *     in="query",
+     *     description="Date of songs creation. Format - Y-m-d",
+     *     @OA\Schema(type="string")
      * )
      * @OA\Response(
      *     response=200,
@@ -47,14 +65,24 @@ final class GetSongsByCreatedAtAction extends Action
     public function __invoke(Request $request): Response
     {
         $limit = (int)$request->get('limit', 3);
+        $page = (int)$request->get('page', 1);
+        $perPage = (int)$request->get('per_page', 50);
+        $creationDate = $request->get('creation_date');
 
         try {
             Assert::lazy()
                 ->that($limit, 'limit')->integer()->greaterThan(0)->notEmpty()
+                ->that($page, 'page')->notEmpty()->integer()
+                ->that($perPage, 'per_page')->notEmpty()->integer()
+                ->that($creationDate, 'creation_date')->nullOr()->date('Y-m-d')
                 ->verifyNow();
 
-            /** @var SongsDto $songs */
-            $songs = $this->queryBus->handle(new GetNewSongsTodayQuery($limit, new \DateTimeImmutable()));
+            if ($creationDate !== null) {
+                $creationDate = new \DateTimeImmutable($creationDate);
+            }
+
+            /** @var SongsCollection $songs */
+            $songs = $this->queryBus->handle(new GetSongsQuery($limit, $page, $perPage, $creationDate));
         } catch (\Throwable $exception) {
             return $this->responseByException($exception);
         }
@@ -62,12 +90,12 @@ final class GetSongsByCreatedAtAction extends Action
         return new JsonResponse($this->present($songs));
     }
 
-    private function present(SongsDto $songs): array
+    private function present(SongsCollection $songsCollection): array
     {
-        $result = [];
+        $songs = [];
 
-        foreach ($songs->getSongs() as $song) {
-            $result[] = [
+        foreach ($songsCollection->getSongs() as $song) {
+            $songs[] = [
                 'song_id' => $song->getSongId(),
                 'title' => $song->getTitle(),
                 'artist_id' => $song->getArtistId(),
@@ -76,7 +104,13 @@ final class GetSongsByCreatedAtAction extends Action
         }
 
         return [
-            'songs' => $result
+            'songs' => $songs,
+            'pagination' => [
+                'elements_on_page' => $songsCollection->getPaginationDto()->getElementsOnPage(),
+                'total_pages_count' => $songsCollection->getPaginationDto()->getTotalPagesCount(),
+                'current_page' => $songsCollection->getPaginationDto()->getCurrentPage(),
+                'total_elements_count' => $songsCollection->getPaginationDto()->getTotalElementsCount(),
+            ]
         ];
     }
 }

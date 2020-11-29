@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\SongsCatalog\Application\Songs\GetNewSongsToday;
+namespace App\Modules\SongsCatalog\Application\Songs\GetSongs;
 
 class SongDto
 {

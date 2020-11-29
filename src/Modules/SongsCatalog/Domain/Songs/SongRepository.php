@@ -13,5 +13,6 @@ interface SongRepository
     /**
      * @return Song[]
      */
-    public function getSongsCreatedAtSpecificDate(int $limit, DateTimeImmutable $createdAtDate): array;
+    public function getSongsFiltered(int $limit, int $offset, ?DateTimeImmutable $creationDate): array;
+    public function getSongsFilteredCount(int $limit, int $offset, ?DateTimeImmutable $getCreationDate): int;
 }

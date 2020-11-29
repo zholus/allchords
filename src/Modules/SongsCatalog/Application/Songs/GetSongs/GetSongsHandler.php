@@ -1,12 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\SongsCatalog\Application\Songs\GetNewSongsToday;
+namespace App\Modules\SongsCatalog\Application\Songs\GetSongs;
 
 use App\Common\Application\Query\QueryHandler;
+use App\Modules\SongsCatalog\Application\PaginationDto;
 use App\Modules\SongsCatalog\Domain\Songs\SongRepository;
 
-final class GetNewSongsTodayHandler implements QueryHandler
+final class GetSongsHandler implements QueryHandler
 {
     private SongRepository $songs;
 
@@ -15,12 +16,25 @@ final class GetNewSongsTodayHandler implements QueryHandler
         $this->songs = $songs;
     }
 
-    public function __invoke(GetNewSongsTodayQuery $query): SongsDto
+    public function __invoke(GetSongsQuery $query): SongsCollection
     {
-        $songs = $this->songs->getSongsCreatedAtSpecificDate(
-            $query->getLimit(),
-            $query->getCreatedAtDate()
+        $page = $query->getPage();
+        $limit = $query->getLimit();
+        $offset = ($page - 1) * $limit;
+
+        $allSongsCount = $this->songs->getSongsFilteredCount(
+            $limit,
+            $offset,
+            $query->getCreationDate()
         );
+
+        $songs = $this->songs->getSongsFiltered(
+            $limit,
+            $offset,
+            $query->getCreationDate()
+        );
+
+        $pagesCount = (int)ceil(count($songs) / $limit);
 
         $result = [];
 
@@ -33,6 +47,13 @@ final class GetNewSongsTodayHandler implements QueryHandler
             );
         }
 
-        return new SongsDto($result);
+        $pagination = new PaginationDto(
+            $allSongsCount,
+            $page,
+            $pagesCount,
+            $limit
+        );
+
+        return new SongsCollection($pagination, ...$result);
     }
 }
