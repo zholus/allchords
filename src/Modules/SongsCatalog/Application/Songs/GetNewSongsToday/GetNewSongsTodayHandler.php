@@ -1,11 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\SongsCatalog\Application\Songs\GetSongsByCreatedDate;
+namespace App\Modules\SongsCatalog\Application\Songs\GetNewSongsToday;
 
+use App\Common\Application\Query\QueryHandler;
 use App\Modules\SongsCatalog\Domain\Songs\SongRepository;
 
-class GetSongsByCreatedDateHandler
+final class GetNewSongsTodayHandler implements QueryHandler
 {
     private SongRepository $songs;
 
@@ -14,7 +15,7 @@ class GetSongsByCreatedDateHandler
         $this->songs = $songs;
     }
 
-    public function __invoke(GetSongsByCreatedDateQuery $query): SongsDto
+    public function __invoke(GetNewSongsTodayQuery $query): SongsDto
     {
         $songs = $this->songs->getSongsCreatedAtSpecificDate(
             $query->getLimit(),
@@ -28,11 +29,7 @@ class GetSongsByCreatedDateHandler
                 $song->getId()->toString(),
                 $song->getArtist()->getId()->toString(),
                 $song->getArtist()->getTitle(),
-                $song->getCreator()->getId()->toString(),
-                $song->getGenre()->getId()->toString(),
-                $song->getTitle(),
-                $song->getChords(),
-                $song->getCreatedAt()
+                $song->getTitle()
             );
         }
 

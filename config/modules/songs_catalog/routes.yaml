@@ -1,0 +1,7 @@
+get_authenticated_user:
+  path: /api/songs-catalog/songs/new-today
+  methods: GET
+  controller: App\Modules\SongsCatalog\UI\Http\Api\GetNewSongsTodayAction
+  options:
+    middleware:
+      - 'App\Common\Infrastructure\Middleware\NeedAuth'

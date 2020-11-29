@@ -7,29 +7,17 @@ services:
     App\Modules\SongsCatalog\Domain\DomainEventSubscriber:
       tags: ['domain.event.subscriber']
 
+    App\Common\Application\Command\CommandHandler:
+      tags:
+        - { name: messenger.message_handler, bus: command.bus }
+
+    App\Common\Application\Query\QueryHandler:
+      tags:
+        - { name: messenger.message_handler, bus: query.bus }
+
   App\Modules\SongsCatalog\:
     resource: '../../../src/Modules/SongsCatalog/'
 
-  App\Modules\SongsCatalog\Application\Songs\CreateNew\NewSongHandler:
-    tags: [messenger.message_handler]
-
-  App\Modules\SongsCatalog\Application\Songs\GetSong\GetSongHandler:
-    tags: [messenger.message_handler]
-
-  App\Modules\SongsCatalog\Application\Creators\CreateNew\CreateNewCreatorHandler:
-    tags: [messenger.message_handler]
-
-  App\Modules\SongsCatalog\Application\Songs\GetSongsByCreatedDate\GetSongsByCreatedDateHandler:
-    tags: [messenger.message_handler]
-
-  App\Modules\SongsCatalog\Domain\Artists\ArtistRepository:
-    class: App\Modules\SongsCatalog\Infrastructure\Domain\Artists\DoctrineArtistRepository
-
-  App\Modules\SongsCatalog\Domain\Creators\CreatorRepository:
-    class: App\Modules\SongsCatalog\Infrastructure\Domain\Creators\DoctrineCreatorRepository
-
-  App\Modules\SongsCatalog\Domain\Genres\GenreRepository:
-    class: App\Modules\SongsCatalog\Infrastructure\Domain\Genres\DoctrineGenreRepository
-
-  App\Modules\SongsCatalog\Domain\Songs\SongRepository:
-    class: App\Modules\SongsCatalog\Infrastructure\Domain\Songs\DoctrineSongRepository
+  App\Modules\SongsCatalog\UI\Http\Api\:
+    resource: '../../../src/Modules/SongsCatalog/UI/Http/Api/'
+    tags: [ 'controller.service_arguments' ]

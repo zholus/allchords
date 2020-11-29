@@ -1,11 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\SongsCatalog\Application\Songs\GetSongsByCreatedDate;
+namespace App\Modules\SongsCatalog\Application\Songs\GetNewSongsToday;
 
+use App\Common\Application\Query\Query;
 use DateTimeImmutable;
 
-class GetSongsByCreatedDateQuery
+final class GetNewSongsTodayQuery implements Query
 {
     private ?DateTimeImmutable $createdAtDate;
     private int $limit;

@@ -3,3 +3,6 @@ accounts:
 
 comments:
   resource: 'modules/comments/routes.yaml'
+
+songs_catalog:
+  resource: 'modules/songs_catalog/routes.yaml'
