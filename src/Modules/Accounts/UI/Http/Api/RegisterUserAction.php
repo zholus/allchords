@@ -47,7 +47,7 @@ final class RegisterUserAction extends Action
      *     ),
      * ),
      * @OA\Response(
-     *     response=200,
+     *     response=201,
      *     description="Register user",
      * )
      * @OA\Response(
@@ -83,6 +83,6 @@ final class RegisterUserAction extends Action
 
         return new JsonResponse([
             'message' => 'success'
-        ]);
+        ], JsonResponse::HTTP_CREATED);
     }
 }

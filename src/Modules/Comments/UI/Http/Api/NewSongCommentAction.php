@@ -52,7 +52,7 @@ final class NewSongCommentAction extends Action
      *     ),
      * ),
      * @OA\Response(
-     *     response=200,
+     *     response=201,
      *     description="Comment added",
      * )
      * @OA\Response(
@@ -92,6 +92,6 @@ final class NewSongCommentAction extends Action
 
         return new JsonResponse([
             'data' => $commentDto->toArray()
-        ]);
+        ], JsonResponse::HTTP_CREATED);
     }
 }
