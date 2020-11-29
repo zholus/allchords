@@ -24,9 +24,29 @@ final class GetNewSongsTodayAction extends Action
         $this->queryBus = $queryBus;
     }
 
+    /**
+     * @OA\Parameter(
+     *     name="limit",
+     *     in="query",
+     *     description="Limit of songs. Default 3",
+     *     @OA\Schema(type="integer")
+     * )
+     * @OA\Response(
+     *     response=200,
+     *     description="Songs list",
+     * )
+     * @OA\Response(
+     *     response=400,
+     *     description="Invalid input request data",
+     * )
+     * @OA\Response(
+     *     response=422,
+     *     description="Cannot process request due to invalid logic",
+     * )
+     */
     public function __invoke(Request $request): Response
     {
-        $limit = (int)$request->get('limit', 0);
+        $limit = (int)$request->get('limit', 3);
 
         try {
             Assert::lazy()
