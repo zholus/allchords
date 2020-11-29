@@ -9,7 +9,7 @@ use App\Modules\Accounts\Application\Users\GetToken\GetTokenQuery;
 use App\Modules\Accounts\Application\Users\GetToken\TokenDto;
 use App\Modules\Accounts\Application\Users\SignInUser\SignInUserCommand;
 use Assert\Assert;
-use DateTimeImmutable;
+use DateTime;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -85,7 +85,7 @@ final class SignInUserAction extends Action
 
         return new JsonResponse([
             'access_token' => $tokenDto->getToken(),
-            'expire_at' => $tokenDto->getExpiryAt()->format(DateTimeImmutable::RFC3339),
+            'expire_at' => $tokenDto->getExpiryAt()->format(DateTime::ISO8601),
             'refresh_token' => $tokenDto->getRefreshToken(),
         ]);
     }

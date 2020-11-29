@@ -53,8 +53,8 @@ final class GetAuthenticatedUserAction extends Action
         }
 
         return new JsonResponse([
-            'data' => [
-                'userId' => $userDto->getUserId(),
+            'user' => [
+                'user_id' => $userDto->getUserId(),
                 'username' => $userDto->getUsername(),
                 'email' => $userDto->getEmail(),
             ]
