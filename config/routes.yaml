@@ -6,3 +6,6 @@ comments:
 
 songs_catalog:
   resource: 'modules/songs_catalog/routes.yaml'
+
+songs_reviews:
+  resource: 'modules/songs_reviews/routes.yaml'

@@ -7,17 +7,17 @@ services:
     App\Modules\SongsReviews\Domain\DomainEventSubscriber:
       tags: ['domain.event.subscriber']
 
+    App\Common\Application\Command\CommandHandler:
+      tags:
+        - { name: messenger.message_handler, bus: command.bus }
+
+    App\Common\Application\Query\QueryHandler:
+      tags:
+        - { name: messenger.message_handler, bus: query.bus }
+
   App\Modules\SongsReviews\:
     resource: '../../../src/Modules/SongsReviews/'
 
-  App\Modules\SongsReviews\Application\Creators\NewCreator\NewCreatorHandler:
-    tags: [ messenger.message_handler ]
-
-  App\Modules\SongsReviews\Application\Reviews\NewReview\NewReviewHandler:
-    tags: [ messenger.message_handler ]
-
-  App\Modules\SongsReviews\Application\Artists\GetArtistsPaginated\GetArtistsPaginatedHandler:
-    tags: [ messenger.message_handler ]
-
-  App\Modules\SongsReviews\Application\Genres\GetGenresPaginated\GetGenresPaginatedHandler:
-    tags: [ messenger.message_handler ]
+  App\Modules\SongsReviews\UI\Http\Api\:
+    resource: '../../../src/Modules/SongsReviews/UI/Http/Api/'
+    tags: [ 'controller.service_arguments' ]

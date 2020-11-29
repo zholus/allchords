@@ -3,10 +3,11 @@ declare(strict_types=1);
 
 namespace App\Modules\SongsReviews\Application\Genres\GetGenresPaginated;
 
+use App\Common\Application\Query\QueryHandler;
 use App\Modules\SongsReviews\Application\PaginationDto;
 use App\Modules\SongsReviews\Domain\Genres\GenreRepository;
 
-class GetGenresPaginatedHandler
+final class GetGenresPaginatedHandler implements QueryHandler
 {
     private GenreRepository $genres;
 

@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace App\Modules\SongsReviews\Application\Reviews\NewReview;
 
-class NewReviewCommand
+use App\Common\Application\Command\Command;
+
+final class NewReviewCommand implements Command
 {
     private array $artistsIds;
     private string $creatorId;
@@ -12,27 +14,27 @@ class NewReviewCommand
     private string $chords;
 
     public function __construct(
-        array $artistsIds,
         string $creatorId,
+        array $artistsIds,
         array $genresIds,
         string $title,
         string $chords
     ) {
-        $this->artistsIds = $artistsIds;
         $this->creatorId = $creatorId;
+        $this->artistsIds = $artistsIds;
         $this->genresIds = $genresIds;
         $this->title = $title;
         $this->chords = $chords;
     }
 
-    public function getArtistsIds(): array
-    {
-        return $this->artistsIds;
-    }
-
     public function getCreatorId(): string
     {
         return $this->creatorId;
+    }
+
+    public function getArtistsIds(): array
+    {
+        return $this->artistsIds;
     }
 
     public function getGenresIds(): array

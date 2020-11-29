@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace App\Modules\SongsReviews\Application\Creators\NewCreator;
 
-class NewCreatorCommand
+use App\Common\Application\Command\Command;
+
+final class NewCreatorCommand implements Command
 {
     private string $creatorId;
     private string $username;

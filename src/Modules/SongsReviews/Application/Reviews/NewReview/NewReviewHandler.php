@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Modules\SongsReviews\Application\Reviews\NewReview;
 
+use App\Common\Application\Command\CommandHandler;
 use App\Modules\SongsReviews\Domain\Artists\ArtistId;
 use App\Modules\SongsReviews\Domain\Artists\ArtistNotFoundException;
 use App\Modules\SongsReviews\Domain\Artists\ArtistRepository;
@@ -16,7 +17,7 @@ use App\Modules\SongsReviews\Domain\Reviews\Review;
 use App\Modules\SongsReviews\Domain\Reviews\ReviewRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 
-class NewReviewHandler
+final class NewReviewHandler implements CommandHandler
 {
     private ReviewRepository $reviews;
     private CreatorRepository $creators;

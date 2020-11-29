@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace App\Modules\SongsReviews\Application\Artists\GetArtistsPaginated;
 
-class GetArtistsPaginatedQuery
+use App\Common\Application\Query\Query;
+
+final class GetArtistsPaginatedQuery implements Query
 {
     private ?string $artistTitle;
     private int $limit;

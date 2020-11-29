@@ -3,12 +3,13 @@ declare(strict_types=1);
 
 namespace App\Modules\SongsReviews\Application\Creators\NewCreator;
 
+use App\Common\Application\Command\CommandHandler;
 use App\Modules\SongsReviews\Domain\Creators\Creator;
 use App\Modules\SongsReviews\Domain\Creators\CreatorAlreadyExistsException;
 use App\Modules\SongsReviews\Domain\Creators\CreatorId;
 use App\Modules\SongsReviews\Domain\Creators\CreatorRepository;
 
-class NewCreatorHandler
+final class NewCreatorHandler implements CommandHandler
 {
     private CreatorRepository $creatorRepository;
 

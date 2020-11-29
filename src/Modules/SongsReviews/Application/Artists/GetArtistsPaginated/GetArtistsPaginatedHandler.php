@@ -3,10 +3,11 @@ declare(strict_types=1);
 
 namespace App\Modules\SongsReviews\Application\Artists\GetArtistsPaginated;
 
+use App\Common\Application\Query\QueryHandler;
 use App\Modules\SongsReviews\Application\PaginationDto;
 use App\Modules\SongsReviews\Domain\Artists\ArtistRepository;
 
-class GetArtistsPaginatedHandler
+final class GetArtistsPaginatedHandler implements QueryHandler
 {
     private ArtistRepository $artists;
 

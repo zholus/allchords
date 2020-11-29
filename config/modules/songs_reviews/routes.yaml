@@ -1,0 +1,23 @@
+get_artists:
+  path: /api/songs-reviews/artists
+  methods: GET
+  controller: App\Modules\SongsReviews\UI\Http\Api\GetArtistsAction
+  options:
+    middleware:
+      - 'App\Common\Infrastructure\Middleware\NeedAuth'
+
+get_genres:
+  path: /api/songs-reviews/genres
+  methods: GET
+  controller: App\Modules\SongsReviews\UI\Http\Api\GetGenresAction
+  options:
+    middleware:
+      - 'App\Common\Infrastructure\Middleware\NeedAuth'
+
+new_review:
+  path: /api/songs-reviews/reviews
+  methods: POST
+  controller: App\Modules\SongsReviews\UI\Http\Api\NewReviewAction
+  options:
+    middleware:
+      - 'App\Common\Infrastructure\Middleware\NeedAuth'

@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace App\Modules\SongsReviews\Application\Genres\GetGenresPaginated;
 
-class GetGenresPaginatedQuery
+use App\Common\Application\Query\Query;
+
+final class GetGenresPaginatedQuery implements Query
 {
     private ?string $genreTitle;
     private int $limit;
