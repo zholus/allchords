@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @OA\Tag(name="SongsCatalog")
  */
-final class GetNewSongsTodayAction extends Action
+final class GetSongsByCreatedAtAction extends Action
 {
     private QueryBus $queryBus;
 

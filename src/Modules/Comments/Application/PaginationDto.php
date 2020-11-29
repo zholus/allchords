@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\Comments\Application\Songs\GetComments;
+namespace App\Modules\Comments\Application;
 
 class PaginationDto
 {

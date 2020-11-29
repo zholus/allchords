@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Modules\Comments\Application\Songs\GetComments;
 
 use App\Common\Application\Query\QueryHandler;
+use App\Modules\Comments\Application\PaginationDto;
 use App\Modules\Comments\Domain\Songs\Comment;
 use App\Modules\Comments\Domain\Songs\SongId;
 use App\Modules\Comments\Domain\Songs\SongNotFoundException;
@@ -18,9 +19,9 @@ final class GetCommentsHandler implements QueryHandler
         $this->songs = $songs;
     }
 
-    public function __invoke(GetCommentsQuery $command)
+    public function __invoke(GetCommentsQuery $query)
     {
-        $songId = new SongId($command->getSongId());
+        $songId = new SongId($query->getSongId());
 
         $song = $this->songs->getById($songId);
 
@@ -28,14 +29,14 @@ final class GetCommentsHandler implements QueryHandler
             throw SongNotFoundException::withId($songId);
         }
 
-        $page = $command->getPage();
-        $limit = $command->getLimit();
+        $page = $query->getPage();
+        $limit = $query->getLimit();
         $offset = ($page - 1) * $limit;
 
         $pagesCount = (int)ceil($song->getComments()->count() / $limit);
         $commentsDto = [];
 
-        $comments = $song->getComments()->slice($offset, $command->getLimit());
+        $comments = $song->getComments()->slice($offset, $query->getLimit());
         foreach ($comments as $comment) {
             /** @var Comment $comment */
             $commentsDto[] = new CommentDto(
@@ -47,15 +48,15 @@ final class GetCommentsHandler implements QueryHandler
             );
         }
 
-        return new CommentsDto(
+        return new CommentsCollection(
             $songId->toString(),
-            $commentsDto,
             new PaginationDto(
                 $song->getComments()->count(),
                 $page,
                 $pagesCount,
                 count($comments)
-            )
+            ),
+            ...$commentsDto
         );
     }
 }

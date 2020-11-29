@@ -25,14 +25,28 @@ class CommentDto
         $this->createdAt = $createdAt;
     }
 
-    public function toArray(): array
+    public function getCommentId(): string
     {
-        return [
-            'comment_id' => $this->commentId,
-            'author_id' => $this->authorId,
-            'author_username' => $this->authorUsername,
-            'text' => $this->text,
-            'created_at' => $this->createdAt->format('Y-m-d H:i:s'),
-        ];
+        return $this->commentId;
+    }
+
+    public function getAuthorId(): string
+    {
+        return $this->authorId;
+    }
+
+    public function getAuthorUsername(): string
+    {
+        return $this->authorUsername;
+    }
+
+    public function getText(): string
+    {
+        return $this->text;
+    }
+
+    public function getCreatedAt(): \DateTimeImmutable
+    {
+        return $this->createdAt;
     }
 }

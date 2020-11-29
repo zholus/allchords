@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace App\Modules\Comments\UI\Http\Api;
 
 use App\Common\Application\Query\QueryBus;
-use App\Modules\Comments\Application\Songs\GetComments\CommentsDto;
+use App\Modules\Comments\Application\Songs\GetComments\CommentDto;
+use App\Modules\Comments\Application\Songs\GetComments\CommentsCollection;
 use App\Modules\Comments\Application\Songs\GetComments\GetCommentsQuery;
 use Assert\Assert;
 use OpenApi\Annotations as OA;
@@ -30,9 +31,21 @@ class GetSongCommentsAction extends Action
      *     description="Uuid song id",
      *     @OA\Schema(type="string")
      * )
+     * @OA\Parameter(
+     *     name="page",
+     *     in="query",
+     *     description="Number of page",
+     *     @OA\Schema(type="integer")
+     * )
+     * @OA\Parameter(
+     *     name="per_page",
+     *     in="query",
+     *     description="Comments per page",
+     *     @OA\Schema(type="integer")
+     * )
      * @OA\Response(
      *     response=200,
-     *     description="Songs comments",
+     *     description="Song comments",
      * )
      * @OA\Response(
      *     response=400,
@@ -56,19 +69,38 @@ class GetSongCommentsAction extends Action
                 ->that($perPage, 'per_page')->notEmpty()->integer()
                 ->verifyNow();
 
-            /** @var CommentsDto $commentsDto */
-            $commentsDto = $this->queryBus->handle(new GetCommentsQuery($songId, $page, $perPage));
+            /** @var CommentsCollection $commentsCollection */
+            $commentsCollection = $this->queryBus->handle(new GetCommentsQuery($songId, $page, $perPage));
         } catch (\Throwable $exception) {
             return $this->responseByException($exception);
         }
 
-        return new JsonResponse([
-            'data' => $commentsDto->toArray()
-        ], 200, [
-            'x-pagination-current-page' => $commentsDto->getPagination()->getCurrentPage(),
-            'x-pagination-elements-on-page' => $commentsDto->getPagination()->getElementsOnPage(),
-            'x-pagination-total-elements-count' => $commentsDto->getPagination()->getTotalElementsCount(),
-            'x-pagination-total-pages-count' => $commentsDto->getPagination()->getTotalPagesCount(),
-        ]);
+        return new JsonResponse($this->present($commentsCollection));
+    }
+
+    private function present(CommentsCollection $commentsCollection): array
+    {
+        $comments = [];
+
+        foreach ($commentsCollection->getComments() as $commentDto) {
+            $comments[] = [
+                'comment_id' => $commentDto->getCommentId(),
+                'author_id' => $commentDto->getAuthorId(),
+                'author_username' => $commentDto->getAuthorUsername(),
+                'text' => $commentDto->getText(),
+                'created_at' => $commentDto->getCreatedAt()->format('Y-m-d H:i:s'),
+            ];
+        }
+
+        return [
+            'song_id' => $commentsCollection->getSongId(),
+            'comments' => $comments,
+            'pagination' => [
+                'elements_on_page' => $commentsCollection->getPaginationDto()->getElementsOnPage(),
+                'total_pages_count' => $commentsCollection->getPaginationDto()->getTotalPagesCount(),
+                'current_page' => $commentsCollection->getPaginationDto()->getCurrentPage(),
+                'total_elements_count' => $commentsCollection->getPaginationDto()->getTotalElementsCount(),
+            ]
+        ];
     }
 }
