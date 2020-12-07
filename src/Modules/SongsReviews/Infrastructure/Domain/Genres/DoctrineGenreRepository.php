@@ -33,9 +33,9 @@ final class DoctrineGenreRepository extends ServiceEntityRepository implements G
     {
         $builder = $this->createQueryBuilder('g');
 
-        if (!empty($gemreTitle)) {
+        if (!empty($genreTitle)) {
             $builder->where('g.title LIKE :title');
-            $builder->setParameter('title', '%' . $gemreTitle . '%');
+            $builder->setParameter('title', '%' . $genreTitle . '%');
         }
 
         $builder
