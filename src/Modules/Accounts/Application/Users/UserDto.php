@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\Accounts\Application\Users\GetUser;
+namespace App\Modules\Accounts\Application\Users;
 
 class UserDto
 {

@@ -6,7 +6,7 @@ namespace App\Modules\Accounts\UI\Http\Api;
 use App\Common\Application\AuthenticatedUserContext;
 use App\Common\Application\Query\QueryBus;
 use App\Modules\Accounts\Application\Users\GetUser\GetUserQuery;
-use App\Modules\Accounts\Application\Users\GetUser\UserDto;
+use App\Modules\Accounts\Application\Users\UserDto;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

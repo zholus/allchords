@@ -8,6 +8,11 @@ sign_in_user:
   methods: POST
   controller: App\Modules\Accounts\UI\Http\Api\SignInUserAction
 
+refresh_token:
+  path: /api/accounts/auth/refresh-token
+  methods: POST
+  controller: App\Modules\Accounts\UI\Http\Api\RefreshAccessToken
+
 get_authenticated_user:
   path: /api/accounts/users/authenticated
   methods: GET

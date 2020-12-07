@@ -2,22 +2,23 @@
 declare(strict_types=1);
 
 namespace App\Modules\Accounts\UI\Http\Api;
-
 use App\Common\Application\Command\CommandBus;
 use App\Common\Application\Query\QueryBus;
+use App\Modules\Accounts\Application\Users\GenerateNewToken\GenerateNewTokenCommand;
 use App\Modules\Accounts\Application\Users\GetToken\GetTokenQuery;
 use App\Modules\Accounts\Application\Users\GetToken\TokenDto;
-use App\Modules\Accounts\Application\Users\SignInUser\SignInUserCommand;
+use App\Modules\Accounts\Application\Users\GetUserByRefreshToken\GetUserByRefreshTokenQuery;
+use App\Modules\Accounts\Application\Users\UserDto;
 use Assert\Assert;
 use DateTime;
-    use OpenApi\Annotations as OA;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @OA\Tag(name="Accounts")
  */
-final class SignInUserAction extends Action
+final class RefreshAccessToken extends Action
 {
     private CommandBus $commandBus;
     private QueryBus $queryBus;
@@ -33,12 +34,7 @@ final class SignInUserAction extends Action
      *     @OA\MediaType(
      *          mediaType="application/x-www-form-urlencoded",
      *          @OA\Schema(
-     *              @OA\Property(property="email",
-     *                    type="string",
-     *                    example="",
-     *                    description=""
-     *                ),
-     *    			@OA\Property(property="password",
+     *              @OA\Property(property="refresh_token",
      *                    type="string",
      *                    example="",
      *                    description=""
@@ -61,24 +57,20 @@ final class SignInUserAction extends Action
      */
     public function __invoke(Request $request): JsonResponse
     {
-        $email = $request->get('email');
-        $password = $request->get('password');
+        $refreshToken = $request->get('refresh_token');
 
         try {
             Assert::lazy()
-                ->that($email, 'email')->email()
-                ->that($password, 'password')->notEmpty()
+                ->that($refreshToken, 'refresh_token')->uuid()
                 ->verifyNow();
 
-            $this->commandBus->dispatch(new SignInUserCommand(
-                $email,
-                $password
-            ));
+            /** @var UserDto $userDto */
+            $userDto = $this->queryBus->handle(new GetUserByRefreshTokenQuery($refreshToken));
 
-            /**
-             * @var TokenDto $tokenDto
-             */
-            $tokenDto = $this->queryBus->handle(new GetTokenQuery($email));
+            $this->commandBus->dispatch(new GenerateNewTokenCommand($refreshToken));
+
+            /** @var TokenDto $tokenDto */
+            $tokenDto = $this->queryBus->handle(new GetTokenQuery($userDto->getEmail()));
         } catch (\Throwable $exception) {
             return $this->responseByException($exception);
         }

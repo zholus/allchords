@@ -1,15 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Modules\Accounts\Application\Users\GetUser;
+namespace App\Modules\Accounts\Application\Users\GetUserByRefreshToken;
 
 use App\Common\Application\Query\QueryHandler;
 use App\Modules\Accounts\Application\Users\UserDto;
-use App\Modules\Accounts\Domain\Users\UserId;
 use App\Modules\Accounts\Domain\Users\UserNotFoundException;
 use App\Modules\Accounts\Domain\Users\UserRepository;
 
-final class GetUserHandler implements QueryHandler
+final class GetUserByRefreshTokenHandler implements QueryHandler
 {
     private UserRepository $users;
 
@@ -18,18 +17,18 @@ final class GetUserHandler implements QueryHandler
         $this->users = $users;
     }
 
-    public function __invoke(GetUserQuery $query): UserDto
+    public function __invoke(GetUserByRefreshTokenQuery $query): UserDto
     {
-        $userId = new UserId($query->getUserId());
+        $refreshToken = $query->getRefreshToken();
 
-        $user = $this->users->getById($userId);
+        $user = $this->users->getByRefreshToken($refreshToken);
 
         if ($user === null) {
-            throw UserNotFoundException::withId($userId);
+            throw UserNotFoundException::withRefreshToken($refreshToken);
         }
 
         return new UserDto(
-            $userId->toString(),
+            $user->getId()->toString(),
             $user->getUsername(),
             $user->getEmail()
         );
