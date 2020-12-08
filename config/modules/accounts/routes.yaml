@@ -20,3 +20,11 @@ get_authenticated_user:
   options:
     middleware:
       - 'App\Common\Infrastructure\Middleware\NeedAuth'
+
+get_authenticated_user_permissions:
+  path: /api/accounts/users/authenticated/permissions
+  methods: GET
+  controller: App\Modules\Accounts\UI\Http\Api\GetAuthenticatedUserPermissionsAction
+  options:
+    middleware:
+      - 'App\Common\Infrastructure\Middleware\NeedAuth'

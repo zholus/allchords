@@ -16,7 +16,7 @@ final class GetUserPermissionsHandler implements QueryHandler
         $this->userRepository = $userRepository;
     }
 
-    public function __invoke(GetUserPermissionsQuery $query)
+    public function __invoke(GetUserPermissionsQuery $query): array
     {
         $userId = new UserId($query->getUserId());
 
