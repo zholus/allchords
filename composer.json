@@ -9,7 +9,6 @@
         "beberlei/assert": "^3.2",
         "composer/package-versions-deprecated": "^1.11",
         "doctrine/doctrine-bundle": "^2.1",
-        "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
         "nelmio/api-doc-bundle": "^v4.0",
         "ramsey/uuid": "^4.1",
@@ -26,7 +25,6 @@
         "zholus/symfony-middleware": "^2.0"
     },
     "require-dev": {
-        "doctrine/doctrine-fixtures-bundle": "^3.3"
     },
     "config": {
         "optimize-autoloader": true,

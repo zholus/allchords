@@ -14,10 +14,6 @@ services:
     App\Common\:
         resource: '../src/Common/'
 
-    App\DataFixtures\:
-        resource: '../fixtures'
-        tags: ['doctrine.fixture.orm']
-
 imports:
     - { resource: 'modules/common/services.yaml' }
     - { resource: 'modules/accounts/services.yaml' }
