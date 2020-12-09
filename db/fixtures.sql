@@ -1,3 +1,12 @@
+INSERT INTO accounts_permissions (id, name)
+VALUES ('c31933cd-931f-4c44-847a-004b666b1a20', 'CAN_REVIEW_SONGS');
+
+INSERT INTO accounts_roles (id, name)
+VALUES ('e1d2dbe9-0147-4102-99e2-98e967c627d4', 'Moderator');
+
+INSERT INTO accounts_roles_permissions (role_id, permission_id)
+VALUES ('e1d2dbe9-0147-4102-99e2-98e967c627d4', 'c31933cd-931f-4c44-847a-004b666b1a20');
+
 -- pass "123123"
 INSERT INTO accounts_users (id, email, password, username, access_token, access_token_expiry_at, created_at,
                                        refresh_token)

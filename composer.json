@@ -9,6 +9,7 @@
         "beberlei/assert": "^3.2",
         "composer/package-versions-deprecated": "^1.11",
         "doctrine/doctrine-bundle": "^2.1",
+        "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
         "nelmio/api-doc-bundle": "^v4.0",
         "ramsey/uuid": "^4.1",
@@ -40,8 +41,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/",
-            "App\\DataFixtures\\": "fixtures/"
+            "App\\Tests\\": "tests/"
         }
     },
     "replace": {
