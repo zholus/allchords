@@ -7,6 +7,7 @@ use Doctrine\DBAL\Driver\Connection;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 final class SeedDbCommand extends Command
@@ -24,6 +25,8 @@ final class SeedDbCommand extends Command
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
+        $io = new SymfonyStyle($input, $output);
+
         $fixturesSqlPath = $this->parameterBag->get('database_fixtures_sql');
 
         if (!is_file($fixturesSqlPath)) {
@@ -33,6 +36,8 @@ final class SeedDbCommand extends Command
         $fixturesSql = file_get_contents($fixturesSqlPath);
 
         $this->connection->exec($fixturesSql);
+
+        $io->success('Seeding has been finished');
 
         return self::SUCCESS;
     }
