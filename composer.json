@@ -11,7 +11,7 @@
         "doctrine/doctrine-bundle": "^2.1",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
-        "nelmio/api-doc-bundle": "^v4.0",
+        "nelmio/api-doc-bundle": "^v4.1",
         "ramsey/uuid": "^4.1",
         "symfony/asset": "5.1.*",
         "symfony/console": "5.1.*",
