@@ -7,6 +7,7 @@ use App\Common\Application\Query\QueryBus;
 use App\Modules\SongsReviews\Application\Genres\GetGenresPaginated\GenresPaginatedCollection;
 use App\Modules\SongsReviews\Application\Genres\GetGenresPaginated\GetGenresPaginatedQuery;
 use Assert\Assert;
+use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -74,7 +75,8 @@ final class GetGenresAction extends Action
      * @OA\Response(
      *     response=422,
      *     description="Cannot process request due to invalid logic",
-     * )
+     * ),
+     * @Security(name="Bearer")
      */
     public function __invoke(Request $request): Response
     {

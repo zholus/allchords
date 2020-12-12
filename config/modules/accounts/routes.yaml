@@ -11,7 +11,7 @@ sign_in_user:
 refresh_token:
   path: /api/accounts/auth/refresh-token
   methods: POST
-  controller: App\Modules\Accounts\UI\Http\Api\RefreshAccessToken
+  controller: App\Modules\Accounts\UI\Http\Api\RefreshAccessTokenAction
 
 get_authenticated_user:
   path: /api/accounts/users/authenticated

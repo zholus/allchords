@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @OA\Tag(name="Accounts")
  */
-final class RefreshAccessToken extends Action
+final class RefreshAccessTokenAction extends Action
 {
     private CommandBus $commandBus;
     private QueryBus $queryBus;
