@@ -53,6 +53,29 @@ final class GetSongsAction extends Action
      * @OA\Response(
      *     response=200,
      *     description="Songs list",
+     *     @OA\JsonContent(
+     *         type="object",
+     *         @OA\Property(
+     *             property="songs",
+     *             type="array",
+     *             @OA\Items(
+     *                  type="object",
+     *                  @OA\Property(property="song_id", type="string", example="404f5d14-6d54-4759-aa5d-944ac70abd07"),
+     *                  @OA\Property(property="title", type="string", example="tnt"),
+     *                  @OA\Property(property="artist_id", type="string", example="404f5d14-6d54-4759-aa5d-944ac70abd07"),
+     *                  @OA\Property(property="artist_name", type="string", example="ac/dc"),
+     *                  @OA\Property(property="created_at", type="string", example="2020-12-12T02:59:30+0000"),
+     *              )
+     *         ),
+     *         @OA\Property(
+     *             property="pagination",
+     *             type="object",
+     *             @OA\Property(property="elements_on_page", type="number", example="5"),
+     *             @OA\Property(property="total_pages_count", type="number", example="2"),
+     *             @OA\Property(property="current_page", type="number", example="1"),
+     *             @OA\Property(property="total_elements_count", type="number", example="10"),
+     *         ),
+     *     )
      * )
      * @OA\Response(
      *     response=400,
