@@ -81,8 +81,6 @@ final class RegisterUserAction extends Action
             return $this->responseByException($exception);
         }
 
-        return new JsonResponse([
-            'message' => 'success'
-        ], JsonResponse::HTTP_CREATED);
+        return new JsonResponse([], JsonResponse::HTTP_CREATED);
     }
 }

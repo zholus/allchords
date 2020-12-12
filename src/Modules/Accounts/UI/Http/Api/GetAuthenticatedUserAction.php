@@ -29,6 +29,16 @@ final class GetAuthenticatedUserAction extends Action
      * @OA\Response(
      *     response=200,
      *     description="User data",
+     *     @OA\JsonContent(
+     *         type="object",
+     *         @OA\Property(
+     *             property="user",
+     *             type="object",
+     *             @OA\Property(property="user_id", type="string", example="404f5d14-6d54-4759-aa5d-944ac70abd07"),
+     *             @OA\Property(property="username", type="string", example="batman"),
+     *             @OA\Property(property="email", type="string", example="example@example.com"),
+     *         ),
+     *     )
      * )
      * @OA\Response(
      *     response=400,

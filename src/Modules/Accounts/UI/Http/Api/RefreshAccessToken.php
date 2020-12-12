@@ -45,6 +45,12 @@ final class RefreshAccessToken extends Action
      * @OA\Response(
      *     response=200,
      *     description="Access token",
+     *     @OA\JsonContent(
+     *         type="object",
+     *         @OA\Property(property="access_token", type="string", example="404f5d14-6d54-4759-aa5d-944ac70abd07"),
+     *         @OA\Property(property="expire_at", type="string", example="2020-12-12T02:59:30+0000"),
+     *         @OA\Property(property="refresh_token", type="string", example="404f5d14-6d54-4759-aa5d-944ac70abd07"),
+     *     )
      * )
      * @OA\Response(
      *     response=400,

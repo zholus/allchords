@@ -29,6 +29,17 @@ final class GetAuthenticatedUserPermissionsAction extends Action
      * @OA\Response(
      *     response=200,
      *     description="Permissions list",
+     *     @OA\JsonContent(
+     *         type="object",
+     *         @OA\Property(
+     *             property="permissions",
+     *             type="array",
+     *             @OA\Items(
+     *                 type="string",
+     *                 example="SOME_PERMISSION_NAME"
+     *             )
+     *         ),
+     *     )
      * )
      * @OA\Response(
      *     response=400,
