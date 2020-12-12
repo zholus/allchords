@@ -54,6 +54,18 @@ final class NewSongCommentAction extends Action
      * @OA\Response(
      *     response=201,
      *     description="Comment added",
+     *     @OA\JsonContent(
+     *         type="object",
+     *         @OA\Property(
+     *             property="comment",
+     *             type="object",
+     *             @OA\Property(property="comment_id", type="string", example="404f5d14-6d54-4759-aa5d-944ac70abd07"),
+     *             @OA\Property(property="author_id", type="string", example="404f5d14-6d54-4759-aa5d-944ac70abd07"),
+     *             @OA\Property(property="author_username", type="string", example="batman"),
+     *             @OA\Property(property="text", type="string", example="comment text"),
+     *             @OA\Property(property="created_at", type="string", example="2020-12-12T02:59:30+0000"),
+     *         ),
+     *     )
      * )
      * @OA\Response(
      *     response=400,
@@ -90,8 +102,19 @@ final class NewSongCommentAction extends Action
             return $this->responseByException($exception);
         }
 
-        return new JsonResponse([
-            'data' => $commentDto->toArray()
-        ], JsonResponse::HTTP_CREATED);
+        return new JsonResponse($this->present($commentDto), JsonResponse::HTTP_CREATED);
+    }
+
+    private function present(CommentDto $commentDto): array
+    {
+        return [
+            'comment' => [
+                'comment_id' => $commentDto->getCommentId(),
+                'author_id' => $commentDto->getAuthorId(),
+                'author_username' => $commentDto->getAuthorUsername(),
+                'text' => $commentDto->getText(),
+                'created_at' => $commentDto->getCreatedAt()->format('Y-m-d H:i:s'),
+            ]
+        ];
     }
 }
