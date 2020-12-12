@@ -46,6 +46,26 @@ final class GetGenresAction extends Action
      * @OA\Response(
      *     response=200,
      *     description="Genres list",
+     *     @OA\JsonContent(
+     *         type="object",
+     *         @OA\Property(
+     *             property="genres",
+     *             type="array",
+     *             @OA\Items(
+     *                  type="object",
+     *                  @OA\Property(property="genre_id", type="string", example="404f5d14-6d54-4759-aa5d-944ac70abd07"),
+     *                  @OA\Property(property="genre_title", type="string", example="rock"),
+     *              )
+     *         ),
+     *         @OA\Property(
+     *             property="pagination",
+     *             type="object",
+     *             @OA\Property(property="elements_on_page", type="number", example="5"),
+     *             @OA\Property(property="total_pages_count", type="number", example="2"),
+     *             @OA\Property(property="current_page", type="number", example="1"),
+     *             @OA\Property(property="total_elements_count", type="number", example="10"),
+     *         ),
+     *     )
      * )
      * @OA\Response(
      *     response=400,
